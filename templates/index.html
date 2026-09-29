@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>我的旅游网站</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Medimurje 旅游精选</h1>
+    <input id="search" type="text" placeholder="搜索景点 / 关键词...">
+  </header>
+
+  <main id="grid"></main>
+  <div id="pager">
+    <button id="prev">上一页</button>
+    <span id="pageInfo"></span>
+    <button id="next">下一页</button>
+  </div>
+
+  <!-- 详情弹窗 -->
+  <div id="modal" class="hidden">
+    <div class="modal-content">
+      <span id="close">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalContent"></p>
+      <a id="modalLink" target="_blank">查看原文</a>
+    </div>
+  </div>
+
+  <script>
+    let page = 1;
+    const size = 9;
+
+    async function loadPages() {
+      const q = document.getElementById("search").value.trim();
+      const url = `/api/pages?page=${page}&size=${size}&q=${encodeURIComponent(q)}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      const grid = document.getElementById("grid");
+      grid.innerHTML = "";
+
+      data.items.forEach((item, i) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <h3>${item.title || "无标题"}</h3>
+          <p>${(item.content || "").slice(0, 120)}...</p>
+        `;
+        card.onclick = () => showDetail(item);
+        grid.appendChild(card);
+      });
+
+      document.getElementById("pageInfo").innerText = `第 ${page} 页`;
+      document.getElementById("prev").disabled = page <= 1;
+    }
+
+    function showDetail(item) {
+      document.getElementById("modalTitle").innerText = item.title || "";
+      document.getElementById("modalContent").innerText = item.content || "";
+      const link = document.getElementById("modalLink");
+      link.href = item.url || "#";
+      document.getElementById("modal").classList.remove("hidden");
+    }
+
+    document.getElementById("close").onclick = () => {
+      document.getElementById("modal").classList.add("hidden");
+    };
+
+    document.getElementById("search").addEventListener("input", () => {
+      page = 1;
+      loadPages();
+    });
+
+    document.getElementById("prev").onclick = () => { page--; loadPages(); };
+    document.getElementById("next").onclick = () => { page++; loadPages(); };
+
+    loadPages();
+  </script>
+</body>
+</html>

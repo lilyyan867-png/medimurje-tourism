@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>漫步田园 · 梅吉穆列</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;color:#333;line-height:1.6;background:#f5f7f5}
+
+/* ===== 导航栏 ===== */
+.navbar{position:fixed;top:0;left:0;right:0;height:90px;background:rgba(26,61,36,0.92);backdrop-filter:blur(10px);display:flex;align-items:center;padding:0 60px;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.navbar .brand{color:#fff;font-size:28px;letter-spacing:6px;margin-right:90px;font-weight:700;font-family:'STKaiti','KaiTi',serif;white-space:nowrap}
+.navbar ul{display:flex;gap:48px;list-style:none}
+.navbar a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:20px;letter-spacing:2px;font-weight:600;transition:color .2s;white-space:nowrap}
+.navbar a:hover,.navbar a.active{color:#a5d6a7}
+
+/* ===== 首屏大图 ===== */
+.hero{position:relative;height:70vh;min-height:520px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:url('/static/assets/漫步田园.jpg') center/cover no-repeat;background-color:#2e5a3a}
+.hero h1{position:relative;z-index:2;font-size:56px;font-weight:600;color:#fff;letter-spacing:6px;margin-bottom:20px;text-shadow:0 4px 24px rgba(0,0,0,0.85),0 2px 8px rgba(0,0,0,0.9)}
+.hero p{position:relative;z-index:2;font-size:17px;color:#fff;letter-spacing:1.5px;line-height:1.9;max-width:760px;padding:0 24px;text-shadow:0 3px 16px rgba(0,0,0,0.85),0 1px 6px rgba(0,0,0,0.9)}
+
+/* ===== 内容区域 ===== */
+.content-section{padding:80px 40px;max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:60px}
+.section-header h2{font-size:32px;font-weight:600;color:#1a3d24;letter-spacing:4px;margin-bottom:12px}
+.section-header p{font-size:15px;color:#666;letter-spacing:1px}
+
+/* ===== 卡片网格 ===== */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:32px}
+.card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,0.12)}
+.card-img{height:220px;background:#e8f5e9;overflow:hidden;position:relative}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.card:hover .card-img img{transform:scale(1.05)}
+.card-body{padding:28px}
+.card-tag{display:inline-block;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);color:#2e7d32;font-size:12px;padding:6px 14px;border-radius:20px;margin-bottom:16px;font-weight:500;letter-spacing:0.5px}
+.card-title{font-size:22px;font-weight:600;color:#1a3d24;letter-spacing:2px;margin-bottom:14px}
+.card-highlight{color:#444;font-size:15px;line-height:1.9;margin-bottom:16px}
+.card-experience{color:#2e7d32;font-size:13px;line-height:1.8;padding-top:16px;border-top:1px dashed #c8e6c9}
+.card-experience::before{content:'✦ ';color:#4caf50}
+
+/* ===== 页脚 ===== */
+.footer{background:#1a3d24;color:rgba(255,255,255,0.7);padding:40px 20px;text-align:center;font-size:13px;letter-spacing:1px;margin-top:80px}
+
+/* ===== 移动端 ===== */
+@media (max-width:900px){
+  .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:12px}
+  .navbar .brand{font-size:20px;letter-spacing:3px;margin-right:0;width:100%}
+  .navbar ul{gap:18px;width:100%;overflow-x:auto;padding-bottom:4px}
+  .navbar a{font-size:14px;letter-spacing:1px}
+  .hero{height:50vh;min-height:380px}
+  .hero h1{font-size:32px;letter-spacing:2px;line-height:1.3}
+  .hero p{font-size:14px;line-height:1.8}
+  .content-section{padding:50px 20px}
+  .section-header h2{font-size:24px;letter-spacing:2px}
+  .card-grid{grid-template-columns:1fr;gap:24px}
+  .card-img{height:180px}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">梅吉穆列</div>
+  <ul>
+    <li><a href="/">绿野仙踪</a></li>
+    <li><a href="/nature" class="active">漫步田园</a></li>
+    <li><a href="/attractions">故城寻踪</a></li>
+    <li><a href="/taste">烟火知味</a></li>
+    <li><a href="/events">四时盛事</a></li>
+    <li><a href="/plan">旅行贴士</a></li>
+  </ul>
+</nav>
+
+<!-- 首屏大图 -->
+<header class="hero">
+  <div>
+    <h1>漫步田园</h1>
+    <p>两河之间的绿意呼吸，每一步都是自然馈赠。<br>
+       穆拉河与德拉瓦河环抱的原生湿地，百年橡树下的田园秘境。</p>
+  </div>
+</header>
+
+<!-- 自然秘境 -->
+<section class="content-section">
+  <div class="section-header">
+    <h2>自然秘境 · 不可复制的原生风光</h2>
+    <p>原生湿地与百年游客中心</p>
+  </div>
+
+  <div class="card-grid">
+
+    <div class="card">
+      <div class="card-img">
+        <img src="/static/assets/穆拉河与德拉瓦河(1).jpg" alt="穆拉-德拉瓦地区公园" onerror="this.style.display='none'">
+      </div>
+      <div class="card-body">
+        <span class="card-tag">联合国认证的『欧洲亚马逊』</span>
+        <h3 class="card-title">穆拉-德拉瓦地区公园</h3>
+        <p class="card-highlight">被纳入联合国教科文组织生物圈保护区。国内没有同规模的平原原生湿地，这里没有过度开发的栈道和人流，只有芦苇荡、牛轭湖与上百种珍稀鸟类，是真正的自然荒野。</p>
+        <p class="card-experience">乘传统木船漂进芦苇荡深处，沿木栈道徒步观鸟，或沿河畔骑行道慢骑，全程只有风声、水声与鸟鸣。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img">
+        <img src="/static/assets/两河之间(2).jpg" alt="两水之间游客中心" onerror="this.style.display='none'">
+      </div>
+      <div class="card-body">
+        <span class="card-tag">百年老宅里的自然门户</span>
+        <h3 class="card-title">『两水之间』游客中心</h3>
+        <p class="card-highlight">由百年林业建筑与贵族故居改造而成。这里能看到 500 年树龄的『亚当橡树』传奇故事，还有专为自然爱好者设计的沉浸式展陈，是国内少见的『轻科普+深体验』型游客中心。</p>
+        <p class="card-experience">逛主题展厅了解流域生态，亲子家庭可以体验户外小河主题乐园，还能预约探访传统乡村民居教育中心。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 避世村落 -->
+<section class="content-section">
+  <div class="section-header">
+    <h2>避世村落 · 慢下来的田园时光</h2>
+    <p>最原生的中欧乡村风貌</p>
+  </div>
+
+  <div class="card-grid">
+
+    <div class="card">
+      <div class="card-img">
+        <img src="/static/assets/两河之间(1).jpg" alt="内德利什切" onerror="this.style.display='none'">
+      </div>
+      <div class="card-body">
+        <span class="card-tag">德拉瓦河畔的静谧避世村</span>
+        <h3 class="card-title">内德利什切</h3>
+        <p class="card-highlight">藏在梅吉穆列中部的森林深处，几乎没有游客。村子保留着最原生的中欧乡村风貌，定期举办本土物产市集与民俗活动，适合偏爱安静、希望彻底放松的慢旅行者。</p>
+        <p class="card-experience">沿德拉瓦河畔步道漫步，在河边草坪野餐，逛本地小店尝手工奶酪与自制果酱。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img">
+        <img src="/static/assets/穆拉-德拉瓦-多瑙河生物圈保护区(1).jpg" alt="田园风光" onerror="this.style.display='none'">
+      </div>
+      <div class="card-body">
+        <span class="card-tag">田园牧歌 · 慢旅行</span>
+        <h3 class="card-title">中欧乡村风貌</h3>
+        <p class="card-highlight">梅吉穆列的乡村保留着中欧最纯粹的田园风貌：连绵的葡萄园、南瓜田、传统木屋与散落的教堂尖顶。这里的时间似乎走得更慢一些，每一帧都是油画般的风景。</p>
+        <p class="card-experience">骑行穿越乡间小路，驻足本地农庄品尝新鲜出炉的玉米面包与自制南瓜籽油。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  梅吉穆列 · 两河间的绿野秘境 · 2026
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>四时盛事 · 梅吉穆列</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f4f7f4;color:#333;line-height:1.6}
+
+.navbar{position:fixed;top:0;left:0;right:0;height:90px;background:rgba(26,61,36,0.92);backdrop-filter:blur(10px);display:flex;align-items:center;padding:0 60px;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.navbar .brand{color:#fff;font-size:28px;letter-spacing:6px;margin-right:90px;font-weight:700;font-family:'STKaiti','KaiTi',serif;white-space:nowrap}
+.navbar ul{display:flex;gap:48px;list-style:none}
+.navbar a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:20px;letter-spacing:2px;font-weight:600;transition:color .2s;white-space:nowrap}
+.navbar a:hover,.navbar a.active{color:#a5d6a7}
+
+.page{padding:150px 20px 80px;max-width:1200px;margin:0 auto}
+
+/* ===== Hero 视频 ===== */
+.hero-mini{position:relative;text-align:center;padding:140px 20px;overflow:hidden;background:#1a3d24;border-radius:14px;margin-bottom:60px}
+.hero-mini .hero-bg{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover;z-index:0}
+.hero-mini h1,.hero-mini p{position:relative;z-index:2}
+.hero-mini h1{font-size:48px;font-weight:600;color:#fff !important;letter-spacing:4px;margin-bottom:16px;text-shadow:0 4px 24px rgba(0,0,0,0.85),0 2px 8px rgba(0,0,0,0.9)}
+.hero-mini p{font-size:16px;color:#fff !important;letter-spacing:1px;text-shadow:0 3px 16px rgba(0,0,0,0.85),0 1px 6px rgba(0,0,0,0.9)}
+
+/* ===== 章节 ===== */
+.section{margin-bottom:56px}
+.section-title{font-size:28px;font-weight:600;color:#1a3d24;border-left:5px solid #2e7d32;padding-left:16px;margin-bottom:10px}
+.section-subtitle{color:#666;font-size:15px;margin-bottom:32px;padding-left:21px}
+
+/* ===== 卡片网格：单列 ===== */
+.card-grid{display:grid;grid-template-columns:1fr;gap:28px}
+
+/* ===== 卡片：固定高度 320px，左图右文 ===== */
+.card{
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 6px 24px rgba(0,0,0,0.06);
+  transition:transform .25s,box-shadow .25s;
+  border-top:3px solid #2e7d32;
+  display:flex;
+  flex-direction:row;
+  height:320px;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.12)}
+
+/* 图片：固定宽 380px，高度 100% */
+.card-img{width:380px;flex-shrink:0;height:100%;overflow:hidden;background:#e8f5e9}
+.card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.card:hover .card-img img{transform:scale(1.06)}
+
+/* 文字：占剩余宽度，垂直居中 */
+.card-body{
+  flex:1;
+  min-width:0;
+  padding:32px 40px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.card-tag{display:inline-block;background:#e8f5e9;color:#2e7d32;font-size:12px;padding:4px 12px;border-radius:14px;margin-bottom:12px;letter-spacing:.5px;font-weight:500;align-self:flex-start}
+.card-title{font-size:21px;font-weight:600;color:#1a3d24;margin-bottom:12px;letter-spacing:1px;line-height:1.3}
+.card-summary{color:#444;font-size:15px;line-height:1.8;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+/* 移动端：上图下文 */
+@media (max-width:900px){
+  .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:12px}
+  .navbar .brand{font-size:20px;letter-spacing:3px;margin-right:0;width:100%}
+  .navbar ul{gap:18px;width:100%;overflow-x:auto;padding-bottom:4px}
+  .navbar a{font-size:14px;letter-spacing:1px}
+  .page{padding:120px 16px 60px}
+  .hero-mini{padding:90px 20px;border-radius:0}
+  .hero-mini h1{font-size:32px;letter-spacing:2px}
+  .section-title{font-size:22px}
+  .card{flex-direction:column;height:auto}
+  .card-img{width:100%;height:200px}
+  .card-body{padding:22px}
+  .card-title{font-size:18px}
+  .card-summary{-webkit-line-clamp:5}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">梅吉穆列</div>
+  <ul>
+    <li><a href="/">绿野仙踪</a></li>
+    <li><a href="/nature">漫步田园</a></li>
+    <li><a href="/attractions">故城寻踪</a></li>
+    <li><a href="/taste">烟火知味</a></li>
+    <li><a href="/events" class="active">四时盛事</a></li>
+    <li><a href="/plan">旅行贴士</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="hero-mini">
+    <video class="hero-bg" autoplay muted loop playsinline>
+      <source src="/static/assets/四时盛事.mp4" type="video/mp4">
+    </video>
+    <h1>四时盛事</h1>
+    <p>从冬日的热酒到夏夜的焰火，一年四季都有值得奔赴的理由。</p>
+  </div>
+
+  <!-- 一月 -->
+  <div class="section">
+    <h2 class="section-title">一月 · 圣文森特徒步之旅</h2>
+    <p class="section-subtitle">葡园徒步 · 百年民俗</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/一月徒步(1).jpg" alt="圣文森特徒步之旅">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">1月 · 圣文森特节前后周末</span>
+          <h3 class="card-title">圣文森特徒步之旅</h3>
+          <p class="card-summary">沿百年葡萄酒之路穿行冬日丘陵葡萄园，全程约 15 公里休闲徒步，沿途设本土美食与热葡萄酒补给站，终点举办传统葡萄藤祈福仪式，全程难度平缓，适合轻户外爱好者与文化体验者。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四月 -->
+  <div class="section">
+    <h2 class="section-title">四月 · 速度与激情</h2>
+    <p class="section-subtitle">国际赛事 · 骑行盛典</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/四月赛车(1).png" alt="国际赛事">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">4月下旬 · 多尼克拉列韦茨镇</span>
+          <h3 class="card-title">FIM 克罗地亚速度摩托大奖赛</h3>
+          <p class="card-summary">国际摩联（FIM）官方认证的世界速度摩托锦标赛分站赛，中东欧级别最高的沙地摩托赛事；现场氛围狂热，配套葡萄酒美食区，可一站式感受赛事激情与本土风土。地点：千年体育场</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/四月骑行.jpg" alt="骑行活动">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">4月中旬 · 全梅吉穆列</span>
+          <h3 class="card-title">BIMEP 梅吉穆列骑行活动</h3>
+          <p class="card-summary">无门槛休闲骑行，路线串联森林、丘陵、葡萄园与乡村小镇，全程设 19 个打卡点，可自由选择里程，一路伴随田园风光与酒香，是体验梅吉穆列慢节奏的绝佳方式。起点设于首府查科韦茨</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五月 -->
+  <div class="section">
+    <h2 class="section-title">五月 · 葡萄酒季</h2>
+    <p class="section-subtitle">酒路开放 · 品鉴佳酿</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/五月葡萄酒(1).jpg" alt="葡萄酒">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">5月中下旬 · 什特里戈瓦镇</span>
+          <h3 class="card-title">Urbanovo 葡萄酒日</h3>
+          <p class="card-summary">一年仅一次的全酒窖开放，沿线百年家族酒庄同步开放地下酒窖；可深度探访酿酒工艺，集中品鉴本土独有品种普希佩尔白葡萄酒，同期举办国际葡萄酒评选、民俗演出与美食市集。地点：什特里戈瓦文化中心 + 葡萄酒之路沿线 20 余家家族酒庄</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 七月 -->
+  <div class="section">
+    <h2 class="section-title">七月 · 森林电音</h2>
+    <p class="section-subtitle">夏日限定 · 连嗨三天</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/七月音乐节.jpg" alt="音乐节">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">7月中下旬 · 洛帕蒂内茨镇</span>
+          <h3 class="card-title">Forestland 森林音乐节</h3>
+          <p class="card-summary">克罗地亚北部规模最大的户外电子音乐节，涵盖多曲风演出，可露营连嗨三天。地点：Forestland 森林公园</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 八月 -->
+  <div class="section">
+    <h2 class="section-title">八月 · 百年市集与葡萄园爵士</h2>
+    <p class="section-subtitle">灯火盛典 · 四国全景</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/八月(1).jpg" alt="集市">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">7月底至8月初 · 为期5天</span>
+          <h3 class="card-title">圣母升天节</h3>
+          <p class="card-summary">彩伞如海铺满盛夏老城，骑士与驯鹰者带你穿越中世纪。六十年历史的克罗地亚北部最大节庆，数千人共赴这场狂欢盛宴，等你入画。地点：查科韦茨镇 · 老城城堡及市中心各主题区域 · 免费入场，部分活动需单独购票</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/八月(2).jpg" alt="爵士乐">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">8月下旬 · 为期3天</span>
+          <h3 class="card-title">葡萄园爵士音乐节</h3>
+          <p class="card-summary">克罗地亚北部最具代表性的国际精品爵士音乐节，以马杰尔金布雷格山顶葡萄园为天然舞台。观众可在落日余晖中俯瞰克罗地亚、斯洛文尼亚、奥地利、匈牙利四国全景，享受顶级爵士乐与美酒的融合体验。地点：什特里戈瓦镇 · 马杰尔金布雷格山</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 九月 -->
+  <div class="section">
+    <h2 class="section-title">九月 · 千球腾空</h2>
+    <p class="section-subtitle">夜空燃灯 · 空中浪漫</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/九月.jpg" alt="气球">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">9月上旬 · 为期4天</span>
+          <h3 class="card-title">普雷洛格热气球节</h3>
+          <p class="card-summary">克罗地亚北部最壮观的热气球盛会！15 国 40 名飞行员齐聚，数十个热气球在清晨与傍晚升空，色彩斑斓。夜幕下『Night Glow』点亮，如巨大发光灯笼漂浮在德拉瓦河上。还能亲自体验系留飞行，赴一场空中浪漫盛宴！地点：普雷洛格镇 · 普雷洛格码头及德拉瓦河畔</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 十一月 -->
+  <div class="section">
+    <h2 class="section-title">十一月 · 新酒民俗</h2>
+    <p class="section-subtitle">非遗酒俗 · 百年传承</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/十一月.jpg" alt="葡萄酒">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">11月11日前后 · 为期3天</span>
+          <h3 class="card-title">圣马丁节传统庆祝活动</h3>
+          <p class="card-summary">近 700 年历史的非遗圣马丁节，11 月 11 日前后在多个葡萄酒小镇接力狂欢！来圣马丁娜穆里河畔，围观传统古拉什炖菜比赛，免费品鉴新酒美食。深入百年家族酒窖，尝一口刚发酵的年轻白葡萄酒，沉醉秋末微醺盛宴！地点：穆尔斯科斯雷迪什切、什特里戈瓦、圣马丁娜穆里、塞尔尼察等葡萄酒小镇</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 十二月 -->
+  <div class="section">
+    <h2 class="section-title">十二月 · 暗黑游行</h2>
+    <p class="section-subtitle">驱邪祈福 · 冬夜民俗</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/十二月.jpg" alt="游行">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">12月中旬 · 18:00 开始</span>
+          <h3 class="card-title">克拉普斯圣诞游行</h3>
+          <p class="card-summary">克罗地亚规模最大的克拉普斯游行驱魔活动！来自 5 国的 32 个团体、约 600 名『半人半羊』恶魔，披兽皮、戴狰狞木面具、持火把沿街穿行。冬夜火光与铃声交织，极具戏剧冲击力。地点：圣马丁娜穆里镇中心 · 建议提前占位并注意保暖</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

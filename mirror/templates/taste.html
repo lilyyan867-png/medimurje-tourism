@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>烟火知味 · 梅吉穆列</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f4f7f4;color:#333;line-height:1.6}
+
+.navbar{position:fixed;top:0;left:0;right:0;height:90px;background:rgba(26,61,36,0.92);backdrop-filter:blur(10px);display:flex;align-items:center;padding:0 60px;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.navbar .brand{color:#fff;font-size:28px;letter-spacing:6px;margin-right:90px;font-weight:700;font-family:'STKaiti','KaiTi',serif;white-space:nowrap}
+.navbar ul{display:flex;gap:48px;list-style:none}
+.navbar a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:20px;letter-spacing:2px;font-weight:600;transition:color .2s;white-space:nowrap}
+.navbar a:hover,.navbar a.active{color:#a5d6a7}
+
+.page{padding:150px 20px 80px;max-width:1200px;margin:0 auto}
+
+/* ===== Hero 视频 ===== */
+.hero-mini{position:relative;text-align:center;padding:140px 20px;overflow:hidden;background:#1a3d24;border-radius:14px;margin-bottom:60px}
+.hero-mini .hero-bg{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover;z-index:0}
+.hero-mini h1,.hero-mini p{position:relative;z-index:2}
+.hero-mini h1{font-size:48px;font-weight:600;color:#fff !important;letter-spacing:4px;margin-bottom:16px;text-shadow:0 4px 24px rgba(0,0,0,0.85),0 2px 8px rgba(0,0,0,0.9)}
+.hero-mini p{font-size:16px;color:#fff !important;letter-spacing:1px;text-shadow:0 3px 16px rgba(0,0,0,0.85),0 1px 6px rgba(0,0,0,0.9)}
+
+/* ===== 章节 ===== */
+.section{margin-bottom:56px}
+.section-title{font-size:28px;font-weight:600;color:#1a3d24;border-left:5px solid #2e7d32;padding-left:16px;margin-bottom:10px}
+.section-subtitle{color:#666;font-size:15px;margin-bottom:32px;padding-left:21px}
+
+/* ===== 卡片网格：单列 ===== */
+.card-grid{display:grid;grid-template-columns:1fr;gap:28px}
+
+/* ===== 卡片：固定高度 320px，左图右文 ===== */
+.card{
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 6px 24px rgba(0,0,0,0.06);
+  transition:transform .25s,box-shadow .25s;
+  border-top:3px solid #2e7d32;
+  display:flex;
+  flex-direction:row;
+  height:320px;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.12)}
+
+/* 图片：固定宽 380px，高度 100% */
+.card-img{width:380px;flex-shrink:0;height:100%;overflow:hidden;background:#e8f5e9}
+.card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.card:hover .card-img img{transform:scale(1.06)}
+
+/* 文字：占剩余宽度，垂直居中 */
+.card-body{
+  flex:1;
+  min-width:0;
+  padding:32px 40px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.card-tag{display:inline-block;background:#e8f5e9;color:#2e7d32;font-size:12px;padding:4px 12px;border-radius:14px;margin-bottom:12px;letter-spacing:.5px;font-weight:500;align-self:flex-start}
+.card-title{font-size:21px;font-weight:600;color:#1a3d24;margin-bottom:12px;letter-spacing:1px;line-height:1.3}
+.card-summary{color:#444;font-size:15px;line-height:1.8;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+.card-details{margin-top:4px}
+.card-details summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;color:#2e7d32;font-size:13px;font-weight:600;letter-spacing:1px;padding:6px 16px;border:1px solid #c8e6c9;border-radius:18px;background:#f1f8f1;transition:all .2s;user-select:none}
+.card-details summary::-webkit-details-marker{display:none}
+.card-details summary::after{content:'▼';font-size:9px;transition:transform .25s}
+.card-details[open] summary::after{transform:rotate(180deg)}
+.card-details summary:hover{background:#2e7d32;color:#fff;border-color:#2e7d32}
+.card-detail-body{margin-top:12px;padding-top:12px;border-top:1px dashed #c8e6c9;color:#555;font-size:13.5px;line-height:1.8;animation:fadeIn .3s ease-out}
+.card-detail-body p{margin-bottom:8px}
+.card-detail-body p:last-child{margin-bottom:0}
+.card-detail-body strong{color:#2e7d32}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== 移动端：上图下文 ===== */
+@media (max-width:900px){
+  .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:12px}
+  .navbar .brand{font-size:20px;letter-spacing:3px;margin-right:0;width:100%}
+  .navbar ul{gap:18px;width:100%;overflow-x:auto;padding-bottom:4px}
+  .navbar a{font-size:14px;letter-spacing:1px}
+  .page{padding:120px 16px 60px}
+  .hero-mini{padding:90px 20px;border-radius:0}
+  .hero-mini h1{font-size:32px;letter-spacing:2px}
+  .section-title{font-size:22px}
+  .card{flex-direction:column;height:auto}
+  .card-img{width:100%;height:200px}
+  .card-body{padding:22px}
+  .card-title{font-size:18px}
+  .card-summary{-webkit-line-clamp:5}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">梅吉穆列</div>
+  <ul>
+    <li><a href="/">绿野仙踪</a></li>
+    <li><a href="/nature">漫步田园</a></li>
+    <li><a href="/attractions">故城寻踪</a></li>
+    <li><a href="/taste" class="active">烟火知味</a></li>
+    <li><a href="/events">四时盛事</a></li>
+    <li><a href="/plan">旅行贴士</a></li>
+  </ul>
+</nav>
+<div class="page">
+
+  <div class="hero-mini">
+    <video class="hero-bg" autoplay muted loop playsinline>
+      <source src="/static/assets/okusi-medimursko-1.mp4" type="video/mp4">
+    </video>
+    <h1>烟火知味</h1>
+    <p>小众产区的顶级佳酿与中欧融合的地道风味。</p>
+</div>
+
+<!-- 葡萄酒之路 -->
+  <div class="section">
+    <h2 class="section-title">葡萄酒之路 · 一方风土，一脉葡香</h2>
+    <p class="section-subtitle">全球单位面积获奖最多的葡萄酒产区之一</p>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-img"><img src="/static/assets/普希佩尔.png" alt="普希佩尔"></div>
+        <div class="card-body">
+          <span class="card-tag">产区专属名片</span>
+          <h3 class="card-title">普希佩尔</h3>
+          <p class="card-summary">梅吉穆列特有的白葡萄品种，分为两款核心产品：经典款口感轻盈，带有清新柑橘果香，易饮百搭；尊享款陈酿时间更长，酒体醇厚，风味层次丰富。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body">
+              <p><strong>主要葡萄品种：</strong>长相思、绿维特纳、灰皮诺、莱茵雷司令、黄麝香、普希佩尔</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img"><img src="/static/assets/Urbanovo葡萄酒节.png" alt="Urbanovo 葡萄酒节"></div>
+        <div class="card-body">
+          <span class="card-tag">5月中旬 · 年度国际盛会</span>
+          <h3 class="card-title">Urbanovo 葡萄酒节</h3>
+          <p class="card-summary">每年 5 月中旬在什特里戈瓦举办，是普希佩尔葡萄酒的年度国际盛会。活动包含国际专家品鉴会、酒窖开放日、葡萄酒知识竞赛、主题晚宴与现场音乐会，是深度体验产区文化的最佳时机。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body">
+              <p><strong>酒乡甄选：</strong>查科韦茨葡萄酒商店、Medimurski Štacun 商店，精选十几家酒庄代表作品</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 酒乡栖居 -->
+  <div class="section">
+    <h2 class="section-title">酒乡栖居 · 住进葡萄园里</h2>
+    <p class="section-subtitle">温泉度假村与酒庄营地</p>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-img"><img src="/static/assets/圣马丁纳穆里温泉小镇(5).png" alt="圣马丁温泉度假村"></div>
+        <div class="card-body">
+          <span class="card-tag">欧洲首家葡萄酒主题康养度假村</span>
+          <h3 class="card-title">圣马丁温泉度假村</h3>
+          <p class="card-summary">坐落于葡萄酒之路核心地带，周边配套百栋高标准乡村别墅。泡葡萄酒精油温泉，眺望连绵葡萄园，是葡萄酒产区才有的专属享受。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body"><p><strong>地点：</strong>Terme Sveti Martin</p></div>
+          </details>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img"><img src="/static/assets/葡萄酒庄.jpg" alt="Hazić 葡萄酒营地"></div>
+        <div class="card-body">
+          <span class="card-tag">沉浸式体验酒庄生活</span>
+          <h3 class="card-title">Hazić 葡萄酒营地</h3>
+          <p class="card-summary">小众特色住宿选择，住在酒庄里，清晨醒来就是葡萄园，傍晚在露台小酌本地酒款。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body"><p><strong>地点：</strong>Jurovčak</p></div>
+          </details>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 酒路揽胜 -->
+  <div class="section">
+    <h2 class="section-title">酒路揽胜 · 沿途风光</h2>
+    <p class="section-subtitle">观景台、水车与百年教堂</p>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-img"><img src="/static/assets/观景台.png" alt="马德尔金布雷格观景台"></div>
+        <div class="card-body">
+          <span class="card-tag">俯瞰全景</span>
+          <h3 class="card-title">马德尔金布雷格观景台</h3>
+          <p class="card-summary">站在这里，可以俯瞰什特里戈瓦全景，一片连着一片的葡萄园在丘陵上铺展，是拍摄日落的最佳机位。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body"><p><strong>地点：</strong>Mađerkin Breg</p></div>
+          </details>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img"><img src="/static/assets/穆拉河传统水车.jpg" alt="穆拉河传统水车"></div>
+        <div class="card-body">
+          <span class="card-tag">聆听百年水声</span>
+          <h3 class="card-title">穆拉河传统水车</h3>
+          <p class="card-summary">穆拉河沿岸还保留着古老的漂浮水车，水声潺潺，是当地人几百年来的记忆。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body"><p>沿穆拉河岸分布，可顺路探访</p></div>
+          </details>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img"><img src="/static/assets/圣杰罗姆、圣乔治等历史教堂.png" alt="圣杰罗姆、圣乔治等历史教堂"></div>
+        <div class="card-body">
+          <span class="card-tag">中欧乡村建筑</span>
+          <h3 class="card-title">圣杰罗姆、圣乔治等历史教堂</h3>
+          <p class="card-summary">沿葡萄酒之路散落着多座中世纪教堂，钟楼、壁画与老石墙，感受最纯粹的中欧乡村建筑风貌。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body"><p>葡萄酒之路沿线</p></div>
+          </details>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 美食志 -->
+  <div class="section">
+    <h2 class="section-title">梅吉穆列美食志 · 地道本土风味</h2>
+    <p class="section-subtitle">融合中欧多国烹饪特色</p>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-img"><img src="/static/assets/梅吉穆列千层蛋糕.png" alt="梅吉穆列千层蛋糕"></div>
+        <div class="card-body">
+          <span class="card-tag">必尝经典</span>
+          <h3 class="card-title">梅吉穆列千层蛋糕</h3>
+          <p class="card-summary">入选联合国世界旅游组织全球美食旅游精选网络，斩获欧洲卓越目的地（EDEN）大奖。层层酥皮、奶酪与奶油，是当地最具代表性的甜点。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body"><p><strong>推荐：</strong>选择带有『梅吉穆列美食家』认证的餐厅</p></div>
+          </details>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img"><img src="/static/assets/培根油脂腌肉.png" alt="培根油脂腌肉 · 奶油干酪"></div>
+        <div class="card-body">
+          <span class="card-tag">必尝经典</span>
+          <h3 class="card-title">培根油脂腌肉 · 奶油干酪</h3>
+          <p class="card-summary">本地传统腌肉与奶制品，配上一杯普希佩尔，是中欧乡村最朴实的享受。另有荞麦粥炖鸭肉、烤梭鲈、原生南瓜籽油等。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body"><p><strong>搭配建议：</strong>荞麦粥炖鸭肉、烤梭鲈、原生南瓜籽油</p></div>
+          </details>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img"><img src="/static/assets/中欧融合风味.png" alt="中欧融合风味"></div>
+        <div class="card-body">
+          <span class="card-tag">文化溯源</span>
+          <h3 class="card-title">中欧融合风味</h3>
+          <p class="card-summary">梅吉穆列的饮食文化融合了维也纳、布达佩斯、威尼斯三地风味，17 世纪兹林斯基城堡的宫廷食谱流传至今。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body"><p><strong>生物动力农业：</strong>鲁道夫·斯坦纳出生地，斯坦纳博士中心长期推广环境友好种植</p></div>
+          </details>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
