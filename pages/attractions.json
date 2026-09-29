@@ -1,31 +1,209 @@
-{
-    "hero_style": "none",
-    "hero_title": "故城寻踪",
-  "hero_subtitle": "中世纪城堡、贵族酒窖与百年温泉，一段不愿醒来的中欧旧梦。",
-  "blocks": [
-    {
-      "title": "人文地标 · 葡萄酒与历史的深度碰撞",
-      "subtitle": "温泉、城堡与活的博物馆",
-      "items": [
-        {
-          "tag": "欧洲首家葡萄酒主题康养小镇",
-          "title": "圣马丁纳穆里温泉小镇",
-          "highlight": "完美融合葡萄酒、温泉、田园风光三元素。国内没有同款葡萄酒温泉体验，边泡温泉边眺望连绵葡萄园，是只有葡萄酒产区才有的专属享受。",
-          "experience": "泡葡萄酒精油温泉，逛穆拉河漂浮磨坊与磨坊博物馆，沿丘陵徒步打卡百年苹果园，一站式搞定温泉、自然与人文。"
-        },
-        {
-          "tag": "中世纪贵族的巴洛克城堡秘境",
-          "title": "兹林斯基老城",
-          "highlight": "曾是克罗地亚显赫贵族兹林斯基家族的府邸，城堡里藏着 17 世纪的宫廷食谱与地下古酒窖。这里没有旅行团，你可以安静地逛巴洛克花园、看古代兵器展，还能在城堡酒窖喝到传统配方的本地葡萄酒。",
-          "experience": "登城堡俯瞰查科韦茨老城，逛地下酒窖品鉴古法葡萄酒，傍晚在巴洛克花园等日落。"
-        },
-        {
-          "tag": "整座县城都是活的博物馆",
-          "title": "梅吉穆列生态博物馆",
-          "highlight": "不用隔着玻璃看展品，直接走进百年村落、走进手工作坊，沉浸式感受中欧乡村的生活原貌。",
-          "experience": "沿线路探访不同主题的村落点位，体验传统蕾丝编织、柳篮编织等非遗手艺，逛本地市集感受烟火气。"
-        }
-      ]
-    }
-  ]
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>故城寻踪 · 梅吉穆列</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f4f7f4;color:#333;line-height:1.6}
+
+/* ===== 导航栏 ===== */
+.navbar{position:fixed;top:0;left:0;right:0;height:90px;background:rgba(26,61,36,0.92);backdrop-filter:blur(10px);display:flex;align-items:center;padding:0 60px;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.navbar .brand{color:#fff;font-size:28px;letter-spacing:6px;margin-right:90px;font-weight:700;font-family:'STKaiti','KaiTi',serif;white-space:nowrap}
+.navbar ul{display:flex;gap:48px;list-style:none}
+.navbar a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:20px;letter-spacing:2px;font-weight:600;transition:color .2s;white-space:nowrap}
+.navbar a:hover,.navbar a.active{color:#a5d6a7}
+
+.page{padding:150px 20px 80px;max-width:1200px;margin:0 auto}
+
+/* ===== Hero 区（视频背景） ===== */
+.hero-mini{position:relative;text-align:center;padding:140px 20px;overflow:hidden;background:#1a3d24;border-radius:14px;margin-bottom:60px}
+.hero-mini .hero-bg{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover;z-index:0}
+.hero-mini h1,.hero-mini p{position:relative;z-index:2}
+.hero-mini h1{font-size:48px;font-weight:600;color:#fff !important;letter-spacing:4px;margin-bottom:16px;text-shadow:0 4px 24px rgba(0,0,0,0.85),0 2px 8px rgba(0,0,0,0.9)}
+.hero-mini p{font-size:16px;color:#fff !important;letter-spacing:1px;text-shadow:0 3px 16px rgba(0,0,0,0.85),0 1px 6px rgba(0,0,0,0.9)}
+
+/* ===== 章节 ===== */
+.section{margin-bottom:60px}
+.section-title{font-size:30px;font-weight:600;color:#1a3d24;border-left:5px solid #2e7d32;padding-left:16px;margin-bottom:12px}
+.section-subtitle{color:#666;font-size:16px;margin-bottom:36px;padding-left:21px}
+
+/* ===== 卡片网格（单列） ===== */
+.card-grid{display:grid;grid-template-columns:1fr;gap:28px}
+
+/* ===== 卡片：上图下文 ===== */
+.card{
+  background:#fff;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 6px 24px rgba(0,0,0,0.06);
+  transition:transform .25s,box-shadow .25s;
+  border-top:3px solid #2e7d32;
 }
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.12)}
+
+/* 图片区 */
+.card-img{
+  width:100%;
+  height:280px;
+  overflow:hidden;
+  background:#e8f5e9;
+}
+.card-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .5s;
+}
+.card:hover .card-img img{transform:scale(1.06)}
+
+/* 文字区 */
+.card-body{padding:32px 36px 36px}
+
+.card-tag{
+  display:inline-block;
+  background:#e8f5e9;
+  color:#2e7d32;
+  font-size:12px;
+  padding:5px 12px;
+  border-radius:14px;
+  margin-bottom:16px;
+  letter-spacing:.5px;
+  font-weight:500;
+}
+.card-title{font-size:24px;font-weight:600;color:#1a3d24;margin-bottom:16px;letter-spacing:1px}
+.card-summary{color:#444;font-size:15px;line-height:1.9;margin-bottom:18px}
+
+/* 折叠详情 */
+.card-details{margin-top:18px}
+.card-details summary{
+  list-style:none;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#2e7d32;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:1px;
+  padding:8px 18px;
+  border:1px solid #c8e6c9;
+  border-radius:20px;
+  background:#f1f8f1;
+  transition:all .2s;
+  user-select:none;
+}
+.card-details summary::-webkit-details-marker{display:none}
+.card-details summary::after{content:'▼';font-size:10px;transition:transform .25s}
+.card-details[open] summary::after{transform:rotate(180deg)}
+.card-details summary:hover{background:#2e7d32;color:#fff;border-color:#2e7d32}
+
+.card-detail-body{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px dashed #c8e6c9;
+  color:#555;
+  font-size:14px;
+  line-height:1.9;
+  animation:fadeIn .3s ease-out;
+}
+.card-detail-body p{margin-bottom:10px}
+.card-detail-body p:last-child{margin-bottom:0}
+.card-detail-body strong{color:#2e7d32}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== 移动端 ===== */
+@media (max-width:900px){
+  .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:12px}
+  .navbar .brand{font-size:20px;letter-spacing:3px;margin-right:0;width:100%}
+  .navbar ul{gap:18px;width:100%;overflow-x:auto;padding-bottom:4px}
+  .navbar a{font-size:14px;letter-spacing:1px}
+  .page{padding:120px 16px 60px}
+  .hero-mini{padding:90px 20px;border-radius:0}
+  .hero-mini h1{font-size:32px;letter-spacing:2px}
+  .section-title{font-size:22px}
+  .card-img{height:200px}
+  .card-body{padding:22px}
+  .card-title{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">梅吉穆列</div>
+  <ul>
+    <li><a href="/">绿野仙踪</a></li>
+    <li><a href="/nature">漫步田园</a></li>
+    <li><a href="/attractions" class="active">故城寻踪</a></li>
+    <li><a href="/taste">烟火知味</a></li>
+    <li><a href="/events">四时盛事</a></li>
+    <li><a href="/plan">旅行贴士</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero-mini">
+    <video class="hero-bg" autoplay muted loop playsinline>
+      <source src="/static/assets/attractions.mp4" type="video/mp4">
+    </video>
+    <h1>故城寻踪</h1>
+    <p>中世纪城堡、贵族酒窖与百年温泉，一段不愿醒来的中欧旧梦。</p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">人文地标 · 葡萄酒与历史的深度碰撞</h2>
+    <p class="section-subtitle">温泉、城堡与活的博物馆</p>
+    <div class="card-grid">
+
+      <!-- 卡片 1：圣马丁纳穆里温泉小镇 -->
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/spring_3.png" alt="圣马丁纳穆里温泉小镇">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">欧洲首家葡萄酒主题康养小镇</span>
+          <h3 class="card-title">圣马丁纳穆里温泉小镇</h3>
+          <p class="card-summary">完美融合葡萄酒、温泉、田园风光三元素。边泡温泉边眺望连绵葡萄园，是只有葡萄酒产区才有的专属享受。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body">
+              <p>国内没有同款葡萄酒温泉体验。这里的葡萄酒精油温泉，是当地独有的养生方式。</p>
+              <p><strong>推荐体验：</strong>泡葡萄酒精油温泉，逛穆拉河漂浮磨坊与磨坊博物馆，沿丘陵徒步打卡百年苹果园，一站式搞定温泉、自然与人文。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- 卡片 2：兹林斯基老城 -->
+      <div class="card">
+        <div class="card-img">
+          <img src="/static/assets/old_city_1.png" alt="兹林斯基老城">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">中世纪贵族的巴洛克城堡秘境</span>
+          <h3 class="card-title">兹林斯基老城</h3>
+          <p class="card-summary">曾是克罗地亚显赫贵族兹林斯基家族的府邸，城堡里藏着 17 世纪的宫廷食谱与地下古酒窖。</p>
+          <details class="card-details">
+            <summary>了解更多</summary>
+            <div class="card-detail-body">
+              <p>这里没有旅行团，你可以安静地逛巴洛克花园、看古代兵器展，还能在城堡酒窖喝到传统配方的本地葡萄酒。</p>
+              <p><strong>推荐体验：</strong>登城堡俯瞰查科韦茨老城，逛地下酒窖品鉴古法葡萄酒，傍晚在巴洛克花园等日落。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
