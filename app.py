@@ -7,7 +7,8 @@ STATIC_DIR = os.path.join(BASE_DIR, "mirror", "static")
 
 app = Flask(
     __name__,
-    static_folder="mirror/templates",
+    template_folder="mirror/templates",
+    static_folder="mirror/static",
     static_url_path="/static"
 )
 
