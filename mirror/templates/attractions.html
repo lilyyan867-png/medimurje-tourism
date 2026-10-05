@@ -4,129 +4,183 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>故城寻踪 · 梅吉穆列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f4f7f4;color:#333;line-height:1.6}
+body{
+  font-family:'PingFang SC','Microsoft YaHei',sans-serif;
+  background:#f5f2ed;
+  color:#3d3429;
+  line-height:1.75;
+}
 
-/* ===== 导航栏 ===== */
-.navbar{position:fixed;top:0;left:0;right:0;height:90px;background:rgba(26,61,36,0.92);backdrop-filter:blur(10px);display:flex;align-items:center;padding:0 60px;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+/* ===== 导航栏（与全站一致） ===== */
+.navbar{
+  position:fixed;top:0;left:0;right:0;height:90px;
+  background:rgba(26,61,36,0.92);backdrop-filter:blur(10px);
+  display:flex;align-items:center;padding:0 60px;z-index:1000;
+  box-shadow:0 2px 12px rgba(0,0,0,0.15)
+}
 .navbar .brand{color:#fff;font-size:28px;letter-spacing:6px;margin-right:90px;font-weight:700;font-family:'STKaiti','KaiTi',serif;white-space:nowrap}
 .navbar ul{display:flex;gap:48px;list-style:none}
 .navbar a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:20px;letter-spacing:2px;font-weight:600;transition:color .2s;white-space:nowrap}
 .navbar a:hover,.navbar a.active{color:#a5d6a7}
 
-.page{padding:150px 20px 80px;max-width:1200px;margin:0 auto}
+.serif{font-family:'Noto Serif SC','STSong','SimSun',serif}
+.page-wrap{padding-top:90px}
 
-/* ===== Hero 区（视频背景） ===== */
-.hero-mini{position:relative;text-align:center;padding:140px 20px;overflow:hidden;background:#1a3d24;border-radius:14px;margin-bottom:60px}
-.hero-mini .hero-bg{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover;z-index:0}
-.hero-mini h1,.hero-mini p{position:relative;z-index:2}
-.hero-mini h1{font-size:48px;font-weight:600;color:#fff !important;letter-spacing:4px;margin-bottom:16px;text-shadow:0 4px 24px rgba(0,0,0,0.85),0 2px 8px rgba(0,0,0,0.9)}
-.hero-mini p{font-size:16px;color:#fff !important;letter-spacing:1px;text-shadow:0 3px 16px rgba(0,0,0,0.85),0 1px 6px rgba(0,0,0,0.9)}
-
-/* ===== 章节 ===== */
-.section{margin-bottom:60px}
-.section-title{font-size:30px;font-weight:600;color:#1a3d24;border-left:5px solid #2e7d32;padding-left:16px;margin-bottom:12px}
-.section-subtitle{color:#666;font-size:16px;margin-bottom:36px;padding-left:21px}
-
-/* ===== 卡片网格（单列） ===== */
-.card-grid{display:grid;grid-template-columns:1fr;gap:28px}
-
-/* ===== 卡片：上图下文 ===== */
-.card{
-  background:#fff;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 6px 24px rgba(0,0,0,0.06);
-  transition:transform .25s,box-shadow .25s;
-  border-top:3px solid #2e7d32;
+/* ===== 全宽 Hero（图，非视频） ===== */
+.hero-editorial{
+  position:relative;min-height:72vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;background:#2a241c
 }
-.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.12)}
-
-/* 图片区 */
-.card-img{
-  width:100%;
-  height:280px;
-  overflow:hidden;
-  background:#e8f5e9;
+.hero-editorial .hero-photo{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:brightness(0.72) saturate(0.95)
 }
-.card-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transition:transform .5s;
+.hero-editorial .hero-inner{position:relative;z-index:2;padding:80px 24px;max-width:920px}
+.hero-editorial .kicker{font-size:13px;letter-spacing:8px;color:rgba(255,255,255,0.75);margin-bottom:20px;text-transform:uppercase}
+.hero-editorial h1{
+  font-size:clamp(36px,5vw,58px);font-weight:600;color:#fff;letter-spacing:10px;
+  margin-bottom:22px;text-shadow:0 8px 32px rgba(0,0,0,0.45)
 }
-.card:hover .card-img img{transform:scale(1.06)}
+.hero-editorial .lead{font-size:17px;color:rgba(255,255,255,0.92);letter-spacing:2px;line-height:2;font-weight:400}
 
-/* 文字区 */
-.card-body{padding:32px 36px 36px}
-
-.card-tag{
-  display:inline-block;
-  background:#e8f5e9;
-  color:#2e7d32;
-  font-size:12px;
-  padding:5px 12px;
-  border-radius:14px;
-  margin-bottom:16px;
-  letter-spacing:.5px;
-  font-weight:500;
+/* ===== 引言：不对称 + 竖排 ===== */
+.intro-band{
+  max-width:1180px;margin:0 auto;padding:88px 40px 40px;
+  display:grid;grid-template-columns:1fr auto;gap:48px;align-items:start
 }
-.card-title{font-size:24px;font-weight:600;color:#1a3d24;margin-bottom:16px;letter-spacing:1px}
-.card-summary{color:#444;font-size:15px;line-height:1.9;margin-bottom:18px}
-
-/* 折叠详情 */
-.card-details{margin-top:18px}
-.card-details summary{
-  list-style:none;
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  color:#2e7d32;
-  font-size:14px;
-  font-weight:600;
-  letter-spacing:1px;
-  padding:8px 18px;
-  border:1px solid #c8e6c9;
-  border-radius:20px;
-  background:#f1f8f1;
-  transition:all .2s;
-  user-select:none;
+.intro-copy h2{font-size:clamp(26px,3vw,34px);font-weight:600;color:#2c2418;letter-spacing:4px;margin-bottom:18px;line-height:1.45}
+.intro-copy p{color:#5c5348;font-size:15px;max-width:640px}
+.intro-vertical{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-size:14px;letter-spacing:6px;color:#8a7a68;
+  border-right:1px solid #d8cfc3;padding-right:22px;min-height:180px
 }
-.card-details summary::-webkit-details-marker{display:none}
-.card-details summary::after{content:'▼';font-size:10px;transition:transform .25s}
-.card-details[open] summary::after{transform:rotate(180deg)}
-.card-details summary:hover{background:#2e7d32;color:#fff;border-color:#2e7d32}
 
-.card-detail-body{
-  margin-top:18px;
-  padding-top:18px;
-  border-top:1px dashed #c8e6c9;
-  color:#555;
-  font-size:14px;
-  line-height:1.9;
-  animation:fadeIn .3s ease-out;
+/* ===== 三联画 ===== */
+.triptych{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:3px;
+  margin:0 0 72px;background:#2a241c
 }
-.card-detail-body p{margin-bottom:10px}
-.card-detail-body p:last-child{margin-bottom:0}
-.card-detail-body strong{color:#2e7d32}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.triptych-panel{position:relative;min-height:420px;overflow:hidden}
+.triptych-panel img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
+.triptych-panel:hover img{transform:scale(1.04)}
+.triptych-panel::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.55) 0%,transparent 55%)
+}
+.triptych-panel .label{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  z-index:2;color:#fff;font-size:clamp(20px,2.5vw,28px);letter-spacing:12px;font-weight:600;
+  text-shadow:0 4px 24px rgba(0,0,0,0.5);white-space:nowrap
+}
+.triptych-panel .caption{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;padding:20px 16px 24px;
+  font-size:12px;color:rgba(255,255,255,0.88);text-align:center;letter-spacing:1px;line-height:1.6
+}
 
-/* ===== 移动端 ===== */
-@media (max-width:900px){
+/* ===== 章节标题 ===== */
+.section-head{text-align:center;padding:24px 40px 56px;max-width:800px;margin:0 auto}
+.section-head .eyebrow{font-size:12px;letter-spacing:6px;color:#9a8b78;margin-bottom:12px}
+.section-head h2{font-size:clamp(24px,3vw,32px);color:#2c2418;letter-spacing:5px;font-weight:600}
+.section-head p{margin-top:14px;font-size:15px;color:#6b6258}
+
+/* ===== 杂志式双卡行（纹理底 +  cream 卡片） ===== */
+.story-row{
+  position:relative;margin:0 0 64px;padding:72px 40px;
+  background:url('/static/assets/old_town.jpg') center/cover no-repeat
+}
+.story-row::before{
+  content:'';position:absolute;inset:0;background:rgba(45,35,28,0.82)
+}
+.story-row-inner{
+  position:relative;z-index:1;max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:stretch
+}
+.story-row.reverse .story-row-inner{direction:rtl}
+.story-row.reverse .story-row-inner > *{direction:ltr}
+
+.story-card{
+  background:#fdfcf8;padding:36px 32px 40px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.22);display:flex;flex-direction:column
+}
+.story-card .dot{align-self:flex-end;width:8px;height:8px;border-radius:50%;background:#8b6914;margin-bottom:16px}
+.story-card-img{flex:1;min-height:220px;overflow:hidden;margin-bottom:24px;background:#e8e2d9}
+.story-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.story-card h3{font-size:22px;letter-spacing:3px;color:#2c2418;margin-bottom:14px;font-weight:600}
+.story-card .tag{font-size:11px;letter-spacing:3px;color:#8a7a68;margin-bottom:12px}
+.story-card p{font-size:14px;color:#4a433c;line-height:1.95;margin-bottom:12px}
+.story-card .exp{font-size:13px;color:#6b6258;padding-top:14px;border-top:1px solid #e5dfd6}
+.story-card .exp strong{color:#5c4a32;font-weight:600}
+
+.story-card.text-only{justify-content:center;text-align:center;padding:48px 36px}
+.story-card.text-only h3{font-size:26px;margin-bottom:20px}
+.story-card.text-only p{text-align:left}
+
+.story-aside{
+  position:absolute;right:40px;top:50%;transform:translateY(-50%);
+  writing-mode:vertical-rl;letter-spacing:8px;font-size:15px;color:rgba(253,252,248,0.55);
+  z-index:2;display:none
+}
+@media (min-width:1100px){.story-aside{display:block}}
+
+/* ===== 四列竖卡（香调网格风格） ===== */
+.pillar-grid{
+  max-width:1180px;margin:0 auto 80px;padding:0 40px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px
+}
+.pillar{
+  background:#fdfcf8;padding:28px 18px 32px;text-align:center;
+  box-shadow:0 4px 24px rgba(60,45,30,0.06);border-top:2px solid #c4b8a8
+}
+.pillar .thumb{width:100%;height:200px;overflow:hidden;margin-bottom:20px;background:#ebe4da}
+.pillar .thumb img{width:100%;height:100%;object-fit:cover}
+.pillar h4{font-size:15px;letter-spacing:2px;color:#2c2418;margin-bottom:10px;font-weight:600}
+.pillar p{font-size:12px;color:#6b6258;line-height:1.85}
+
+/* ===== 全宽影院视频 ===== */
+.cinema-block{
+  width:100vw;max-width:100vw;
+  margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);
+  position:relative;background:#1a1510;overflow:hidden
+}
+.cinema-block video{
+  display:block;width:100%;height:auto;
+  min-height:min(56vh,520px);max-height:85vh;
+  object-fit:cover;aspect-ratio:21/9
+}
+.cinema-caption{
+  position:absolute;left:0;right:0;bottom:0;padding:32px 40px 40px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.65));
+  text-align:center;pointer-events:none
+}
+.cinema-caption p{color:rgba(255,255,255,0.9);font-size:15px;letter-spacing:4px}
+
+.footer-mini{
+  text-align:center;padding:48px 20px 56px;font-size:12px;color:#9a8b78;letter-spacing:3px
+}
+
+@media (max-width:960px){
   .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:12px}
-  .navbar .brand{font-size:20px;letter-spacing:3px;margin-right:0;width:100%}
-  .navbar ul{gap:18px;width:100%;overflow-x:auto;padding-bottom:4px}
-  .navbar a{font-size:14px;letter-spacing:1px}
-  .page{padding:120px 16px 60px}
-  .hero-mini{padding:90px 20px;border-radius:0}
-  .hero-mini h1{font-size:32px;letter-spacing:2px}
-  .section-title{font-size:22px}
-  .card-img{height:200px}
-  .card-body{padding:22px}
-  .card-title{font-size:20px}
+  .navbar .brand{font-size:20px;margin-right:0;width:100%}
+  .navbar ul{gap:18px;width:100%;overflow-x:auto}
+  .navbar a{font-size:14px}
+  .intro-band{grid-template-columns:1fr;padding:56px 20px 32px}
+  .intro-vertical{writing-mode:horizontal-tb;border-right:none;border-top:1px solid #d8cfc3;padding:16px 0 0}
+  .triptych{grid-template-columns:1fr}
+  .triptych-panel{min-height:280px}
+  .story-row{padding:48px 20px}
+  .story-row-inner{grid-template-columns:1fr}
+  .story-row.reverse .story-row-inner{direction:ltr}
+  .pillar-grid{grid-template-columns:repeat(2,1fr);padding:0 20px}
+  .cinema-block video{min-height:40vh;aspect-ratio:16/9}
+}
+@media (max-width:520px){
+  .pillar-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -144,64 +198,150 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f4f7f4;c
   </ul>
 </nav>
 
-<div class="page">
+<div class="page-wrap">
 
-  <!-- Hero -->
-  <div class="hero-mini">
-    <video class="hero-bg" autoplay muted loop playsinline>
-      <source src="/static/assets/attractions.mp4" type="video/mp4">
-    </video>
-    <h1>故城寻踪</h1>
-    <p>中世纪城堡、贵族酒窖与百年温泉，一段不愿醒来的中欧旧梦。</p>
+  <header class="hero-editorial">
+    <img class="hero-photo" src="/static/assets/old_town.jpg" alt="兹林斯基老城与查科韦茨">
+    <div class="hero-inner serif">
+      <p class="kicker">Medimurje · Heritage</p>
+      <h1>故城寻踪</h1>
+      <p class="lead">中世纪城堡、贵族酒窖与百年温泉，<br>一段不愿醒来的中欧旧梦。</p>
+    </div>
+  </header>
+
+  <section class="intro-band">
+    <div class="intro-copy serif">
+      <h2>人文地标 · 葡萄酒与历史的深度碰撞</h2>
+      <p>温泉、城堡与活的博物馆——在梅吉穆列，历史不是封存在玻璃柜里的标本，而是仍可走入、可品尝、可触摸的日常风景。</p>
+    </div>
+    <p class="intro-vertical serif">每一座故城，都是一缕被唤醒的故事</p>
+  </section>
+
+  <section class="triptych" aria-label="故城三景">
+    <article class="triptych-panel">
+      <img src="/static/assets/spring_3.png" alt="圣马丁纳穆里温泉">
+      <span class="label serif">温泉</span>
+      <p class="caption">圣马丁纳穆里 · 葡萄酒主题康养</p>
+    </article>
+    <article class="triptych-panel">
+      <img src="/static/assets/old_city_1.png" alt="兹林斯基老城">
+      <span class="label serif">城堡</span>
+      <p class="caption">兹林斯基家族 · 巴洛克秘境</p>
+    </article>
+    <article class="triptych-panel">
+      <img src="/static/assets/church.png" alt="历史教堂">
+      <span class="label serif">信仰</span>
+      <p class="caption">圣杰罗姆、圣乔治等历史教堂</p>
+    </article>
+  </section>
+
+  <div class="section-head serif">
+    <p class="eyebrow">Aroma of Time</p>
+    <h2>故城寻踪，由此展开</h2>
+    <p>三座地标，三种方式，读懂两河之间的旧日贵族与今日慢生活。</p>
   </div>
 
-  <div class="section">
-    <h2 class="section-title">人文地标 · 葡萄酒与历史的深度碰撞</h2>
-    <p class="section-subtitle">温泉、城堡与活的博物馆</p>
-    <div class="card-grid">
-
-      <!-- 卡片 1：圣马丁纳穆里温泉小镇 -->
-      <div class="card">
-        <div class="card-img">
-          <img src="/static/assets/spring_3.png" alt="圣马丁纳穆里温泉小镇">
+  <!-- 圣马丁 -->
+  <section class="story-row">
+    <span class="story-aside serif">葡萄酒与温泉</span>
+    <div class="story-row-inner">
+      <article class="story-card">
+        <span class="dot"></span>
+        <div class="story-card-img">
+          <img src="/static/assets/spring_1.png" alt="圣马丁纳穆里温泉小镇">
         </div>
-        <div class="card-body">
-          <span class="card-tag">欧洲首家葡萄酒主题康养小镇</span>
-          <h3 class="card-title">圣马丁纳穆里温泉小镇</h3>
-          <p class="card-summary">完美融合葡萄酒、温泉、田园风光三元素。边泡温泉边眺望连绵葡萄园，是只有葡萄酒产区才有的专属享受。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body">
-              <p>国内没有同款葡萄酒温泉体验。这里的葡萄酒精油温泉，是当地独有的养生方式。</p>
-              <p><strong>推荐体验：</strong>泡葡萄酒精油温泉，逛穆拉河漂浮磨坊与磨坊博物馆，沿丘陵徒步打卡百年苹果园，一站式搞定温泉、自然与人文。</p>
-            </div>
-          </details>
-        </div>
-      </div>
+        <p class="tag">欧洲首家葡萄酒主题康养小镇</p>
+        <h3 class="serif">圣马丁纳穆里温泉小镇</h3>
+        <p>完美融合葡萄酒、温泉、田园风光三元素。边泡温泉边眺望连绵葡萄园，是只有葡萄酒产区才有的专属享受。</p>
+        <p class="exp"><strong>推荐体验：</strong>泡葡萄酒精油温泉，逛穆拉河漂浮磨坊与磨坊博物馆，沿丘陵徒步打卡百年苹果园。</p>
+      </article>
+      <article class="story-card text-only serif">
+        <h3>穆拉河畔<br>的慢疗愈</h3>
+        <p>国内没有同款葡萄酒温泉体验。这里的葡萄酒精油温泉，是当地独有的养生方式——在丘陵与河风之间，把身体交给温水与酒香。</p>
+      </article>
+    </div>
+  </section>
 
-      <!-- 卡片 2：兹林斯基老城 -->
-      <div class="card">
-        <div class="card-img">
+  <!-- 兹林斯基 -->
+  <section class="story-row reverse">
+    <span class="story-aside serif">贵族与酒窖</span>
+    <div class="story-row-inner">
+      <article class="story-card text-only serif">
+        <h3>没有旅行团的<br>城堡午后</h3>
+        <p>你可以安静地逛巴洛克花园、看古代兵器展，还能在城堡酒窖喝到传统配方的本地葡萄酒——兹林斯基家族留下的，是一座仍可走进的府邸。</p>
+      </article>
+      <article class="story-card">
+        <span class="dot"></span>
+        <div class="story-card-img">
           <img src="/static/assets/old_city_1.png" alt="兹林斯基老城">
         </div>
-        <div class="card-body">
-          <span class="card-tag">中世纪贵族的巴洛克城堡秘境</span>
-          <h3 class="card-title">兹林斯基老城</h3>
-          <p class="card-summary">曾是克罗地亚显赫贵族兹林斯基家族的府邸，城堡里藏着 17 世纪的宫廷食谱与地下古酒窖。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body">
-              <p>这里没有旅行团，你可以安静地逛巴洛克花园、看古代兵器展，还能在城堡酒窖喝到传统配方的本地葡萄酒。</p>
-              <p><strong>推荐体验：</strong>登城堡俯瞰查科韦茨老城，逛地下酒窖品鉴古法葡萄酒，傍晚在巴洛克花园等日落。</p>
-            </div>
-          </details>
-        </div>
-      </div>
-
-
-
+        <p class="tag">中世纪贵族的巴洛克城堡秘境</p>
+        <h3 class="serif">兹林斯基老城</h3>
+        <p>曾是克罗地亚显赫贵族兹林斯基家族的府邸，城堡里藏着 17 世纪的宫廷食谱与地下古酒窖。</p>
+        <p class="exp"><strong>推荐体验：</strong>登城堡俯瞰查科韦茨老城，逛地下酒窖品鉴古法葡萄酒，傍晚在巴洛克花园等日落。</p>
+      </article>
     </div>
-  </div>
+  </section>
+
+  <!-- 生态博物馆 -->
+  <section class="story-row">
+    <span class="story-aside serif">活的博物馆</span>
+    <div class="story-row-inner">
+      <article class="story-card">
+        <span class="dot"></span>
+        <div class="story-card-img">
+          <img src="/static/assets/old_town.jpg" alt="梅吉穆列生态博物馆村落">
+        </div>
+        <p class="tag">整座县城都是活的博物馆</p>
+        <h3 class="serif">梅吉穆列生态博物馆</h3>
+        <p>不用隔着玻璃看展品，直接走进百年村落、走进手工作坊，沉浸式感受中欧乡村的生活原貌。</p>
+        <p class="exp"><strong>推荐体验：</strong>沿线路探访不同主题的村落点位，体验传统蕾丝编织、柳篮编织等非遗手艺，逛本地市集感受烟火气。</p>
+      </article>
+      <article class="story-card">
+        <span class="dot"></span>
+        <div class="story-card-img">
+          <img src="/static/assets/spring_5.png" alt="圣马丁温泉与田园">
+        </div>
+        <p class="tag">田园与非遗</p>
+        <h3 class="serif">手作与市集</h3>
+        <p>从温泉小镇到查科韦茨周边村落，非遗手艺与本地市集串联成一条可步行、可参与的「生态博物馆」动线。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="pillar-grid serif" aria-label="更多故城线索">
+    <article class="pillar">
+      <div class="thumb"><img src="/static/assets/wine.jpg" alt="葡萄酒庄"></div>
+      <h4>葡萄酒庄</h4>
+      <p>古法酒窖与丘陵葡萄园，品鉴本地配方。</p>
+    </article>
+    <article class="pillar">
+      <div class="thumb"><img src="/static/assets/lookup.png" alt="观景台"></div>
+      <h4>马德尔金布雷格</h4>
+      <p>登高远眺，两河平原与故城轮廓尽收眼底。</p>
+    </article>
+    <article class="pillar">
+      <div class="thumb"><img src="/static/assets/spring_3.png" alt="温泉"></div>
+      <h4>葡萄酒精油泉</h4>
+      <p>产区独有的康养体验，与田园视野相伴。</p>
+    </article>
+    <article class="pillar">
+      <div class="thumb"><img src="/static/assets/church.png" alt="教堂"></div>
+      <h4>历史教堂群</h4>
+      <p>圣杰罗姆、圣乔治等石砌信仰地标。</p>
+    </article>
+  </section>
+
+  <section class="cinema-block" aria-label="故城寻踪影像">
+    <video autoplay muted loop playsinline poster="/static/assets/old_town.jpg">
+      <source src="/static/assets/attractions.mp4" type="video/mp4">
+    </video>
+    <div class="cinema-caption serif">
+      <p>故城寻踪 · 在影像中重返两河之间的旧梦</p>
+    </div>
+  </section>
+
+  <p class="footer-mini serif">梅吉穆列 · 故城寻踪</p>
 
 </div>
 
