@@ -1,82 +1,143 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <title>我的旅游网站</title>
-  <link rel="stylesheet" href="/static/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>欢迎探索梅吉穆列</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;color:#333;line-height:1.6}
+
+/* ===== 导航栏 ===== */
+.navbar{position:fixed;top:0;left:0;right:0;height:90px;background:rgba(26,61,36,0.92);backdrop-filter:blur(10px);display:flex;align-items:center;padding:0 60px;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.navbar .brand{color:#fff;font-size:28px;letter-spacing:6px;margin-right:90px;font-weight:700;font-family:'STKaiti','KaiTi',serif;white-space:nowrap}
+.navbar ul{display:flex;gap:48px;list-style:none}
+.navbar a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:20px;letter-spacing:2px;font-weight:600;transition:color .2s;white-space:nowrap}
+.navbar a:hover,.navbar a.active{color:#a5d6a7}
+
+/* ===== 首屏大图 ===== */
+.hero{position:relative;height:100vh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:url('/static/assets/front.jpg') center/cover no-repeat;background-color:#1a3d24}
+.hero h1{position:relative;z-index:2;color:#fff;font-size:56px;font-weight:600;letter-spacing:6px;line-height:1.25;margin-bottom:24px;text-shadow:0 4px 24px rgba(0,0,0,0.85),0 2px 8px rgba(0,0,0,0.9);font-family:'STKaiti','KaiTi','PingFang SC',serif}
+.hero p{position:relative;z-index:2;color:#fff;font-size:17px;line-height:2;letter-spacing:1.5px;max-width:780px;padding:0 32px;text-shadow:0 3px 16px rgba(0,0,0,0.85),0 1px 6px rgba(0,0,0,0.9)}
+
+/* ===== 入口卡片 ===== */
+.entry-section{padding:100px 40px;max-width:1300px;margin:0 auto}
+.entry-title{text-align:center;font-size:36px;font-weight:600;color:#1a3d24;letter-spacing:4px;margin-bottom:14px}
+.entry-sub{text-align:center;font-size:15px;color:#666;letter-spacing:1px;margin-bottom:60px}
+.entry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.entry-card{position:relative;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;text-decoration:none;color:inherit;display:block}
+.entry-card:hover{transform:translateY(-8px);box-shadow:0 18px 50px rgba(0,0,0,0.15)}
+.entry-card .thumb{height:200px;background:linear-gradient(135deg,#2e7d32,#66bb6a);overflow:hidden}
+.entry-card .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.entry-card .body{padding:26px}
+.entry-card h3{font-size:22px;font-weight:600;color:#1a3d24;letter-spacing:3px;margin-bottom:10px}
+.entry-card p{color:#666;font-size:14px;line-height:1.85}
+.entry-card .arrow{display:inline-block;margin-top:14px;color:#2e7d32;font-size:13px;letter-spacing:2px;font-weight:600}
+
+/* ===== 页脚 ===== */
+.footer{background:#1a3d24;color:rgba(255,255,255,0.75);padding:44px 20px 40px;text-align:center;font-size:13px;letter-spacing:1px}
+.footer-line{margin-bottom:22px;font-size:13px;color:rgba(255,255,255,0.6)}
+.footer-members{
+  display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;
+  padding-top:22px;border-top:1px solid rgba(255,255,255,0.15);
+  max-width:680px;margin:0 auto;
+}
+.members-label{color:rgba(255,255,255,0.45);font-size:12px;letter-spacing:4px}
+.member{color:#a5d6a7;font-size:15px;letter-spacing:3px;font-weight:500}
+
+/* ===== 移动端 ===== */
+@media (max-width:900px){
+  .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:12px}
+  .navbar .brand{font-size:20px;letter-spacing:3px;margin-right:0;width:100%}
+  .navbar ul{gap:18px;width:100%;overflow-x:auto;padding-bottom:4px}
+  .navbar a{font-size:14px;letter-spacing:1px}
+  .hero h1{font-size:34px;letter-spacing:3px}
+  .hero p{font-size:15px;letter-spacing:1px}
+  .entry-section{padding:60px 20px}
+  .entry-title{font-size:24px;letter-spacing:2px}
+  .entry-sub{font-size:13px;margin-bottom:36px}
+  .footer-members{gap:12px}
+  .member{font-size:13px;letter-spacing:2px}
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Medimurje 旅游精选</h1>
-    <input id="search" type="text" placeholder="搜索景点 / 关键词...">
-  </header>
 
-  <main id="grid"></main>
-  <div id="pager">
-    <button id="prev">上一页</button>
-    <span id="pageInfo"></span>
-    <button id="next">下一页</button>
+<nav class="navbar">
+  <div class="brand">梅吉穆列</div>
+  <ul>
+    <li><a href="/" class="active">绿野仙踪</a></li>
+    <li><a href="/nature">漫步田园</a></li>
+    <li><a href="/attractions">故城寻踪</a></li>
+    <li><a href="/taste">烟火知味</a></li>
+    <li><a href="/events">四时盛事</a></li>
+    <li><a href="/plan">旅行贴士</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1>梅吉穆列・两河间的绿野秘境</h1>
+    <p>克罗地亚最北端的隐秘沃土，静卧穆拉河与德拉瓦河的环抱之中。<br>
+       世代耕耘出如画田园，生活悠然松弛，藏着人与自然共生的慢时光。</p>
   </div>
+</header>
 
-  <!-- 详情弹窗 -->
-  <div id="modal" class="hidden">
-    <div class="modal-content">
-      <span id="close">&times;</span>
-      <h2 id="modalTitle"></h2>
-      <p id="modalContent"></p>
-      <a id="modalLink" target="_blank">查看原文</a>
-    </div>
+<section class="entry-section">
+  <h2 class="entry-title">探索梅吉穆列</h2>
+  <p class="entry-sub">四条线索，走进这片绿野</p>
+  <div class="entry-grid">
+
+    <a href="/nature" class="entry-card">
+      <div class="thumb"><img src="/static/assets/nature_front.jpg" alt="漫步田园" onerror="this.style.display='none'"></div>
+      <div class="body">
+        <h3>漫步田园</h3>
+        <p>穆拉-德拉瓦湿地、温泉与百年田园。</p>
+        <span class="arrow">走进自然 →</span>
+      </div>
+    </a>
+
+    <a href="/attractions" class="entry-card">
+      <div class="thumb"><img src="/static/assets/old_town.jpg" alt="故城寻踪" onerror="this.style.display='none'"></div>
+      <div class="body">
+        <h3>故城寻踪</h3>
+        <p>兹林斯基城堡、葡萄酒温泉小镇与活的博物馆。</p>
+        <span class="arrow">追溯历史 →</span>
+      </div>
+    </a>
+
+    <a href="/taste" class="entry-card">
+      <div class="thumb"><img src="/static/assets/food.png" alt="烟火知味" onerror="this.style.display='none'"></div>
+      <div class="body">
+        <h3>烟火知味</h3>
+        <p>普希佩尔白葡萄酒、千层蛋糕与中欧融合风味。</p>
+        <span class="arrow">品味地道 →</span>
+      </div>
+    </a>
+
+    <a href="/events" class="entry-card">
+      <div class="thumb"><video src="/static/assets/events_front.png" alt="四时盛事" onerror="this.style.display='none'"></div>
+      <div class="body">
+        <h3>四时盛事</h3>
+        <p>从冬日热酒到夏夜焰火，一年四季都有奔赴的理由。</p>
+        <span class="arrow">查看节庆 →</span>
+      </div>
+    </a>
+
   </div>
+</section>
 
-  <script>
-    let page = 1;
-    const size = 9;
+<footer class="footer">
+  <div class="footer-line">梅吉穆列 · 两河间的绿野秘境 · 2026</div>
+  <div class="footer-members">
+    <span class="members-label">小组成员</span>
+    <span class="member">刘雨欣</span>
+    <span class="member">颜伊宁</span>
+    <span class="member">张俊佳</span>
+    <span class="member">罗琬越</span>
+    <span class="member">张文晶</span>
+  </div>
+</footer>
 
-    async function loadPages() {
-      const q = document.getElementById("search").value.trim();
-      const url = `/api/pages?page=${page}&size=${size}&q=${encodeURIComponent(q)}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      const grid = document.getElementById("grid");
-      grid.innerHTML = "";
-
-      data.items.forEach((item, i) => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <h3>${item.title || "无标题"}</h3>
-          <p>${(item.content || "").slice(0, 120)}...</p>
-        `;
-        card.onclick = () => showDetail(item);
-        grid.appendChild(card);
-      });
-
-      document.getElementById("pageInfo").innerText = `第 ${page} 页`;
-      document.getElementById("prev").disabled = page <= 1;
-    }
-
-    function showDetail(item) {
-      document.getElementById("modalTitle").innerText = item.title || "";
-      document.getElementById("modalContent").innerText = item.content || "";
-      const link = document.getElementById("modalLink");
-      link.href = item.url || "#";
-      document.getElementById("modal").classList.remove("hidden");
-    }
-
-    document.getElementById("close").onclick = () => {
-      document.getElementById("modal").classList.add("hidden");
-    };
-
-    document.getElementById("search").addEventListener("input", () => {
-      page = 1;
-      loadPages();
-    });
-
-    document.getElementById("prev").onclick = () => { page--; loadPages(); };
-    document.getElementById("next").onclick = () => { page++; loadPages(); };
-
-    loadPages();
-  </script>
 </body>
 </html>
