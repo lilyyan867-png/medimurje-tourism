@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>欢迎探索梅吉穆列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- 引入手写书法字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;color:#333;line-height:1.6}
+
+/* ===== 导航栏 ===== */
+.navbar{
+  position:fixed;top:0;left:0;right:0;height:80px;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  display:flex;align-items:center;padding:0 60px;z-index:1000;
+  box-shadow:0 1px 20px rgba(0,0,0,0.06)
+}
+.navbar .brand{
+  color:#1a1a1a;font-size:24px;letter-spacing:8px;margin-right:80px;
+  font-weight:500;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+  white-space:nowrap
+}
+.navbar ul{display:flex;gap:44px;list-style:none;flex:1;justify-content:center}
+.navbar a{
+  color:#2c2c2c;text-decoration:none;font-size:16px;letter-spacing:3px;
+  font-weight:400;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+  transition:color .3s;white-space:nowrap
+}
+.navbar a:hover{color:#8a7250}
+.navbar a.active{color:#2e7d32}
+
+/* ===== 首屏大图 ===== */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 👈 改为左对齐 */
+  padding-left: 20%; /* 👈 左侧留白，形成左对齐排版 */
+  overflow: hidden;
+  background: url('/static/assets/front.jpg') center/cover no-repeat;
+  background-color: #ffffff;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: middle; /* 👈 文字中对齐 */
+  top: 50px; /* 👈 调整这里的数值控制下移距离，数字越大越靠下 */
+}
+/* ===== 首屏大图文字 ===== */
+/* 取消粗体 */
+.hero h1 {
+  color: #fff;
+  font-size: 50px;
+  font-weight: 400; /* 👈 改为 400 或者 normal，取消粗体 */
+  letter-spacing: 6px;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.85), 0 2px 8px rgba(0,0,0,0.9);
+  font-family: 'Ma Shan Zheng', 'STXingkai', 'Xingkai SC', 'STKaiti', 'KaiTi', cursive, serif;
+}
+
+.hero h2 {
+  color: #fff;
+  font-size: 40px; /* 字号不变 */
+  font-weight: 400; /* 👈 副标题也取消粗体（如果之前有默认加粗的话） */
+  line-height: 2;
+  letter-spacing: 2px;
+  text-shadow: 0 3px 16px rgba(0,0,0,0.85), 0 1px 6px rgba(0,0,0,0.9);
+  
+  /* 👇 修改字体：与主标题保持同步 */
+  font-family: 'Ma Shan Zheng', 'STXingkai', 'Xingkai SC', 'STKaiti', 'KaiTi', cursive, serif;
+}
+
+/* 移动端适配（防止字过大溢出或排版错乱） */
+@media (max-width: 900px) {
+  .hero {
+    padding-left: 6%; /* 手机端左侧留白稍微减少 */
+  }
+  .hero h1 {
+    font-size: 34px; /* 手机端适当缩小 */
+    letter-spacing: 3px;
+  }
+  .hero h2 {
+    font-size: 25px;
+    letter-spacing: 1px;
+  }
+}
+
+/* ===== 入口卡片 ===== */
+.entry-section{padding:100px 40px;max-width:1300px;margin:0 auto}
+.entry-title{text-align:center;font-size:36px;font-weight:600;color:#1a3d24;letter-spacing:4px;margin-bottom:14px}
+.entry-sub{text-align:center;font-size:15px;color:#666;letter-spacing:1px;margin-bottom:60px}
+.entry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.entry-card{position:relative;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.08);transition:transform .3s,box-shadow .3s;text-decoration:none;color:inherit;display:block}
+.entry-card:hover{transform:translateY(-8px);box-shadow:0 18px 50px rgba(0,0,0,0.15)}
+.entry-card .thumb{height:200px;background:linear-gradient(135deg,#2e7d32,#66bb6a);overflow:hidden}
+.entry-card .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.entry-card .body{padding:26px}
+.entry-card h3{font-size:22px;font-weight:600;color:#1a3d24;letter-spacing:3px;margin-bottom:10px}
+.entry-card p{color:#666;font-size:14px;line-height:1.85}
+.entry-card .arrow{display:inline-block;margin-top:14px;color:#2e7d32;font-size:13px;letter-spacing:2px;font-weight:600}
+
+/* ===== 页脚 ===== */
+.footer{background:#1b7143;color:rgba(255,255,255,0.75);padding:44px 20px 40px;text-align:center;font-size:13px;letter-spacing:1px}
+.footer-line{margin-bottom:22px;font-size:13px;color:rgba(255,255,255,0.6)}
+.footer-members{
+  display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;
+  padding-top:22px;border-top:1px solid rgba(255,255,255,0.15);
+  max-width:680px;margin:0 auto;
+}
+.members-label{color:rgba(255,255,255,0.45);font-size:12px;letter-spacing:4px}
+.member{color:rgba(255,255,255,0.72);font-size:15px;letter-spacing:3px;font-weight:500}
+
+/* ===== 概念介绍（左文右图） ===== */
+.concept-section {
+  padding: 120px 60px;
+  /* 👇 核心背景修改 */
+  background-color: #ffffff; /* 保留白色底，防止图片加载失败时排版乱掉 */
+  background-image: url('/static/assets/花纹.svg'); /* 引用你的花纹图片路径 */
+  background-repeat: no-repeat; /* 平铺：花纹会像墙纸一样重复。如果不希望重复，改成 no-repeat */
+  background-position: left top; /* 位置：左 */
+  background-size: 500px; /* 尺寸：控制花纹大小。如果是满铺大图，改成 cover；如果是特定尺寸，可以写如 200px */
+}
+.concept-inner{
+  max-width:1080px;          /* ← 从 1180 缩小，整体变窄 */
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1.2fr 0.85fr;   /* ← 图片列从 1fr 缩到 0.85fr */
+  gap:100px;
+  align-items:center;
+}
+.concept-text{
+  padding-left:50px;         /* ← 文字往中间靠 */
+  padding-right:20px;
+}
+.concept-eyebrow{
+  font-size:40px;
+  letter-spacing:6px;
+  color:#8a7250;
+  margin-bottom:40px;
+  font-family:'STKaiti','KaiTi',serif;
+}
+.concept-desc{
+  font-size:17px;
+  line-height:2.3;
+  color:#3a2f24;
+  letter-spacing:2px;
+  font-family:'STKaiti','KaiTi','PingFang SC',serif;
+}
+.concept-img{
+  overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,0.12);
+}
+.concept-img img{
+  width:100%;
+  display:block;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  transition:transform .8s ease;
+}
+.concept-img:hover img{transform:scale(1.03)}
+
+/* ===== 图片流水线 ===== */
+.photo-marquee {
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  padding: 40px 0;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: scroll-left 30s linear infinite;
+}
+
+.marquee-item {
+  flex-shrink: 0;
+  width: 320px;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f0e8dc;
+}
+
+.marquee-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.marquee-item:hover img {
+  transform: scale(1.05);
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* 关键：位移到一半，配合复制列表实现无缝循环 */
+  }
+}
+
+/* ===== 漫步田园 展示区 ===== */
+.nature-feature {
+  padding: 100px 60px;
+  background: #ffffff;
+}
+.nature-feature-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr; /* 左侧大图，右侧内容区 */
+  gap: 80px;
+  align-items: stretch; /* 左右等高，大图撑满左侧 */
+}
+.nature-img-lg {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.12);
+}
+.nature-img-lg img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* 右侧内容区（上下结构：右上小图 + 右下文字） */
+.nature-content-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 小图在上，文字在下 */
+  gap: 40px;
+}
+.nature-img-sm {
+  width: 70%; /* 小图宽度占右侧区域的70% */
+  align-self: flex-end; /* 靠右对齐，形成右上角 */
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+.nature-img-sm img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4/3; /* 小图横向比例 */
+  object-fit: cover;
+}
+
+/* 右下角文字区 */
+.nature-text {
+  display: flex;
+  flex-direction: column;
+}
+.nature-title-inline {
+  font-size: 36px;
+  font-weight: 400;
+  color: #2c2418;
+  letter-spacing: 10px;
+  margin-bottom: 30px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+}
+.nature-text p {
+  font-size: 15px;
+  line-height: 2.4;
+  color: #4a433c;
+  letter-spacing: 1.5px;
+  margin-bottom: 48px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+}
+
+/* 👇 这里确保按钮样式完整保留 */
+.nature-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  background: #f0e8dc;
+  color: #2c2418;
+  padding: 16px 36px;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 4px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  align-self: flex-start;
+  transition: background .25s, transform .25s;
+}
+.nature-btn:hover {
+  background: #e0d5c2;
+  transform: translateX(4px);
+}
+.nature-btn span {
+  font-size: 16px;
+  transition: transform .25s;
+}
+.nature-btn:hover span {
+  transform: translateX(4px);
+}
+
+/* 移动端适配 */
+@media (max-width: 900px) {
+  .nature-feature { padding: 60px 20px; }
+  .nature-feature-inner {
+    grid-template-columns: 1fr; /* 移动端变为单列堆叠 */
+    gap: 30px;
+  }
+  .nature-img-lg img {
+    aspect-ratio: 16/9;
+  }
+  .nature-content-wrap {
+    gap: 24px;
+  }
+  .nature-img-sm {
+    width: 80%;
+    align-self: center; /* 手机端小图居中 */
+  }
+  .nature-title-inline { font-size: 26px; letter-spacing: 6px; margin-bottom: 24px; text-align: center; }
+  .nature-text p { font-size: 14px; line-height: 2.2; margin-bottom: 32px; text-align: center; }
+  .nature-btn { align-self: center; }
+}
+
+/* ===== 故城寻踪 展示区 ===== */
+.attraction-feature {
+  padding: 100px 60px;
+  background: #ffffff;
+}
+.attraction-feature-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.7fr 1.1fr 1.2fr; /* 左小图 : 中间文字 : 右大图 */
+  gap: 40px;
+  align-items: center;
+}
+.attraction-img-sm {
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+.attraction-img-sm img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3/4; /* 小图竖向比例 */
+  object-fit: cover;
+}
+.attraction-img-lg {
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.12);
+}
+.attraction-img-lg img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4/5; /* 大图竖向比例 */
+  object-fit: cover;
+}
+.attraction-content {
+  padding: 0 10px;
+}
+.attraction-title {
+  font-size: 36px;
+  font-weight: 400;
+  color: #2c2418;
+  letter-spacing: 10px;
+  margin-bottom: 40px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+}
+.attraction-desc {
+  font-size: 15px;
+  line-height: 2.4;
+  color: #4a433c;
+  letter-spacing: 1.5px;
+  margin-bottom: 48px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+}
+.attraction-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  background: #f0e8dc;
+  color: #2c2418;
+  padding: 16px 36px;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 4px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  transition: background .25s, transform .25s;
+}
+.attraction-btn:hover {
+  background: #e0d5c2;
+  transform: translateX(4px);
+}
+.attraction-btn span {
+  font-size: 16px;
+  transition: transform .25s;
+}
+.attraction-btn:hover span {
+  transform: translateX(4px);
+}
+
+/* ===== 烟火知味 展示区 ===== */
+.taste-feature {
+  padding: 100px 60px;
+  background: #ffffff;
+}
+.taste-feature-inner {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 80px;
+  /* 👇 修改点：从 stretch 改为 start，让左侧容器高度完全由图片决定，消除底部白色块 */
+  align-items: start; 
+}
+
+/* 左侧大图 */
+.taste-img-lg {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 0 24px 50px rgba(0,0,0,0.12);
+}
+.taste-img-lg img {
+  width: 100%;
+  height: auto; /* 👈 保持原始比例 */
+  display: block; /* 👈 消除图片底部可能产生的微小行高间隙 */
+}
+
+/* 右侧内容区 */
+.taste-content-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 文字在上方，小图在下方 */
+  height: 100%;
+  gap: 40px;
+}
+
+/* 文字区右移下移 */
+.taste-content {
+  padding-left: 30px;
+  padding-top: 20px;
+}
+.taste-title {
+  font-size: 36px;
+  font-weight: 400;
+  color: #2c2418;
+  letter-spacing: 10px;
+  margin-bottom: 30px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+}
+.taste-desc {
+  font-size: 15px;
+  line-height: 2.4;
+  color: #4a433c;
+  letter-spacing: 1.5px;
+  margin-bottom: 40px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+}
+.taste-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  background: #f0e8dc;
+  color: #2c2418;
+  padding: 16px 36px;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 4px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  align-self: flex-start;
+  transition: background .25s, transform .25s;
+}
+.taste-btn:hover {
+  background: #e0d5c2;
+  transform: translateX(4px);
+}
+.taste-btn span {
+  font-size: 16px;
+  transition: transform .25s;
+}
+.taste-btn:hover span {
+  transform: translateX(4px);
+}
+
+/* 中下方小图 */
+.taste-img-sm {
+  width: 55%;
+  align-self: flex-end;
+  margin-left: 0;
+  margin-right: 0;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+.taste-img-sm img {
+  width: 100%;
+  height: auto; /* 👈 保持原始比例 */
+  display: block; 
+}
+
+/* 移动端适配 */
+@media (max-width: 900px) {
+  .taste-feature { padding: 60px 20px; }
+  .taste-feature-inner {
+    align-items: start; /* 👈 手机端也改为 start 对齐 */
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  /* 👇 手机端如果强制比例会导致变形，改为 auto */
+  .taste-img-lg { max-width: 100%; height: auto; } 
+  .taste-content-wrap {
+    height: auto;
+    justify-content: flex-start;
+    gap: 30px;
+  }
+  .taste-content { padding-left: 0; padding-top: 0; text-align: center; }
+  .taste-title { font-size: 26px; letter-spacing: 6px; margin-bottom: 24px; }
+  .taste-desc { font-size: 14px; line-height: 2.2; margin-bottom: 32px; }
+  .taste-btn { align-self: center; }
+  .taste-img-sm {
+    width: 80%;
+    align-self: center;
+    margin: 0 auto;
+  }
+}
+
+/* ===== 四时盛事 展示区 ===== */
+.events-feature {
+  padding: 100px 0 80px; /* 左右不加内边距，让流水线可以贯穿全宽 */
+  background: #ffffff; /* 参考网站的米灰色背景 */
+  overflow: hidden;
+}
+.events-feature-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 横向循环滚动图片流水线 */
+.events-marquee {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 60px;
+}
+.events-marquee-track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: events-scroll-left 40s linear infinite;
+}
+.events-marquee-track:hover {
+  animation-play-state: paused; /* 鼠标悬停时暂停滚动 */
+}
+@keyframes events-scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* 位移到一半，配合复制列表实现无缝循环 */
+}
+.events-marquee-item {
+  flex-shrink: 0;
+  width: 260px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #e8e2d8;
+}
+.events-marquee-item img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3/4; /* 竖向比例，与参考网站一致 */
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.events-marquee-item:hover img {
+  transform: scale(1.05);
+}
+.events-marquee-label {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 3px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  padding: 0 12px;
+}
+
+/* 左下方文字区，适度留白 */
+.events-content {
+  padding: 0 60px; /* 左右内边距，让文字不贴边 */
+  max-width: 600px; /* 限制文字区宽度，形成留白效果 */
+  margin-left: 0; /* 靠左对齐，左下方 */
+}
+.events-title {
+  font-size: 42px;
+  font-weight: 400;
+  color: #2c2418;
+  letter-spacing: 14px;
+  margin-bottom: 30px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+}
+.events-desc {
+  font-size: 15px;
+  line-height: 2.4;
+  color: #4a433c;
+  letter-spacing: 1.5px;
+  margin-bottom: 40px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+}
+.events-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  background: #e8e2d8;
+  color: #2c2418;
+  padding: 16px 36px;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 4px;
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  transition: background .25s, transform .25s;
+}
+.events-btn:hover {
+  background: #d8d0c4;
+  transform: translateX(4px);
+}
+.events-btn span {
+  font-size: 16px;
+  transition: transform .25s;
+}
+.events-btn:hover span {
+  transform: translateX(4px);
+}
+
+/* 移动端适配 */
+@media (max-width: 900px) {
+  .events-feature { padding: 60px 0 50px; }
+  .events-marquee-item { width: 180px; }
+  .events-marquee-track { gap: 16px; }
+  .events-content { padding: 0 20px; max-width: 100%; }
+  .events-title { font-size: 28px; letter-spacing: 8px; margin-bottom: 20px; }
+  .events-desc { font-size: 14px; line-height: 2.2; margin-bottom: 32px; }
+  .events-btn { align-self: center; }
+}
+
+/* 移动端适配 */
+@media (max-width: 900px) {
+  .attraction-feature { padding: 60px 20px; }
+  .attraction-feature-inner {
+    grid-template-columns: 1fr; /* 移动端变为单列堆叠 */
+    gap: 30px;
+  }
+  .attraction-title { font-size: 26px; letter-spacing: 6px; margin-bottom: 24px; text-align: center; }
+  .attraction-desc { font-size: 14px; line-height: 2.2; margin-bottom: 32px; text-align: center; }
+  .attraction-btn { align-self: center; }
+  /* 移动端顺序：文字 -> 小图 -> 大图 */
+  .attraction-content { order: 1; text-align: center; }
+  .attraction-img-sm { order: 2; width: 80%; margin: 0 auto; }
+  .attraction-img-lg { order: 3; }
+}
+
+
+/* ===== 移动端 ===== */
+@media (max-width:900px){
+  .photo-marquee { padding: 24px 0; }
+  .marquee-track { gap: 12px; }
+  .marquee-item { width: 200px; height: 150px; }
+  .concept-section{padding:60px 20px}
+  .concept-inner{grid-template-columns:1fr;gap:36px}
+  .concept-text{padding-right:0}
+  .concept-eyebrow{margin-bottom:24px}
+  .concept-desc{font-size:15px;letter-spacing:1px}
+  .concept-img img{aspect-ratio:16/9}
+  .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:12px}
+  .navbar .brand{font-size:20px;letter-spacing:3px;margin-right:0;width:100%}
+  .navbar ul{gap:18px;width:100%;overflow-x:auto;padding-bottom:4px}
+  .navbar a{font-size:14px;letter-spacing:1px}
+  .entry-section{padding:60px 20px}
+  .entry-title{font-size:24px;letter-spacing:2px}
+  .entry-sub{font-size:13px;margin-bottom:36px}
+  .footer-members{gap:12px}
+  .member{font-size:13px;letter-spacing:2px}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">梅吉穆列</div>
+  <ul>
+    <li><a href="/" class="active">绿野仙踪</a></li>
+    <li><a href="/nature">漫步田园</a></li>
+    <li><a href="/attractions">故城寻踪</a></li>
+    <li><a href="/taste">烟火知味</a></li>
+    <li><a href="/events">四时盛事</a></li>
+    <li><a href="/plan">旅行贴士</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="hero-content">
+    <h1>梅吉穆列</h1>
+    <h2>两河之间的秘境</h2>
+  </div>
+</header>
+
+<!-- ===== 概念介绍（左文右图） ===== -->
+<section class="concept-section">
+  <div class="concept-inner">
+    <div class="concept-text">
+      <p class="concept-eyebrow">梅吉穆列</p>
+      <p class="concept-desc">克罗地亚最北端的隐秘沃土，<br>静卧穆拉河与德拉瓦河的环抱之中。<br>世代耕耘出如画田园，<br>生活悠然松弛，<br>藏着人与自然共生的慢时光。</p>
+    </div>
+    <div class="concept-img">
+      <img src="/static/assets/two_river_4.png" alt="梅吉穆列风光">
+    </div>
+  </div>
+</section>
+
+<!-- ===== 图片流水线 ===== -->
+<section class="photo-marquee">
+  <div class="marquee-track">
+    <!-- 第一组图片 -->
+    <div class="marquee-item"><img src="/static/assets/river_3.jpg" alt="占位图1"></div>
+    <div class="marquee-item"><img src="/static/assets/wine_road.png" alt="占位图2"></div>
+    <div class="marquee-item"><img src="/static/assets/relax.png" alt="占位图4"></div>
+    <div class="marquee-item"><img src="/static/assets/Urbanovo_festival.png" alt="占位图3"></div>
+    <div class="marquee-item"><img src="/static/assets/cake.png" alt="占位图5"></div>
+    <div class="marquee-item"><img src="/static/assets/village_2.png" alt="占位图6"></div>
+    <div class="marquee-item"><img src="/static/assets/zlsj_3.png" alt="占位图7"></div>
+    <div class="marquee-item"><img src="/static/assets/zlsj_2.png" alt="占位图8"></div>
+
+    <!-- 第二组图片（复制第一组，用于无缝循环） -->
+    <div class="marquee-item"><img src="/static/assets/river_3.jpg" alt="占位图1"></div>
+    <div class="marquee-item"><img src="/static/assets/wine_road.png" alt="占位图2"></div>
+    <div class="marquee-item"><img src="/static/assets/relax.png" alt="占位图4"></div>
+    <div class="marquee-item"><img src="/static/assets/Urbanovo_festival.png" alt="占位图3"></div>
+    <div class="marquee-item"><img src="/static/assets/cake.png" alt="占位图5"></div>
+    <div class="marquee-item"><img src="/static/assets/village_2.png" alt="占位图6"></div>
+    <div class="marquee-item"><img src="/static/assets/zlsj_3.png" alt="占位图7"></div>
+    <div class="marquee-item"><img src="/static/assets/zlsj_2.png" alt="占位图8"></div>
+
+  </div>
+</section>
+
+<!-- ===== 漫步田园 展示区 ===== -->
+<section class="nature-feature">
+  <div class="nature-feature-inner">
+
+    <!-- 左下角大图 -->
+    <div class="nature-img-lg">
+      <img src="/static/assets/nature_front_2.jpg" alt="漫步田园大图">
+    </div>
+
+    <!-- 右侧内容区（右上角小图 + 右下角文字和按钮） -->
+    <div class="nature-content-wrap">
+
+      <!-- 右上角小图 -->
+      <div class="nature-img-sm">
+        <img src="/static/assets/spring_5.png" alt="漫步田园小图">
+      </div>
+
+      <!-- 右下角文字区 -->
+      <div class="nature-text">
+        <h2 class="nature-title-inline">漫步田园</h2>
+        <p>
+          两河之间的绿意呼吸，每一步都是自然馈赠。<br>
+          穆拉河与德拉瓦河环抱的原生湿地、天然温泉与百年橡树下的田园秘境——<br>
+          在梅吉穆列，最治愈的风景藏在缓慢的行走里。
+        </p>
+        <!-- 👇 这里是保留的按钮 -->
+        <a href="/nature" class="nature-btn">
+          走进自然 <span>→</span>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 故城寻踪 展示区 ===== -->
+<section class="attraction-feature">
+  <div class="attraction-feature-inner">
+    
+    <!-- 左侧小图 -->
+    <div class="attraction-img-sm">
+      <img src="/static/assets/lookup_7.jpg" alt="故城寻踪小图">
+    </div>
+
+    <!-- 中间文字区 -->
+    <div class="attraction-content">
+      <h2 class="attraction-title">故城寻踪</h2>
+      <p class="attraction-desc">
+        梅吉穆列的旧时光，藏在兹林斯基城堡的石墙里，<br>
+        也藏在穆拉河畔的古镇街巷中。<br>
+        从葡萄酒温泉小镇到“活的博物馆”，<br>
+        每一步都是与中欧历史的轻声对话。
+      </p>
+      <a href="/attractions" class="attraction-btn">
+        追溯历史 <span>→</span>
+      </a>
+    </div>
+
+    <!-- 右侧大图 -->
+    <div class="attraction-img-lg">
+      <img src="/static/assets/old_city_3.png" alt="故城寻踪大图"  >
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 烟火知味 展示区 ===== -->
+<section class="taste-feature">
+  <div class="taste-feature-inner">
+
+    <!-- 左侧大图 -->
+    <div class="taste-img-lg">
+      <img src="/static/assets/Urbanovo_festival.png" alt="烟火知味大图"  >
+    </div>
+
+    <!-- 右侧内容区（上方文字 + 中下方小图） -->
+    <div class="taste-content-wrap">
+      
+      <!-- 上方文字区 -->
+      <div class="taste-content">
+        <h2 class="taste-title">烟火知味</h2>
+        <p class="taste-desc">
+          从普希佩尔白葡萄酒的清爽，<br>
+          到梅吉穆列千层蛋糕的层层香甜。<br>
+          木桶腌肉与南瓜籽油的质朴风味，<br>
+          在家庭农场的餐桌上代代相传。
+        </p>
+        <a href="/taste" class="taste-btn">
+          品味美食 <span>→</span>
+        </a>
+      </div>
+
+      <!-- 中下方小图 -->
+      <div class="taste-img-sm">
+        <img src="/static/assets/taste_front_2.png" alt="烟火知味小图"  >
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== 四时盛事 展示区 ===== -->
+<section class="events-feature">
+  <div class="events-feature-inner">
+
+    <!-- 横向循环滚动图片流水线 -->
+    <div class="events-marquee">
+      <div class="events-marquee-track">
+        <!-- 第一组图片（各月份活动） -->
+        <div class="events-marquee-item">
+          <img src="/static/assets/january.jpg" alt="一月·徒步">
+          <span class="events-marquee-label">一月·徒步</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/april.png" alt="四月·比赛">
+          <span class="events-marquee-label">四月·比赛</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets//april_2.jpg" alt="四月·骑行">
+          <span class="events-marquee-label">四月·骑行</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/Urbanovo_festival_3.png" alt="五月·葡萄酒日" >
+          <span class="events-marquee-label">五月·葡萄酒日</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/july_3.png" alt="七月·森林音乐节"  >
+          <span class="events-marquee-label">七月·森林音乐节</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/august_1.jpg" alt="八月·圣母升天节"  >
+          <span class="events-marquee-label">八月·圣母升天节</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/august_3.jpg" alt="八月·爵士音乐节"  >
+          <span class="events-marquee-label">八月·爵士音乐节</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/sep.jpg" alt="九月·热气球节"  >
+          <span class="events-marquee-label">九月 · 热气球节</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/nov.jpg" alt="十一月·圣马丁节"  >
+          <span class="events-marquee-label">十一月·圣马丁节</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/dec.jpg" alt="十二月·游行"  >
+          <span class="events-marquee-label">十二月·游行</span>
+        </div>
+
+        <!-- 第二组图片（复制第一组，用于无缝循环） -->
+        <div class="events-marquee-item">
+          <img src="/static/assets/january.jpg" alt="一月·徒步">
+          <span class="events-marquee-label">一月·徒步</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/april.png" alt="四月·比赛">
+          <span class="events-marquee-label">四月·比赛</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets//april_2.jpg" alt="四月·骑行">
+          <span class="events-marquee-label">四月·骑行</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/Urbanovo_festival_3.png" alt="五月·葡萄酒日" >
+          <span class="events-marquee-label">五月·葡萄酒日</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/july_3.png" alt="七月·森林音乐节"  >
+          <span class="events-marquee-label">七月·森林音乐节</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/august_1.jpg" alt="八月·圣母升天节"  >
+          <span class="events-marquee-label">八月·圣母升天节</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/august_3.jpg" alt="八月·爵士音乐节"  >
+          <span class="events-marquee-label">八月·爵士音乐节</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/sep.jpg" alt="九月·热气球节"  >
+          <span class="events-marquee-label">九月 · 热气球节</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/nov.jpg" alt="十一月·圣马丁节"  >
+          <span class="events-marquee-label">十一月·圣马丁节</span>
+        </div>
+        <div class="events-marquee-item">
+          <img src="/static/assets/dec.jpg" alt="十二月·游行"  >
+          <span class="events-marquee-label">十二月·游行</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 左下方文字区 -->
+    <div class="events-content">
+      <h2 class="events-title">四时盛事</h2>
+      <p class="events-desc">
+        从冬末的狂欢节到春日的徒步，
+        从夏夜的音乐节到秋天的热气球升空。
+        梅吉穆列的四季，总有一场盛事在等你。
+      </p>
+      <a href="/events" class="events-btn">
+        探索节庆 <span>→</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="footer-line">梅吉穆列 · 两河间的绿野秘境 · 2026</div>
+  <div class="footer-members">
+    <span class="members-label">小组成员</span>
+    <span class="member">刘雨欣</span>
+    <span class="member">颜伊宁</span>
+    <span class="member">张俊佳</span>
+    <span class="member">罗琬越</span>
+    <span class="member">张文晶</span>
+  </div>
+</footer>
+
+</body>
+</html>
