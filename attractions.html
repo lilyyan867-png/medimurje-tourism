@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>故城寻踪 · 梅吉穆列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'PingFang SC','Microsoft YaHei',sans-serif;
+  background:#f5f2ed;color:#3d3429;line-height:1.75;
+}
+.serif{font-family:'Noto Serif SC','STSong','SimSun',serif}
+
+/* ===== 导航栏 ===== */
+.navbar{
+  position:fixed;top:0;left:0;right:0;height:80px;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  display:flex;align-items:center;padding:0 60px;z-index:1000;
+  box-shadow:0 1px 20px rgba(0,0,0,0.06)
+}
+.navbar .brand{
+  color:#1a1a1a;font-size:24px;letter-spacing:8px;margin-right:80px;
+  font-weight:500;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+  white-space:nowrap
+}
+.navbar ul{display:flex;gap:44px;list-style:none;flex:1;justify-content:center}
+.navbar a{
+  color:#2c2c2c;text-decoration:none;font-size:16px;letter-spacing:3px;
+  font-weight:400;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+  transition:color .3s;white-space:nowrap
+}
+.navbar a:hover{color:#8a7250}
+.navbar a.active{color:#2e7d32}
+
+/* ===== Hero ===== */
+.hero-editorial{
+  position:relative;min-height:85vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;background:#1a1510
+}
+.hero-editorial::before{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.35),transparent 28%,transparent 70%,rgba(0,0,0,0.28))
+}
+.hero-editorial .hero-photo{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:brightness(0.72) saturate(0.95)
+}
+.hero-editorial .hero-inner{position:relative;z-index:2;padding:120px 24px 80px;max-width:920px}
+.hero-editorial .kicker{font-size:13px;letter-spacing:8px;color:rgba(255,255,255,0.75);margin-bottom:20px}
+.hero-editorial h1{
+  font-size:clamp(36px,5vw,58px);font-weight:600;color:#fff;letter-spacing:10px;
+  margin-bottom:22px;text-shadow:0 8px 32px rgba(0,0,0,0.45);
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+}
+.hero-editorial .lead{font-size:17px;color:rgba(255,255,255,0.92);letter-spacing:2px;line-height:2}
+
+/* ===== 引言（居中排版） ===== */
+.intro-band{
+  max-width:1180px;margin:0 auto;padding:88px 40px 60px;
+  text-align: center;
+}
+.intro-copy h2{
+  font-size:clamp(26px,3vw,34px);font-weight:600;color:#2c2418;
+  letter-spacing:4px;margin-bottom:18px;line-height:1.45;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+}
+.intro-copy p{
+  color:#5c5348;font-size:15px;max-width:800px;
+  margin: 0 auto 16px;
+  letter-spacing: 1px; line-height: 2;
+}
+/* 补回横线和下方的引言文字 */
+.intro-tagline{
+  margin: 40px auto 0;
+  padding-top: 28px;
+  border-top: 1px solid #d8cfc3; /* 👈 恢复横线 */
+  font-size:14px;
+  letter-spacing:4px;
+  color:#8a7a68;
+  text-align: center;
+  max-width: 800px;
+}
+
+/* ===== 景点交替排版 ===== */
+.spot-list {
+  max-width: 1180px;
+  margin: 0 auto 140px; /* 👈 修改点：底部留白加大到 140px，拉开与视频的间距 */
+  padding: 0 40px;
+}
+.spot-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 100px;
+}
+.spot-row:last-child {
+  margin-bottom: 0;
+}
+.spot-row.reverse .spot-content {
+  order: -1;
+}
+.spot-img {
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+.spot-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  transition: transform 0.8s ease;
+}
+.spot-img:hover img {
+  transform: scale(1.03);
+}
+.spot-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.spot-tag {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: #9a8b78;
+  margin-bottom: 14px;
+}
+.spot-content h3 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #2c2418;
+  letter-spacing: 6px;
+  margin-bottom: 24px;
+}
+.spot-desc {
+  font-size: 15px;
+  line-height: 2.2;
+  color: #4a433c;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+.spot-exp {
+  font-size: 14px;
+  line-height: 2;
+  color: #6b6258;
+  letter-spacing: 1px;
+  padding-top: 20px;
+  border-top: 1px solid #e0d8ce;
+}
+.spot-exp strong {
+  color: #5c4a32;
+  font-weight: 600;
+}
+
+/* ===== 影院视频 ===== */
+.cinema-block {
+  position: relative;
+  background: #1a1510;
+  overflow: hidden;
+  margin-top: 80px; /* 👈 修改点：顶部留白增加到 80px，与上方景点区进一步拉开距离 */
+}
+.cinema-block video{
+  display:block;width:100%;height:auto;
+  min-height:min(56vh,520px);max-height:85vh;
+  object-fit:cover;aspect-ratio:21/9
+}
+.cinema-caption{
+  position:absolute;left:0;right:0;bottom:0;padding:32px 40px 40px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.65));
+  text-align:center;pointer-events:none
+}
+.cinema-caption p{color:rgba(255,255,255,0.9);font-size:15px;letter-spacing:4px}
+
+.footer-mini{
+  text-align:center;padding:48px 20px 56px;font-size:12px;color:#9a8b78;letter-spacing:3px
+}
+
+/* ===== 移动端适配 ===== */
+@media (max-width:960px){
+  .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:12px}
+  .navbar .brand{font-size:20px;margin-right:0;width:100%}
+  .navbar ul{gap:18px;width:100%;overflow-x:auto}
+  .navbar a{font-size:14px}
+  .intro-band{padding:56px 20px 32px}
+  
+  .spot-list { 
+    padding: 0 20px; 
+    margin-bottom: 80px; /* 手机端适度缩小间距 */
+  }
+  .spot-row {
+    grid-template-columns: 1fr; 
+    gap: 32px;
+    margin-bottom: 64px;
+  }
+  .spot-row.reverse .spot-content {
+    order: 0; 
+  }
+  .spot-content h3 { font-size: 24px; letter-spacing: 4px; }
+  .spot-desc { font-size: 14px; line-height: 2; }
+  .spot-exp { font-size: 13px; }
+  
+  .cinema-block {
+    margin-top: 40px; /* 手机端适度缩小 */
+  }
+  .cinema-block video{min-height:40vh;aspect-ratio:16/9}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">梅吉穆列</div>
+  <ul>
+    <li><a href="/">绿野仙踪</a></li>
+    <li><a href="/nature.html">漫步田园</a></li>
+    <li><a href="/attractions.html" class="active">故城寻踪</a></li>
+    <li><a href="/taste.html">烟火知味</a></li>
+    <li><a href="/events.html">四时盛事</a></li>
+    <li><a href="/plan.html">旅行贴士</a></li>
+  </ul>
+</nav>
+
+<header class="hero-editorial">
+  <img class="hero-photo" src="/static/assets/old_town.jpg" alt="兹林斯基老城与查科韦茨" onerror="this.src='https://picsum.photos/1920/1080?random=99'">
+  <div class="hero-inner serif">
+    <p class="kicker">Medimurje · Heritage</p>
+    <h1>故城寻踪</h1>
+    <p class="lead">中世纪城堡、贵族酒窖与百年温泉，<br>一段不愿醒来的中欧旧梦。</p>
+  </div>
+</header>
+
+<section class="intro-band">
+  <div class="intro-copy serif">
+    <h2>人文地标 · 葡萄酒与历史的深度碰撞</h2>
+    <p>温泉、城堡与活的博物馆——在梅吉穆列，历史不是封存在玻璃柜里的标本，<br>而是仍可走入、可品尝、可触摸的日常风景。</p>
+  </div>
+</section>
+
+<!-- ===== 景点交替排版（第一行左图右文，第二行左文右图，第三行左图右文） ===== -->
+<section class="spot-list">
+
+  <!-- 景点1：左图右文 -->
+  <article class="spot-row">
+    <div class="spot-img">
+      <img src="/static/assets/spring_7.jpg" alt="圣马丁纳穆里温泉小镇" onerror="this.src='https://picsum.photos/800/600?random=101'">
+    </div>
+    <div class="spot-content">
+      <p class="spot-tag">欧洲首家葡萄酒主题康养小镇</p>
+      <h3 class="serif">圣马丁纳穆里温泉小镇</h3>
+      <p class="spot-desc">完美融合葡萄酒、温泉、田园风光三元素。国内没有同款葡萄酒温泉体验，边泡温泉边眺望连绵葡萄园，是只有葡萄酒产区才有的专属享受。</p>
+      <p class="spot-exp"><strong>推荐体验：</strong>泡葡萄酒精油温泉，逛穆拉河漂浮磨坊与磨坊博物馆，沿丘陵徒步打卡百年苹果园，一站式搞定温泉、自然与人文。</p>
+    </div>
+  </article>
+
+  <!-- 景点2：左文右图（加上 reverse 类） -->
+  <article class="spot-row reverse">
+    <div class="spot-img">
+      <img src="/static/assets/old_city_2.png" alt="兹林斯基老城" onerror="this.src='https://picsum.photos/800/600?random=102'">
+    </div>
+    <div class="spot-content">
+      <p class="spot-tag">中世纪贵族的巴洛克城堡秘境</p>
+      <h3 class="serif">兹林斯基老城</h3>
+      <p class="spot-desc">曾是克罗地亚显赫贵族兹林斯基家族的府邸，城堡里藏着 17 世纪的宫廷食谱与地下古酒窖。这里没有旅行团，你可以安静地逛巴洛克花园、看古代兵器展，还能在城堡酒窖喝到传统配方的本地葡萄酒。</p>
+      <p class="spot-exp"><strong>推荐体验：</strong>登城堡俯瞰查科韦茨老城，逛地下酒窖品鉴古法葡萄酒，傍晚在巴洛克花园等日落。</p>
+    </div>
+  </article>
+
+  <!-- 景点3：左图右文 -->
+  <article class="spot-row">
+    <div class="spot-img">
+      <img src="/static/assets/museum.png" alt="梅吉穆列生态博物馆" onerror="this.src='https://picsum.photos/800/600?random=103'">
+    </div>
+    <div class="spot-content">
+      <p class="spot-tag">整座县城都是活的博物馆</p>
+      <h3 class="serif">梅吉穆列生态博物馆</h3>
+      <p class="spot-desc">不用隔着玻璃看展品，直接走进百年村落、走进手工作坊，沉浸式感受中欧乡村的生活原貌。</p>
+      <p class="spot-exp"><strong>推荐体验：</strong>沿线路探访不同主题的村落点位，体验传统蕾丝编织、柳篮编织等非遗手艺，逛本地市集感受烟火气。</p>
+    </div>
+  </article>
+
+</section>
+
+<section class="cinema-block" aria-label="故城寻踪影像">
+  <video autoplay muted loop playsinline poster="/static/assets/old_town.jpg">
+    <source src="/static/assets/attractions.mp4" type="video/mp4">
+  </video>
+  <div class="cinema-caption serif">
+    <p>故城寻踪 · 在影像中重返两河之间的旧梦</p>
+  </div>
+</section>
+
+<p class="footer-mini serif">梅吉穆列 · 故城寻踪</p>
+
+</body>
+</html>

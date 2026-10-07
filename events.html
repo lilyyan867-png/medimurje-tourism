@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>四时盛事 · 梅吉穆列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'PingFang SC','Microsoft YaHei',sans-serif;
+  background:#f5f2ed;color:#3d3429;line-height:1.75;
+}
+.serif{font-family:'Noto Serif SC','STSong','SimSun',serif}
+
+/* ===== 导航栏 ===== */
+.navbar{
+  position:fixed;top:0;left:0;right:0;height:80px;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  display:flex;align-items:center;padding:0 60px;z-index:1000;
+  box-shadow:0 1px 20px rgba(0,0,0,0.06)
+}
+.navbar .brand{
+  color:#1a1a1a;font-size:24px;letter-spacing:8px;margin-right:80px;
+  font-weight:500;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+  white-space:nowrap
+}
+.navbar ul{display:flex;gap:44px;list-style:none;flex:1;justify-content:center}
+.navbar a{
+  color:#2c2c2c;text-decoration:none;font-size:16px;letter-spacing:3px;
+  font-weight:400;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+  transition:color .3s;white-space:nowrap
+}
+.navbar a:hover{color:#8a7250}
+.navbar a.active{color:#2e7d32}
+
+/* ===== Hero ===== */
+.hero-editorial{
+  position:relative;min-height:85vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;background:#1a1510
+}
+.hero-editorial::before{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.35),transparent 28%,transparent 70%,rgba(0,0,0,0.28))
+}
+.hero-editorial video.hero-photo{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:brightness(0.72) saturate(0.95)
+}
+.hero-editorial .hero-inner{position:relative;z-index:2;padding:120px 24px 80px;max-width:920px}
+.hero-editorial .kicker{font-size:13px;letter-spacing:8px;color:rgba(255,255,255,0.75);margin-bottom:20px}
+.hero-editorial h1{
+  font-size:clamp(36px,5vw,58px);font-weight:600;color:#fff;letter-spacing:10px;
+  margin-bottom:22px;text-shadow:0 8px 32px rgba(0,0,0,0.45)
+}
+.hero-editorial .lead{font-size:17px;color:rgba(255,255,255,0.92);letter-spacing:2px;line-height:2}
+
+/* ===== 引言 ===== */
+.intro-band{
+  max-width:1180px;margin:0 auto;padding:88px 40px 40px;
+}
+.intro-copy h2{
+  font-size:clamp(26px,3vw,34px);font-weight:600;color:#2c2418;
+  letter-spacing:4px;margin-bottom:18px;line-height:1.45
+}
+.intro-copy p{
+  color:#5c5348;font-size:15px;max-width:640px
+}
+/* 横线 + 下方引言文字 */
+.intro-tagline{
+  margin-top:40px;
+  padding-top:28px;
+  border-top:1px solid #d8cfc3;
+  font-size:14px;
+  letter-spacing:2px;
+  color:#8a7a68;
+}
+
+/* ===== 大标题 ===== */
+.section-head{text-align:center;padding:40px 40px 32px;max-width:800px;margin:0 auto}
+.section-head .eyebrow{font-size:12px;letter-spacing:6px;color:#9a8b78;margin-bottom:12px}
+.section-head h2{font-size:clamp(24px,3vw,32px);color:#2c2418;letter-spacing:5px;font-weight:600}
+.section-head p{margin-top:14px;font-size:15px;color:#6b6258}
+
+/* ===== 控制区（吸顶） ===== */
+.controls-wrap{
+  position:sticky;top:90px;z-index:900;
+  background:rgba(245,242,237,0.94);
+  backdrop-filter:blur(8px);
+  padding:16px 20px 18px;
+  border-bottom:1px solid #e5dfd6;
+  margin-bottom:40px;
+}
+.controls{max-width:1180px;margin:0 auto}
+
+/* 一级：模式切换 */
+.mode-switch{
+  display:flex;justify-content:center;gap:0;
+  border:1px solid #2e7d32;border-radius:26px;
+  padding:3px;width:max-content;margin:0 auto 14px;
+  background:#fdfcf8
+}
+.mode-switch button{
+  font-family:'Noto Serif SC','STSong',serif;
+  font-size:14px;letter-spacing:3px;font-weight:600;
+  padding:9px 32px;border-radius:22px;cursor:pointer;
+  border:none;background:transparent;color:#2e7d32;
+  transition:all .25s ease
+}
+.mode-switch button.active{
+  background:#2e7d32;color:#fff;
+  box-shadow:0 4px 14px rgba(46,125,50,0.28)
+}
+
+/* 二级：子筛选 */
+.sub-filter{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  min-height:40px
+}
+.sub-filter button{
+  font-family:'Noto Serif SC','STSong',serif;
+  font-size:13px;letter-spacing:1.5px;font-weight:500;
+  padding:7px 18px;border-radius:20px;cursor:pointer;
+  border:1px solid #d8cfc3;background:#fdfcf8;color:#5c4a32;
+  transition:all .2s ease;white-space:nowrap
+}
+.sub-filter button:hover{background:#e8f5e9;color:#2e7d32;border-color:#2e7d32}
+.sub-filter button.active{
+  background:#8b6914;color:#fff;border-color:#8b6914;
+  box-shadow:0 3px 10px rgba(139,105,20,0.25)
+}
+
+/* ===== 月份块 ===== */
+.month-block{
+  max-width:1180px;margin:0 auto 60px;padding:0 40px
+}
+.month-head{
+  display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:baseline;
+  padding-bottom:18px;margin-bottom:32px;
+  border-bottom:2px solid #2e7d32
+}
+.month-head .month-num{
+  font-size:14px;letter-spacing:4px;color:#8b6914;
+  font-weight:600;font-family:'Noto Serif SC','STSong',serif
+}
+.month-head .month-name{
+  font-size:clamp(24px,2.6vw,30px);color:#2c2418;font-weight:600;
+  letter-spacing:6px;font-family:'Noto Serif SC','STSong',serif
+}
+.month-head .month-sub{
+  font-size:13px;color:#8a7a68;letter-spacing:1.5px;text-align:right
+}
+
+/* ===== 活动卡 ===== */
+.event-wide{
+  display:flex;flex-direction:row;
+  background:#fdfcf8;border-radius:14px;
+  box-shadow:0 6px 24px rgba(0,0,0,0.06);
+  overflow:hidden;height:300px;margin-bottom:24px;
+  transition:transform .25s,box-shadow .25s;
+  border-top:3px solid #2e7d32;
+  animation:fadeIn .35s ease-out
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.event-wide:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.12)}
+.event-wide .event-img{width:380px;flex-shrink:0;height:100%;overflow:hidden;background:#e8e2d9}
+.event-wide .event-img img{
+  width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease
+}
+.event-wide:hover .event-img img{transform:scale(1.05)}
+.event-wide .event-body{
+  flex:1;min-width:0;padding:36px 40px;
+  display:flex;flex-direction:column;justify-content:center;overflow:hidden
+}
+.event-body .tag{
+  font-size:11px;letter-spacing:3px;color:#8a7a68;margin-bottom:10px;
+  font-family:'Noto Serif SC','STSong',serif
+}
+.event-body h4{
+  font-size:22px;color:#2c2418;font-weight:600;letter-spacing:2.5px;
+  margin-bottom:14px;font-family:'Noto Serif SC','STSong',serif;line-height:1.4
+}
+.event-body .desc{
+  font-size:14.5px;color:#4a433c;line-height:1.9;margin-bottom:14px;
+  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden
+}
+.event-body .exp{
+  font-size:13px;color:#6b6258;line-height:1.8;
+  padding-top:14px;border-top:1px solid #e5dfd6;margin-top:auto
+}
+.event-body .exp strong{color:#5c4a32;font-weight:600}
+
+/* ===== 影院视频 ===== */
+.cinema-block{position:relative;background:#1a1510;overflow:hidden;margin-top:40px}
+.cinema-block video{
+  display:block;width:100%;height:auto;
+  min-height:min(56vh,520px);max-height:85vh;
+  object-fit:cover;aspect-ratio:21/9
+}
+.cinema-caption{
+  position:absolute;left:0;right:0;bottom:0;padding:32px 40px 40px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.65));
+  text-align:center;pointer-events:none
+}
+.cinema-caption p{color:rgba(255,255,255,0.9);font-size:15px;letter-spacing:4px}
+
+.footer-mini{
+  text-align:center;padding:48px 20px 56px;font-size:12px;color:#9a8b78;letter-spacing:3px
+}
+
+/* ===== 移动端 ===== */
+@media (max-width:960px){
+  .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:12px}
+  .navbar .brand{font-size:20px;margin-right:0;width:100%}
+  .navbar ul{gap:18px;width:100%;overflow-x:auto}
+  .navbar a{font-size:14px}
+  .intro-band{padding:56px 20px 32px}
+  .intro-tagline{margin-top:28px;padding-top:20px}
+  .controls-wrap{top:auto;position:relative;padding:12px 16px}
+  .mode-switch button{font-size:13px;padding:8px 22px;letter-spacing:2px}
+  .sub-filter button{font-size:12px;padding:6px 14px}
+  .month-block{padding:0 20px;margin-bottom:44px}
+  .month-head{grid-template-columns:1fr;gap:6px;text-align:left}
+  .month-head .month-sub{text-align:left}
+  .event-wide{flex-direction:column;height:auto}
+  .event-wide .event-img{width:100%;height:200px}
+  .event-wide .event-body{padding:24px 22px}
+  .event-body .desc{-webkit-line-clamp:5}
+  .cinema-block video{min-height:40vh;aspect-ratio:16/9}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">梅吉穆列</div>
+  <ul>
+    <li><a href="/">绿野仙踪</a></li>
+    <li><a href="/nature.html">漫步田园</a></li>
+    <li><a href="/attractions.html">故城寻踪</a></li>
+    <li><a href="/taste.html">烟火知味</a></li>
+    <li><a href="/events.html" class="active">四时盛事</a></li>
+    <li><a href="/plan.html">旅行贴士</a></li>
+  </ul>
+</nav>
+
+<header class="hero-editorial">
+  <video class="hero-photo" autoplay muted loop playsinline poster="/static/assets/events_front.png">
+    <source src="/static/assets/events_1.mp4" type="video/mp4">
+  </video>
+  <div class="hero-inner serif">
+    <p class="kicker">Medimurje · Seasons</p>
+    <h1>四时盛事</h1>
+    <p class="lead">从冬日的热酒到夏夜的焰火，<br>一年四季都有值得奔赴的理由。</p>
+  </div>
+</header>
+
+<section class="intro-band">
+  <div class="intro-copy serif">
+    <h2>四季轮转 · 节庆与民俗的交响</h2>
+    <p>梅吉穆列的节庆不只属于盛夏——一月的葡萄园徒步、五月的酒窖开放、九月的热气球升空、十二月的暗黑游行，每个月都在上演属于这片土地的故事。</p>
+    <p class="intro-tagline">一年十二月，月月有理由回到两河之间</p>
+  </div>
+</section>
+
+<div class="section-head serif">
+  <p class="eyebrow">Calendar of Wonders</p>
+  <h2>按月份或主题，翻阅这一年的盛事</h2>
+  <p>两种视角，看见不同的梅吉穆列。</p>
+</div>
+
+<!-- ===== 控制区 ===== -->
+<div class="controls-wrap">
+  <div class="controls">
+
+    <!-- 一级：模式 -->
+    <div class="mode-switch" role="tablist">
+      <button type="button" data-mode="month" class="active">📅 按月份</button>
+      <button type="button" data-mode="theme">🎨 按主题</button>
+    </div>
+
+    <!-- 二级：月份筛选 -->
+    <div class="sub-filter" id="filter-month">
+      <button type="button" data-value="all" class="active">全部月份</button>
+      <button type="button" data-value="1">一月</button>
+      <button type="button" data-value="4">四月</button>
+      <button type="button" data-value="5">五月</button>
+      <button type="button" data-value="7">七月</button>
+      <button type="button" data-value="8">八月</button>
+      <button type="button" data-value="9">九月</button>
+      <button type="button" data-value="11">十一月</button>
+      <button type="button" data-value="12">十二月</button>
+    </div>
+
+    <!-- 二级：主题筛选 -->
+    <div class="sub-filter" id="filter-theme" style="display:none">
+      <button type="button" data-value="all" class="active">全部主题</button>
+      <button type="button" data-value="wine">🍷 葡萄酒</button>
+      <button type="button" data-value="folk">🎭 民俗</button>
+      <button type="button" data-value="sport">🏃 户外</button>
+      <button type="button" data-value="trend">🎵 潮流</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================== -->
+<!-- ========== 视图 A：按月份 ========== -->
+<!-- =========================================================== -->
+<div id="view-month">
+
+  <section class="month-block" data-month="1">
+    <div class="month-head">
+      <span class="month-num">01 / JANUARY</span>
+      <h3 class="month-name">一月</h3>
+      <span class="month-sub">圣文森特徒步之旅 · 1 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/january.jpg" alt="圣文森特徒步之旅"></div>
+      <div class="event-body">
+        <p class="tag">1月 · 圣文森特节前后周末</p>
+        <h4>圣文森特徒步之旅</h4>
+        <p class="desc">沿百年葡萄酒之路穿行冬日丘陵葡萄园，全程约 15 公里休闲徒步，沿途设本土美食与热葡萄酒补给站。</p>
+        <p class="exp"><strong>终点：</strong>传统葡萄藤祈福仪式 · 全程难度平缓，适合轻户外爱好者与文化体验者。</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="month-block" data-month="4">
+    <div class="month-head">
+      <span class="month-num">02 / APRIL</span>
+      <h3 class="month-name">四月</h3>
+      <span class="month-sub">速度与激情 · 2 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/april.png" alt="FIM 大奖赛"></div>
+      <div class="event-body">
+        <p class="tag">4月下旬 · 多尼克拉列韦茨镇</p>
+        <h4>FIM 速度摩托大奖赛</h4>
+        <p class="desc">国际摩联官方认证的世界速度摩托锦标赛分站赛，中东欧级别最高的沙地摩托赛事；现场氛围狂热，配套葡萄酒美食区。</p>
+        <p class="exp"><strong>地点：</strong>千年体育场</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/april_2.jpg" alt="BIMEP 骑行"></div>
+      <div class="event-body">
+        <p class="tag">4月中旬 · 全梅吉穆列</p>
+        <h4>BIMEP 骑行活动</h4>
+        <p class="desc">无门槛休闲骑行，路线串联森林、丘陵、葡萄园与乡村小镇，全程设 19 个打卡点，可自由选择里程。</p>
+        <p class="exp"><strong>起点：</strong>首府查科韦茨 · 一路伴随田园风光与酒香。</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="month-block" data-month="5">
+    <div class="month-head">
+      <span class="month-num">03 / MAY</span>
+      <h3 class="month-name">五月</h3>
+      <span class="month-sub">葡萄酒季 · 1 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/Urbanovo_festival_3.png" alt="Urbanovo 葡萄酒日"></div>
+      <div class="event-body">
+        <p class="tag">5月中下旬 · 什特里戈瓦镇</p>
+        <h4>Urbanovo 葡萄酒日</h4>
+        <p class="desc">一年仅一次的全酒窖开放，沿线百年家族酒庄同步开放地下酒窖；可深度探访酿酒工艺，集中品鉴本土独有品种普希佩尔白葡萄酒，同期举办国际葡萄酒评选、民俗演出与美食市集。</p>
+        <p class="exp"><strong>地点：</strong>什特里戈瓦文化中心 + 葡萄酒之路沿线 20 余家家族酒庄</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="month-block" data-month="7">
+    <div class="month-head">
+      <span class="month-num">04 / JULY</span>
+      <h3 class="month-name">七月</h3>
+      <span class="month-sub">森林电音 · 1 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/july_3.png" alt="Forestland 森林音乐节"></div>
+      <div class="event-body">
+        <p class="tag">7月中下旬 · 洛帕蒂内茨镇</p>
+        <h4>Forestland 森林音乐节</h4>
+        <p class="desc">克罗地亚北部规模最大的户外电子音乐节，涵盖多曲风演出，可露营连嗨三天。</p>
+        <p class="exp"><strong>地点：</strong>Forestland 森林公园 · 户外帐篷营地过夜</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="month-block" data-month="8">
+    <div class="month-head">
+      <span class="month-num">05 / AUGUST</span>
+      <h3 class="month-name">八月</h3>
+      <span class="month-sub">百年市集与葡萄园爵士 · 2 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/august_1.jpg" alt="圣母升天节"></div>
+      <div class="event-body">
+        <p class="tag">7月底至8月初 · 为期5天</p>
+        <h4>圣母升天节</h4>
+        <p class="desc">彩伞如海铺满盛夏老城，骑士与驯鹰者带你穿越中世纪。六十年历史的克罗地亚北部最大节庆，数千人共赴这场狂欢盛宴。</p>
+        <p class="exp"><strong>地点：</strong>查科韦茨镇 · 老城城堡及市中心各主题区域 · 免费入场，部分活动需单独购票。</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/august_3.jpg" alt="葡萄园爵士音乐节"></div>
+      <div class="event-body">
+        <p class="tag">8月下旬 · 为期3天</p>
+        <h4>葡萄园爵士音乐节</h4>
+        <p class="desc">克罗地亚北部最具代表性的国际精品爵士音乐节，以马杰尔金布雷格山顶葡萄园为天然舞台。落日余晖中俯瞰四国全景，享受顶级爵士乐与美酒。</p>
+        <p class="exp"><strong>地点：</strong>什特里戈瓦镇 · 马杰尔金布雷格山</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="month-block" data-month="9">
+    <div class="month-head">
+      <span class="month-num">06 / SEPTEMBER</span>
+      <h3 class="month-name">九月</h3>
+      <span class="month-sub">千球腾空 · 1 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/sep.jpg" alt="普雷洛格热气球节"></div>
+      <div class="event-body">
+        <p class="tag">9月上旬 · 为期4天</p>
+        <h4>普雷洛格热气球节</h4>
+        <p class="desc">克罗地亚北部最壮观的热气球盛会！15 国 40 名飞行员齐聚，数十个热气球在清晨与傍晚升空，色彩斑斓。夜幕下『Night Glow』点亮，如巨大发光灯笼漂浮在德拉瓦河上。</p>
+        <p class="exp"><strong>地点：</strong>普雷洛格镇 · 普雷洛格码头及德拉瓦河畔 · 还能亲自体验系留飞行。</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="month-block" data-month="11">
+    <div class="month-head">
+      <span class="month-num">07 / NOVEMBER</span>
+      <h3 class="month-name">十一月</h3>
+      <span class="month-sub">新酒民俗 · 1 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/nov.jpg" alt="圣马丁节传统庆祝活动"></div>
+      <div class="event-body">
+        <p class="tag">11月11日前后 · 为期3天</p>
+        <h4>圣马丁节传统庆祝活动</h4>
+        <p class="desc">近 700 年历史的非遗圣马丁节，11 月 11 日前后在多个葡萄酒小镇接力狂欢！来圣马丁娜穆里河畔，围观传统古拉什炖菜比赛，免费品鉴新酒美食。</p>
+        <p class="exp"><strong>地点：</strong>穆尔斯科斯雷迪什切、什特里戈瓦、圣马丁娜穆里、塞尔尼察等葡萄酒小镇 · 深入百年家族酒窖，尝一口刚发酵的年轻白葡萄酒。</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="month-block" data-month="12">
+    <div class="month-head">
+      <span class="month-num">08 / DECEMBER</span>
+      <h3 class="month-name">十二月</h3>
+      <span class="month-sub">暗黑游行 · 1 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/dec.jpg" alt="克拉普斯圣诞游行"></div>
+      <div class="event-body">
+        <p class="tag">12月中旬 · 18:00 开始</p>
+        <h4>克拉普斯圣诞游行</h4>
+        <p class="desc">克罗地亚规模最大的克拉普斯游行驱魔活动！来自 5 国的 32 个团体、约 600 名『半人半羊』恶魔，披兽皮、戴狰狞木面具、持火把沿街穿行。冬夜火光与铃声交织，极具戏剧冲击力。</p>
+        <p class="exp"><strong>地点：</strong>圣马丁娜穆里镇中心 · 建议提前占位并注意保暖。</p>
+      </div>
+    </article>
+  </section>
+
+</div><!-- /view-month -->
+
+<!-- =========================================================== -->
+<!-- ========== 视图 B：按主题 ========== -->
+<!-- =========================================================== -->
+<div id="view-theme" style="display:none">
+
+  <section class="month-block" data-theme="wine">
+    <div class="month-head">
+      <span class="month-num">🍷 THEME 01</span>
+      <h3 class="month-name">葡萄酒主题节庆</h3>
+      <span class="month-sub">4 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/january.jpg" alt="圣文森特徒步之旅"></div>
+      <div class="event-body">
+        <p class="tag">1月 · 圣文森特节前后周末</p>
+        <h4>圣文森特徒步之旅</h4>
+        <p class="desc">沿百年葡萄酒之路穿行冬日丘陵葡萄园，全程约 15 公里休闲徒步，沿途设本土美食与热葡萄酒补给站。</p>
+        <p class="exp"><strong>终点：</strong>传统葡萄藤祈福仪式 · 全程难度平缓，适合轻户外爱好者与文化体验者。</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/Urbanovo_festival_3.png" alt="Urbanovo 葡萄酒日"></div>
+      <div class="event-body">
+        <p class="tag">5月中下旬 · 什特里戈瓦镇</p>
+        <h4>Urbanovo 葡萄酒日</h4>
+        <p class="desc">一年仅一次的全酒窖开放，沿线百年家族酒庄同步开放地下酒窖；可深度探访酿酒工艺，集中品鉴本土独有品种普希佩尔白葡萄酒，同期举办国际葡萄酒评选、民俗演出与美食市集。</p>
+        <p class="exp"><strong>地点：</strong>什特里戈瓦文化中心 + 葡萄酒之路沿线 20 余家家族酒庄</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/august_3.jpg" alt="葡萄园爵士音乐节"></div>
+      <div class="event-body">
+        <p class="tag">8月下旬 · 为期3天</p>
+        <h4>葡萄园爵士音乐节</h4>
+        <p class="desc">以马杰尔金布雷格山顶葡萄园为天然舞台。观众可在落日余晖中俯瞰克罗地亚、斯洛文尼亚、奥地利、匈牙利四国全景，享受顶级爵士乐与美酒的融合体验。</p>
+        <p class="exp"><strong>地点：</strong>什特里戈瓦镇 · 马杰尔金布雷格山</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/nov.jpg" alt="圣马丁节传统庆祝活动"></div>
+      <div class="event-body">
+        <p class="tag">11月11日前后 · 为期3天</p>
+        <h4>圣马丁节传统庆祝活动</h4>
+        <p class="desc">近 700 年历史的非遗圣马丁节，多个葡萄酒小镇接力狂欢！围观传统古拉什炖菜比赛，免费品鉴新酒美食。</p>
+        <p class="exp"><strong>地点：</strong>穆尔斯科斯雷迪什切、什特里戈瓦、圣马丁娜穆里、塞尔尼察等葡萄酒小镇 · 深入百年家族酒窖。</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="month-block" data-theme="folk" style="display:none">
+    <div class="month-head">
+      <span class="month-num">🎭 THEME 02</span>
+      <h3 class="month-name">本土传统民俗盛典</h3>
+      <span class="month-sub">3 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/august_1.jpg" alt="圣母升天节"></div>
+      <div class="event-body">
+        <p class="tag">7月底至8月初 · 为期5天</p>
+        <h4>圣母升天节</h4>
+        <p class="desc">彩伞如海铺满盛夏老城，骑士与驯鹰者带你穿越中世纪。六十年历史的克罗地亚北部最大节庆，数千人共赴这场狂欢盛宴。</p>
+        <p class="exp"><strong>地点：</strong>查科韦茨镇 · 老城城堡及市中心各主题区域 · 免费入场，部分活动需单独购票。</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/nov.jpg" alt="圣马丁节传统庆祝活动"></div>
+      <div class="event-body">
+        <p class="tag">11月11日前后 · 为期3天</p>
+        <h4>圣马丁节传统庆祝活动</h4>
+        <p class="desc">近 700 年历史的非遗圣马丁节，多个葡萄酒小镇接力狂欢！围观传统古拉什炖菜比赛，免费品鉴新酒美食。</p>
+        <p class="exp"><strong>地点：</strong>穆尔斯科斯雷迪什切、什特里戈瓦、圣马丁娜穆里、塞尔尼察等葡萄酒小镇 · 深入百年家族酒窖。</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/dec.jpg" alt="克拉普斯圣诞游行"></div>
+      <div class="event-body">
+        <p class="tag">12月中旬 · 18:00 开始</p>
+        <h4>克拉普斯圣诞游行</h4>
+        <p class="desc">克罗地亚规模最大的克拉普斯游行驱魔活动！来自 5 国的 32 个团体、约 600 名『半人半羊』恶魔，披兽皮、戴狰狞木面具、持火把沿街穿行。</p>
+        <p class="exp"><strong>地点：</strong>圣马丁娜穆里镇中心 · 建议提前占位并注意保暖。</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="month-block" data-theme="sport" style="display:none">
+    <div class="month-head">
+      <span class="month-num">🏃 THEME 03</span>
+      <h3 class="month-name">户外与体育盛会</h3>
+      <span class="month-sub">4 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/january.jpg" alt="圣文森特徒步之旅"></div>
+      <div class="event-body">
+        <p class="tag">1月 · 圣文森特节前后周末</p>
+        <h4>圣文森特徒步之旅</h4>
+        <p class="desc">沿百年葡萄酒之路穿行冬日丘陵葡萄园，全程约 15 公里休闲徒步，沿途设本土美食与热葡萄酒补给站。</p>
+        <p class="exp"><strong>终点：</strong>传统葡萄藤祈福仪式 · 全程难度平缓，适合轻户外爱好者与文化体验者。</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/april.png" alt="FIM 大奖赛"></div>
+      <div class="event-body">
+        <p class="tag">4月下旬 · 多尼克拉列韦茨镇</p>
+        <h4>FIM 速度摩托大奖赛</h4>
+        <p class="desc">国际摩联官方认证的世界速度摩托锦标赛分站赛，中东欧级别最高的沙地摩托赛事；现场氛围狂热，配套葡萄酒美食区。</p>
+        <p class="exp"><strong>地点：</strong>千年体育场</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/april_2.jpg" alt="BIMEP 骑行"></div>
+      <div class="event-body">
+        <p class="tag">4月中旬 · 全梅吉穆列</p>
+        <h4>BIMEP 骑行活动</h4>
+        <p class="desc">无门槛休闲骑行，路线串联森林、丘陵、葡萄园与乡村小镇，全程设 19 个打卡点，可自由选择里程。</p>
+        <p class="exp"><strong>起点：</strong>首府查科韦茨 · 一路伴随田园风光与酒香。</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/sep.jpg" alt="普雷洛格热气球节"></div>
+      <div class="event-body">
+        <p class="tag">9月上旬 · 为期4天</p>
+        <h4>普雷洛格热气球节</h4>
+        <p class="desc">克罗地亚北部最壮观的热气球盛会！数十个热气球在清晨与傍晚升空。夜幕下『Night Glow』点亮，如巨大发光灯笼漂浮在德拉瓦河上。</p>
+        <p class="exp"><strong>地点：</strong>普雷洛格镇 · 普雷洛格码头及德拉瓦河畔 · 还能亲自体验系留飞行。</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="month-block" data-theme="trend" style="display:none">
+    <div class="month-head">
+      <span class="month-num">🎵 THEME 04</span>
+      <h3 class="month-name">潮流青年活动</h3>
+      <span class="month-sub">3 项活动</span>
+    </div>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/july_3.png" alt="Forestland 森林音乐节"></div>
+      <div class="event-body">
+        <p class="tag">7月中下旬 · 洛帕蒂内茨镇</p>
+        <h4>Forestland 森林音乐节</h4>
+        <p class="desc">克罗地亚北部规模最大的户外电子音乐节，涵盖多曲风演出，可露营连嗨三天。</p>
+        <p class="exp"><strong>地点：</strong>Forestland 森林公园 · 户外帐篷营地过夜</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/august_3.jpg" alt="葡萄园爵士音乐节"></div>
+      <div class="event-body">
+        <p class="tag">8月下旬 · 为期3天</p>
+        <h4>葡萄园爵士音乐节</h4>
+        <p class="desc">以马杰尔金布雷格山顶葡萄园为天然舞台。观众可在落日余晖中俯瞰克罗地亚、斯洛文尼亚、奥地利、匈牙利四国全景。</p>
+        <p class="exp"><strong>地点：</strong>什特里戈瓦镇 · 马杰尔金布雷格山</p>
+      </div>
+    </article>
+    <article class="event-wide">
+      <div class="event-img"><img src="/static/assets/sep.jpg" alt="普雷洛格热气球节"></div>
+      <div class="event-body">
+        <p class="tag">9月上旬 · 为期4天</p>
+        <h4>普雷洛格热气球节</h4>
+        <p class="desc">15 国 40 名飞行员齐聚，数十个热气球在清晨与傍晚升空，色彩斑斓。还能亲自体验系留飞行，赴一场空中浪漫盛宴！</p>
+        <p class="exp"><strong>地点：</strong>普雷洛格镇 · 普雷洛格码头及德拉瓦河畔</p>
+      </div>
+    </article>
+  </section>
+
+</div><!-- /view-theme -->
+
+<section class="cinema-block" aria-label="四时盛事影像">
+  <video autoplay muted loop playsinline poster="/static/assets/august_2.jpg">
+    <source src="/static/assets/四时盛事.mp4" type="video/mp4">
+  </video>
+  <div class="cinema-caption serif">
+    <p>四时盛事 · 在影像中走过梅吉穆列的一年</p>
+  </div>
+</section>
+
+<p class="footer-mini serif">梅吉穆列 · 四时盛事</p>
+
+<script>
+(function(){
+  // ---------- 元素 ----------
+  var modeBtns = document.querySelectorAll('.mode-switch button');
+  var filterMonth = document.getElementById('filter-month');
+  var filterTheme = document.getElementById('filter-theme');
+  var viewMonth = document.getElementById('view-month');
+  var viewTheme = document.getElementById('view-theme');
+
+  var monthBlocks = viewMonth.querySelectorAll('.month-block');
+  var themeBlocks = viewTheme.querySelectorAll('.month-block');
+
+  var currentMode = 'month';
+
+  // ---------- 一级：模式切换 ----------
+  modeBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var mode = btn.dataset.mode;
+      if (mode === currentMode) return;
+      currentMode = mode;
+
+      modeBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      if (mode === 'month') {
+        viewMonth.style.display = '';
+        viewTheme.style.display = 'none';
+        filterMonth.style.display = '';
+        filterTheme.style.display = 'none';
+        // 重置月份筛选
+        resetFilter(filterMonth);
+        applyMonthFilter('all');
+      } else {
+        viewMonth.style.display = 'none';
+        viewTheme.style.display = '';
+        filterMonth.style.display = 'none';
+        filterTheme.style.display = '';
+        // 重置主题筛选
+        resetFilter(filterTheme);
+        applyThemeFilter('all');
+      }
+    });
+  });
+
+  // ---------- 二级：月份筛选 ----------
+  filterMonth.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      resetFilter(filterMonth);
+      btn.classList.add('active');
+      applyMonthFilter(btn.dataset.value);
+    });
+  });
+
+  // ---------- 二级：主题筛选 ----------
+  filterTheme.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      resetFilter(filterTheme);
+      btn.classList.add('active');
+      applyThemeFilter(btn.dataset.value);
+    });
+  });
+
+  // ---------- 工具 ----------
+  function resetFilter(container){
+    container.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+  }
+
+  function applyMonthFilter(value){
+    monthBlocks.forEach(function(block){
+      if (value === 'all' || block.dataset.month === value) {
+        block.style.display = '';
+        // 动画
+        block.style.animation = 'none';
+        void block.offsetWidth;
+        block.style.animation = '';
+      } else {
+        block.style.display = 'none';
+      }
+    });
+  }
+
+  function applyThemeFilter(value){
+    themeBlocks.forEach(function(block){
+      if (value === 'all' || block.dataset.theme === value) {
+        block.style.display = '';
+        block.style.animation = 'none';
+        void block.offsetWidth;
+        block.style.animation = '';
+      } else {
+        block.style.display = 'none';
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
