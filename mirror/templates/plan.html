@@ -4,29 +4,227 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>旅行贴士 · 梅吉穆列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f4f7f4;color:#333;line-height:1.6}
-.navbar{position:fixed;top:0;left:0;right:0;height:90px;background:rgba(26,61,36,0.95);backdrop-filter:blur(10px);display:flex;align-items:center;padding:0 60px;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,0.1)}
-.navbar .brand{color:#fff;font-size:28px;letter-spacing:6px;margin-right:90px;font-weight:700}
-.navbar ul{display:flex;gap:48px;list-style:none}
-.navbar a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:20px;letter-spacing:2px;font-weight:600;transition:color .2s}
-.navbar a:hover,.navbar a.active{color:#a5d6a7}
-.page{padding:150px 20px 80px;max-width:1200px;margin:0 auto}
-.hero-mini{text-align:center;padding:40px 20px 60px}
-.hero-mini h1{font-size:48px;font-weight:600;color:#1a3d24;letter-spacing:4px;margin-bottom:16px}
-.hero-mini p{font-size:16px;color:#666;letter-spacing:1px}
-.section{margin-bottom:80px}
-.section-title{font-size:30px;font-weight:600;color:#1a3d24;border-left:5px solid #2e7d32;padding-left:16px;margin-bottom:12px}
-.section-subtitle{color:#666;font-size:16px;margin-bottom:36px;padding-left:21px}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
-.card{background:#fff;border-radius:14px;padding:28px;box-shadow:0 6px 24px rgba(0,0,0,0.06);transition:transform .25s,box-shadow .25s;border-top:3px solid #2e7d32}
-.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.1)}
-.card-tag{display:inline-block;background:#e8f5e9;color:#2e7d32;font-size:12px;padding:4px 10px;border-radius:12px;margin-bottom:14px}
-.card-title{font-size:20px;font-weight:600;color:#1a3d24;margin-bottom:14px}
-.card-highlight{color:#444;font-size:15px;line-height:1.85;margin-bottom:14px}
-.card-experience{color:#2e7d32;font-size:13px;line-height:1.7;padding-top:14px;border-top:1px dashed #c8e6c9;word-break:break-all}
-@media (max-width:768px){.navbar{padding:0 20px;height:auto;flex-wrap:wrap}.navbar ul{gap:18px;font-size:13px}.hero-mini h1{font-size:32px}}
+html{scroll-behavior:smooth}
+body{
+  font-family:'PingFang SC','Microsoft YaHei',sans-serif;
+  background:#f5f2ed;color:#3d3429;line-height:1.75;
+}
+
+/* ===== 导航栏 ===== */
+.navbar{
+  position:fixed;top:0;left:0;right:0;height:80px;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  display:flex;align-items:center;padding:0 60px;z-index:1000;
+  box-shadow:0 1px 20px rgba(0,0,0,0.06)
+}
+.navbar .brand{
+  color:#1a1a1a;font-size:24px;letter-spacing:8px;margin-right:80px;
+  font-weight:500;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+  white-space:nowrap
+}
+.navbar ul{display:flex;gap:44px;list-style:none;flex:1;justify-content:center}
+.navbar a{
+  color:#2c2c2c;text-decoration:none;font-size:16px;letter-spacing:3px;
+  font-weight:400;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+  transition:color .3s;white-space:nowrap
+}
+.navbar a:hover{color:#8a7250}
+.navbar a.active{color:#2e7d32}
+
+/* ===== Hero ===== */
+.hero{
+  position:relative;min-height:60vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;background:#2a241c;
+  background-image:url('/static/assets/train.jpg');
+  background-size:cover;background-position:center
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.42),rgba(0,0,0,0.25) 50%,rgba(0,0,0,0.55))
+}
+.hero-inner{position:relative;z-index:2;padding:140px 24px 60px;max-width:920px} /* 宽度调整为 920px 匹配 TxT1 */
+
+/* 👇 替换为“烟火知味”同款的优雅字体样式 */
+.hero .kicker{
+  font-size:14px;
+  letter-spacing:14px;
+  color:rgba(245,236,217,0.75);
+  margin-bottom:48px;
+  font-weight:300;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+}
+.hero h1{
+  font-size:clamp(42px,6vw,76px);
+  font-weight:400;
+  color:#fdf9f0;
+  letter-spacing:16px;
+  margin-bottom:36px;
+  line-height:1.2;
+  text-shadow:0 4px 30px rgba(0,0,0,0.35);
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+}
+.hero .lead{
+  font-size:17px;
+  color:rgba(245,236,217,0.9);
+  letter-spacing:4px;
+  line-height:2.2;
+  font-weight:300;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+}
+
+/* ===== 内容框架 ===== */
+.page{padding:0 20px 80px;max-width:1100px;margin:0 auto}
+
+/* ===== 页内导航 ===== */
+.page-toc{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  padding:36px 0 8px;border-bottom:1px solid #e5dfd6;
+}
+.page-toc a{
+  padding:8px 18px;font-size:13px;letter-spacing:2px;
+  color:#5c4a32;text-decoration:none;border-radius:20px;
+  background:#fdfcf8;border:1px solid #e5dfd6;
+  transition:all .2s ease
+}
+.page-toc a:hover{background:#2e7d32;color:#fff;border-color:#2e7d32}
+
+/* ===== 分节 ===== */
+.section{padding:56px 0 24px;scroll-margin-top:100px}
+.section-head{
+  display:flex;align-items:baseline;gap:16px;margin-bottom:24px;
+  border-bottom:2px solid #2e7d32;padding-bottom:14px
+}
+.section-head .num{
+  font-size:14px;letter-spacing:4px;color:#8b6914;
+  font-weight:600;font-family:'Noto Serif SC','STSong',serif
+}
+.section-head h2{
+  font-size:clamp(22px,2.5vw,28px);font-weight:600;color:#2c2418;
+  letter-spacing:4px;font-family:'Noto Serif SC','STSong',serif
+}
+.section p{font-size:15px;color:#4a433c;line-height:1.95;margin-bottom:14px}
+.section p strong{color:#2c2418;font-weight:600}
+
+/* ===== 列表 ===== */
+.section ul{list-style:none;padding:0;margin:8px 0 20px}
+.section ul li{
+  position:relative;padding:12px 0 12px 26px;font-size:14.5px;
+  color:#4a433c;line-height:1.9;border-bottom:1px dashed #e5dfd6
+}
+.section ul li:last-child{border-bottom:none}
+.section ul li::before{
+  content:'·';position:absolute;left:8px;top:12px;
+  color:#2e7d32;font-size:22px;font-weight:700;line-height:1
+}
+
+/* ===== 卡片网格 ===== */
+.card-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;margin:20px 0
+}
+.mini-card{
+  background:#fdfcf8;border-radius:10px;padding:22px 20px;
+  border-left:3px solid #2e7d32;box-shadow:0 4px 20px rgba(60,45,30,0.05)
+}
+.mini-card h4{
+  font-size:15px;font-weight:600;color:#2c2418;letter-spacing:1.5px;
+  margin-bottom:8px;font-family:'Noto Serif SC','STSong',serif
+}
+.mini-card p{font-size:13.5px;color:#5c5348;line-height:1.85;margin:0}
+
+/* ===== 提示框 ===== */
+.notice{
+  background:#fdfcf8;border-left:4px solid #8b6914;
+  padding:16px 22px;margin:20px 0;font-size:13.5px;
+  color:#5c5348;line-height:1.9;border-radius:0 8px 8px 0
+}
+.notice a{color:#2e7d32;text-decoration:none;word-break:break-all}
+.notice a:hover{text-decoration:underline}
+
+/* ===== 展开框 ===== */
+.expand-box{
+  background:#fdfcf8;border-radius:10px;margin:20px 0;overflow:hidden;
+  border:1px solid #e5dfd6
+}
+.expand-box summary{
+  list-style:none;cursor:pointer;padding:16px 22px;
+  font-size:14px;font-weight:600;color:#5c4a32;letter-spacing:1.5px;
+  display:flex;align-items:center;gap:10px;
+  transition:background .2s ease;user-select:none
+}
+.expand-box summary::-webkit-details-marker{display:none}
+.expand-box summary::before{
+  content:'＋';color:#2e7d32;font-weight:700;font-size:16px;
+  transition:transform .25s ease
+}
+.expand-box[open] summary::before{content:'－'}
+.expand-box summary:hover{background:#f7f3ec}
+.expand-box .expand-body{padding:0 22px 20px;border-top:1px dashed #e5dfd6}
+.expand-box table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13.5px}
+.expand-box th,.expand-box td{
+  text-align:left;padding:9px 12px;border-bottom:1px solid #f0e9dd;color:#4a433c
+}
+.expand-box th{
+  background:#f7f3ec;color:#2c2418;font-weight:600;letter-spacing:1px
+}
+
+/* ===== 页脚 ===== */
+.footer{
+  background:#1b7143;color:rgba(255,255,255,0.72);
+  padding:56px 20px 40px;margin-top:40px
+}
+.footer-inner{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:36px
+}
+.footer h4{
+  color:#fff;font-size:14px;letter-spacing:3px;font-weight:600;
+  margin-bottom:14px;font-family:'Noto Serif SC','STSong',serif
+}
+.footer p{font-size:13px;line-height:1.9;color:rgba(255,255,255,0.65)}
+.footer a{color:rgba(255,255,255,0.72);text-decoration:none;transition:color .2s}
+.footer a:hover{color:#7dcea0}
+.footer-bottom{
+  text-align:center;margin-top:40px;padding-top:24px;
+  border-top:1px solid rgba(255,255,255,0.12);
+  font-size:12px;letter-spacing:2px;color:rgba(255,255,255,0.45)
+}
+
+/* ===== 返回顶部 ===== */
+.back-to-top{
+  position:fixed;right:28px;bottom:28px;width:44px;height:44px;
+  border-radius:50%;border:none;cursor:pointer;
+  background:rgba(26,61,36,0.92);color:#fff;font-size:18px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.2);
+  opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;
+  z-index:999
+}
+.back-to-top.show{opacity:1;pointer-events:auto}
+.back-to-top:hover{transform:translateY(-3px);background:#2e7d32}
+
+/* ===== 移动端 ===== */
+@media (max-width:900px){
+  .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:12px}
+  .navbar .brand{font-size:20px;margin-right:0;width:100%}
+  .navbar ul{gap:18px;width:100%;overflow-x:auto;padding-bottom:4px}
+  .navbar a{font-size:14px}
+  .hero{min-height:50vh}
+  .hero h1{font-size:32px;letter-spacing:6px}
+  .hero p{font-size:14px}
+  .page-toc{padding:24px 0 0}
+  .section{padding:40px 0 16px}
+  .footer-inner{grid-template-columns:1fr;gap:24px}
+  .back-to-top{right:16px;bottom:16px}
+}
 </style>
 </head>
 <body>
@@ -43,158 +241,281 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f4f7f4;c
   </ul>
 </nav>
 
+<header class="hero">
+  <div class="hero-inner serif">
+    <p class="kicker">Medimurje · Travel Notes</p>
+    <h1>旅行贴士</h1>
+    <p class="lead">出行前看一眼，路上少踩一个坑。<br>签证、交通、季节、货币与实用信息，一次说清。</p>
+  </div>
+</header>
+
 <div class="page">
 
-  <div class="hero-mini">
-    <h1>旅行贴士</h1>
-    <p>出行前看一眼，路上少踩一个坑。</p>
-  </div>
+  <!-- 页内导航 -->
+  <nav class="page-toc" aria-label="本页导览">
+    <a href="#visa">签证入境</a>
+    <a href="#drive">自驾入境</a>
+    <a href="#train">火车抵达</a>
+    <a href="#bus">大巴抵达</a>
+    <a href="#air">飞机抵达</a>
+    <a href="#season">出行时段</a>
+    <a href="#tips">实用贴士</a>
+    <a href="#money">货币 · 通讯 · 电力</a>
+    <a href="#contact">重要电话</a>
+  </nav>
 
-  <div class="section">
-    <h2 class="section-title">签证入境</h2>
-    <p class="section-subtitle">申根协定成员国</p>
+  <!-- 签证 -->
+  <section class="section" id="visa">
+    <div class="section-head">
+      <span class="num">01 / VISA</span>
+      <h2>签证入境</h2>
+    </div>
+    <p>克罗地亚于 <strong>2023 年 1 月 1 日</strong>加入申请协定，中国公民持普通护照赴克须提前办妥申请签证。持外交护照赴克免办签证；持公务护照经非申请国中转入境克免办签证，经申请国中转入境克须提前办妥申请签证。</p>
+    <div class="notice">
+      在线申请：<a href="https://crovisa.mvep.hr/" target="_blank" rel="noopener">https://crovisa.mvep.hr/</a><br>
+      北京、上海、广州设有签证申请中心 · 咨询电话：010-65326242
+    </div>
+  </section>
+
+  <!-- 自驾 -->
+  <section class="section" id="drive">
+    <div class="section-head">
+      <span class="num">02 / DRIVE</span>
+      <h2>自驾入境</h2>
+    </div>
+    <p>梅吉穆列地处克罗地亚最北端，毗邻斯洛文尼亚与匈牙利，跨境公路路网完善。从斯洛文尼亚或匈牙利自驾入境，可选择以下边境口岸：戈里钱–莱泰涅一号/二号口岸、穆尔斯科斯雷迪什切–佩蒂绍夫奇口岸、特恩诺夫茨–德拉瓦河畔斯雷迪什切口岸。</p>
+    <ul>
+      <li><strong>萨格勒布方向（南线高速）：</strong>萨格勒布 — A4 高速 — 查科韦茨 — 戈里钱口岸，衔接匈牙利 M70（E71/E65）通往布达佩斯</li>
+      <li><strong>斯洛文尼亚穆尔斯卡索博塔方向（西线国道）：</strong>查科韦茨 — D209 — 穆尔斯科斯雷迪什切口岸 — 伦达瓦、穆尔斯卡索博塔，可延伸至奥地利巴德拉德克斯堡</li>
+      <li><strong>瓦拉日丁方向（东南线国道）：</strong>瓦拉日丁 — D20 — 查科韦茨 — 普雷洛格 — 多尼亚杜布拉瓦，接续 D2 前往科普里夫尼察、奥西耶克</li>
+      <li><strong>马里博尔方向（西北线国道）：</strong>查科韦茨 — D208 — 特恩诺夫茨口岸 — 马里博尔，延伸可达申蒂利口岸前往格拉茨，衔接 A1 高速（E57）去往卢布尔雅那</li>
+    </ul>
+    <p>多条跨境与境内自驾线路沿途风光秀丽，一路是潘诺尼亚平原的葡萄园、田园村落与德拉瓦河沿岸景致。跨境自驾请备好相关证件，留意边境通关规定与道路限速。</p>
+    <div class="notice">
+      路线规划：<a href="https://www.viamichelin.com" target="_blank" rel="noopener">viamichelin.com</a><br>
+      实时路况：<a href="https://www.hak.hr/info/stanje-na-cestama" target="_blank" rel="noopener">hak.hr/info/stanje-na-cestama</a>
+    </div>
+  </section>
+
+  <!-- 火车 -->
+  <section class="section" id="train">
+    <div class="section-head">
+      <span class="num">03 / TRAIN</span>
+      <h2>火车抵达</h2>
+    </div>
+    <p>查科韦茨火车站是梅吉穆列最重要的铁路枢纽，距离市中心仅 1 公里，绝大多数游客经此乘坐列车抵达。区域内还设有多个地方性小火车站，多服务本地通勤，支线列车班次相对有限。</p>
+    <p>列车时刻表：<a href="https://prodaja.hzpp.hr/en" target="_blank" rel="noopener" style="color:#2e7d32">https://prodaja.hzpp.hr/en</a></p>
+
+    <details class="expand-box">
+      <summary>点击展开：梅吉穆列境内全部火车站列表</summary>
+      <div class="expand-body">
+        <table>
+          <thead>
+            <tr><th>中文站名</th><th>外文原名（导航检索）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>查科韦茨</td><td>Čakovec</td></tr>
+            <tr><td>穆尔斯科斯雷迪什切</td><td>Mursko Središće</td></tr>
+            <tr><td>弗拉蒂希内茨</td><td>Vratišinec</td></tr>
+            <tr><td>克里什塔诺韦茨</td><td>Krištanovec</td></tr>
+            <tr><td>新塞洛罗克</td><td>Novo Selo Rok</td></tr>
+            <tr><td>马齐内茨</td><td>Macinec</td></tr>
+            <tr><td>敦伊科韦茨</td><td>Dunjkovec</td></tr>
+            <tr><td>布佐韦茨</td><td>Buzovec</td></tr>
+            <tr><td>马拉苏博蒂察</td><td>Mala Subotica</td></tr>
+            <tr><td>切霍韦茨</td><td>Čehovec</td></tr>
+            <tr><td>多尼克拉列韦茨</td><td>Donji Kraljevec</td></tr>
+            <tr><td>多尼米哈列韦茨</td><td>Donji Mihaljevec</td></tr>
+            <tr><td>科托里巴</td><td>Kotoriba</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </section>
+
+  <!-- 大巴 -->
+  <section class="section" id="bus">
+    <div class="section-head">
+      <span class="num">04 / BUS</span>
+      <h2>大巴抵达</h2>
+    </div>
+    <p>本地大巴线路连通区域内大部分城镇与村落。<strong>需要留意：</strong>前往偏远小型村庄的大巴在休息日停运，乡村出行务必提前核对班次。</p>
+    <div class="notice">
+      查询网站：<a href="https://www.buscroatia.com/" target="_blank" rel="noopener">https://www.buscroatia.com/</a><br>
+      可查询克罗地亚多数车站的大巴时刻与线路信息。
+    </div>
+  </section>
+
+  <!-- 飞机 -->
+  <section class="section" id="air">
+    <div class="section-head">
+      <span class="num">05 / AIR</span>
+      <h2>飞机抵达</h2>
+    </div>
+    <p>萨格勒布国际机场位于萨格勒布郊区，是克罗地亚客流量最大的机场，距梅吉穆列约 110 公里，高速公路直达。抵达后可搭乘大巴或出租车前往市区的火车站、汽车站，再换乘火车或大巴前往查科韦茨，去往梅吉穆列全域。</p>
     <div class="card-grid">
-      <div class="card">
-        <span class="card-tag">中国公民须知</span>
-        <h3 class="card-title">申根签证</h3>
-        <p class="card-highlight">克罗地亚于 2023 年 1 月 1 日加入申根协定，中国公民持普通护照赴克须提前办妥申根签证。如需申请，请登录 https://crovisa.mvep.hr/ 在线申请。</p>
-        <p class="card-experience">目前克在北京、上海、广州设有签证申请中心；咨询可拨克驻华使馆 010-65326242</p>
+      <div class="mini-card">
+        <h4>萨格勒布国际机场</h4>
+        <p>距梅吉穆列 110 公里 · 高速公路直达 · 官网 <a href="https://www.zagreb-airport.hr/en" target="_blank" rel="noopener" style="color:#2e7d32">zagreb-airport.hr</a></p>
+      </div>
+      <div class="mini-card">
+        <h4>马里博尔机场</h4>
+        <p>距梅吉穆列 70 公里 · 斯洛文尼亚境内 · 适合落地后自驾入境</p>
+      </div>
+      <div class="mini-card">
+        <h4>布达佩斯机场</h4>
+        <p>距梅吉穆列 275 公里 · 匈牙利境内 · 适合落地后自驾入境</p>
       </div>
     </div>
-  </div>
+    <div class="notice">
+      注意：<strong>普里斯拉韦茨（Pribislavec）</strong>是运动航空机场，没有客运／货运航站楼，普通游客不能落地客运航班，只做飞行训练、体育航空。另有瓦拉日丁机场可供参考。
+    </div>
+  </section>
 
-  <div class="section">
-    <h2 class="section-title">交通方式 · 到达方式总览</h2>
-    <p class="section-subtitle">自驾 · 火车 · 大巴 · 飞机</p>
+  <!-- 出行时段 -->
+  <section class="section" id="season">
+    <div class="section-head">
+      <span class="num">06 / SEASON</span>
+      <h2>出行时段与节庆</h2>
+    </div>
+    <p>梅吉穆列的特色节庆分散在区域内各个小镇，并不集中于单一地点。首府查科韦茨多举办大型城市庆典；什特里戈瓦是葡萄酒主题活动的核心区域；穆里河畔圣马丁以温泉、汽车嘉年华及新酒民俗活动为特色。各小镇之间可乘坐大巴或自驾短途往返。</p>
     <div class="card-grid">
-      <div class="card">
-        <span class="card-tag">自驾 · 推荐</span>
-        <h3 class="card-title">跨境公路路网完善</h3>
-        <p class="card-highlight">梅吉穆列地处克罗地亚最北端，毗邻斯洛文尼亚与匈牙利。可选择边境口岸：戈里钱-莱泰涅一号/二号、穆尔斯科斯雷迪什切-佩蒂绍夫奇、特恩诺夫茨-德拉瓦河畔斯雷迪什切。</p>
-        <p class="card-experience">实时路况：hak.hr/info/stanje-na-cestama</p>
+      <div class="mini-card">
+        <h4>旺季 · 6–8月</h4>
+        <p>夏季户外节庆最集中：汽车嘉年华、森林之地音乐节、波尔丘恩科洛沃传统庆典等。游客数量较多，住宿价格有所上涨，建议提前预订。</p>
       </div>
-      <div class="card">
-        <span class="card-tag">火车</span>
-        <h3 class="card-title">查科韦茨火车站</h3>
-        <p class="card-highlight">梅吉穆列最重要的铁路枢纽，距离市中心仅 1 公里。区域内有多个地方性小火车站，多服务本地通勤。</p>
-        <p class="card-experience">时刻表：https://prodaja.hzpp.hr/en</p>
+      <div class="mini-card">
+        <h4>平季 · 4、5、9月</h4>
+        <p>摩托车赛事、骑行活动、葡萄酒日、热气球节集中上演。节庆密度低于夏季，气候宜人，兼顾体验与性价比。</p>
       </div>
-      <div class="card">
-        <span class="card-tag">飞机</span>
-        <h3 class="card-title">萨格勒布国际机场</h3>
-        <p class="card-highlight">距梅吉穆列 110 公里，高速公路直达。备选：马里博尔机场（70 公里）、布达佩斯机场（275 公里）。</p>
-        <p class="card-experience">官网：https://www.zagreb-airport.hr/en</p>
-      </div>
-      <div class="card">
-        <span class="card-tag">大巴</span>
-        <h3 class="card-title">本地大巴线路</h3>
-        <p class="card-highlight">连通区域内大部分城镇与村落，但前往偏远村庄的大巴在休息日停运，出行务必提前核对班次。</p>
-        <p class="card-experience">查询：https://www.buscroatia.com/</p>
+      <div class="mini-card">
+        <h4>淡季 · 1、11、12月</h4>
+        <p>以葡萄酒民俗、圣诞主题人文活动为主。游客数量偏少，住宿价格处于全年低位，适合温泉康养与人文慢游。</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <h2 class="section-title">出行时段与节庆 · 旺季 / 平季 / 淡季</h2>
-    <p class="section-subtitle">建议结合节庆安排行程</p>
+  <!-- 实用贴士 -->
+  <section class="section" id="tips">
+    <div class="section-head">
+      <span class="num">07 / TIPS</span>
+      <h2>实用出行贴士</h2>
+    </div>
+
+    <p><strong>饮用水与食品</strong><br>梅吉穆列自来水水质纯净，可直接饮用。受欧盟法规管控，本地禁止销售转基因食品，大部分食品产自克罗地亚本土农场，食品标签会标注食材原产地。在餐厅和酒吧点餐时，商家一般会提供自来水。</p>
+
+    <p><strong>医疗与药物</strong><br>统一紧急求救电话 <strong>112</strong>。感冒、头痛等轻症所需非处方药可在药房购买。24 小时营业药房设于查科韦茨。克罗地亚全境无高危传染病流行风险，仅建议提前接种破伤风疫苗。</p>
+
+    <p><strong>户外安全提示</strong><br>在林区、水边活动时需防范蜱虫叮咬，建议随身携带驱虫药剂；离开林间后，仔细检查全身皮肤。夏季水域周边蚊虫较多，提前做好防护，建议穿长裤长袖，避开黄昏时段。</p>
+
+    <p><strong>禁烟规定</strong><br>克罗地亚所有封闭公共场所、工作场所及餐饮住宿场所禁止吸烟（有特殊标识许可的区域除外）。年满 18 周岁方可购买烟草制品。</p>
+  </section>
+
+  <!-- 货币 通讯 电力 -->
+  <section class="section" id="money">
+    <div class="section-head">
+      <span class="num">08 / MONEY</span>
+      <h2>货币 · 通讯 · 电力</h2>
+    </div>
     <div class="card-grid">
-      <div class="card">
-        <span class="card-tag">旺季 · 6-8月</span>
-        <h3 class="card-title">夏季户外节庆最集中</h3>
-        <p class="card-highlight">汽车嘉年华、森林之地音乐节、波尔丘恩科洛沃传统庆典、柳条与渔获节、传统歌谣节等大型户外活动陆续上演。游客数量较多，住宿价格有所上涨，热门住宿建议提前预订。</p>
-        <p class="card-experience">适合：喜欢热闹、不怕人多的游客</p>
+      <div class="mini-card">
+        <h4>货币 · 欧元（€）</h4>
+        <p>克罗地亚自 2023 年 1 月 1 日起使用欧元作为法定货币。梅吉穆列全域支持现金、借记卡、信用卡支付。小镇市集建议备少量现金。</p>
       </div>
-      <div class="card">
-        <span class="card-tag">平季 · 4、5、9月</span>
-        <h3 class="card-title">特色活动高人气</h3>
-        <p class="card-highlight">摩托车赛事、骑行活动、葡萄酒日、热气球节都集中在此区间。整体节庆密度低于夏季，气候宜人，游客流量适中，兼顾游玩体验与出行性价比。</p>
-        <p class="card-experience">适合：追求性价比与舒适气候的游客</p>
+      <div class="mini-card">
+        <h4>邮政与通讯</h4>
+        <p>查科韦茨邮局（马萨里克瓦大街 28 号）工作日 7:00–19:00；乡村邮局多为 7:00–14:00。邮局、报刊亭可购买电话卡。移动网络支持 GSM 900MHz、1800MHz 频段。</p>
       </div>
-      <div class="card">
-        <span class="card-tag">淡季 · 1、11、12月</span>
-        <h3 class="card-title">葡萄酒民俗与温泉</h3>
-        <p class="card-highlight">以葡萄酒民俗、圣诞主题人文活动为主，大型户外狂欢活动较少。到访游客数量偏少，住宿价格处于全年低位。</p>
-        <p class="card-experience">适合：偏爱温泉康养、酒庄品鉴、人文慢游的游客</p>
+      <div class="mini-card">
+        <h4>电力 · 230V / 50Hz</h4>
+        <p>采用欧洲标准 CEE7/16 插头，为欧洲多国通用规格。中国游客需自备转换插头。</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <h2 class="section-title">实用出行贴士</h2>
-    <p class="section-subtitle">饮用水 · 医疗 · 户外安全</p>
+  <!-- 重要电话 -->
+  <section class="section" id="contact">
+    <div class="section-head">
+      <span class="num">09 / CONTACT</span>
+      <h2>重要联系电话</h2>
+    </div>
     <div class="card-grid">
-      <div class="card">
-        <span class="card-tag">饮用水与食品</span>
-        <h3 class="card-title">自来水可直接饮用</h3>
-        <p class="card-highlight">梅吉穆列地区自来水水质纯净。受欧盟法规管控，本地禁止销售转基因食品，大部分食品产自克罗地亚本土农场，食品标签会标注食材原产地。</p>
-        <p class="card-experience">餐厅和酒吧一般会主动提供自来水，食品安全无需过度担忧</p>
+      <div class="mini-card">
+        <h4>统一紧急求救</h4>
+        <p><strong>112</strong> — 遇急症或紧急情况均可拨打。<br>道路救援（HAK）：+385 1987 · <a href="https://www.hak.hr" target="_blank" rel="noopener" style="color:#2e7d32">www.hak.hr</a></p>
       </div>
-      <div class="card">
-        <span class="card-tag">医疗与药物</span>
-        <h3 class="card-title">统一紧急电话 112</h3>
-        <p class="card-highlight">轻症非处方药可在药房购买。24 小时营业药房设于查科韦茨。克罗地亚全境无高危传染病流行风险，仅建议提前接种破伤风疫苗。</p>
-        <p class="card-experience">24 小时药房：莫兰迪纳大街 1 号，电话 +385 40 310 651</p>
+      <div class="mini-card">
+        <h4>24 小时出租车</h4>
+        <p>+385 40 313 619<br>+385 40 384 305<br>出租车站点：查科韦茨中央汽车站（马萨里克瓦大街 26 号）</p>
       </div>
-      <div class="card">
-        <span class="card-tag">户外安全</span>
-        <h3 class="card-title">防蜱虫与蚊虫</h3>
-        <p class="card-highlight">在林区、水边活动时需防范蜱虫叮咬，建议随身携带驱虫药剂；离开林间后仔细检查全身皮肤。夏季水域周边蚊虫较多，提前做好防护。</p>
-        <p class="card-experience">建议穿长裤长袖，避开黄昏时段</p>
+      <div class="mini-card">
+        <h4>医院急诊</h4>
+        <p>急诊全天候开放。除精神科、儿科、产科患者外，持转诊单的患者可前往急诊接待处就诊。<br>电话：+385 40 375 345</p>
+      </div>
+      <div class="mini-card">
+        <h4>查科韦茨汽车站</h4>
+        <p>+385 40 313 947<br>查科韦茨 24 小时药房：莫兰迪纳大街 1 号 · +385 40 310 651</p>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="section">
-    <h2 class="section-title">货币 · 支付 · 通讯 · 电力</h2>
-    <p class="section-subtitle">抵达前把这几项准备好</p>
-    <div class="card-grid">
-      <div class="card">
-        <span class="card-tag">货币</span>
-        <h3 class="card-title">欧元</h3>
-        <p class="card-highlight">克罗地亚自 2023 年 1 月 1 日起使用欧元作为法定货币。梅吉穆列全域支持现金、借记卡、信用卡支付。</p>
-        <p class="card-experience">多数商铺支持刷卡，但小镇市集建议备少量现金</p>
-      </div>
-      <div class="card">
-        <span class="card-tag">邮政与通讯</span>
-        <h3 class="card-title">查科韦茨邮局</h3>
-        <p class="card-highlight">马萨里克瓦大街 28 号，工作日 7:00-19:00；乡村邮局多为 7:00-14:00，部分中午暂停办公。邮局、报刊亭可购买电话卡。</p>
-        <p class="card-experience">移动网络支持 GSM 900MHz、1800MHz 频段</p>
-      </div>
-      <div class="card">
-        <span class="card-tag">电力</span>
-        <h3 class="card-title">230V / 50Hz</h3>
-        <p class="card-highlight">采用欧洲标准 CEE7/16 插头，为欧洲多国通用规格。</p>
-        <p class="card-experience">中国游客需自备转换插头</p>
-      </div>
+  <!-- 治安 -->
+  <section class="section" id="safety">
+    <div class="section-head">
+      <span class="num">10 / SAFETY</span>
+      <h2>治安安全</h2>
     </div>
-  </div>
-
-  <div class="section">
-    <h2 class="section-title">重要联系电话</h2>
-    <p class="section-subtitle">出行前存一份</p>
-    <div class="card-grid">
-      <div class="card">
-        <span class="card-tag">紧急</span>
-        <h3 class="card-title">112</h3>
-        <p class="card-highlight">统一紧急求救电话，遇到急症或其他紧急情况均可拨打。</p>
-        <p class="card-experience">道路救援（HAK）：+385 1987，官网 www.hak.hr</p>
-      </div>
-      <div class="card">
-        <span class="card-tag">出租车</span>
-        <h3 class="card-title">24 小时出租车</h3>
-        <p class="card-highlight">电话 +385 40 313 619 / +385 40 384 305。</p>
-        <p class="card-experience">出租车站点：查科韦茨中央汽车站（马萨里克瓦大街 26 号）</p>
-      </div>
-      <div class="card">
-        <span class="card-tag">医院</span>
-        <h3 class="card-title">急诊全天候开放</h3>
-        <p class="card-highlight">除精神科、儿科、产科患者外，持转诊单的患者可前往急诊接待处就诊。</p>
-        <p class="card-experience">联系电话：+385 40 375 345</p>
-      </div>
-    </div>
-  </div>
+    <p>如遇危险或困难，拨打 <strong>112</strong> 寻求救援。梅吉穆列治安条件优良，犯罪发生率低，游客出行整体安全性高，但仍不能完全排除个别治安风险，建议保持基本防范意识。</p>
+  </section>
 
 </div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h4>梅吉穆列</h4>
+      <p>两河间的绿野秘境<br>穆拉河与德拉瓦河环抱的中欧田园</p>
+    </div>
+    <div>
+      <h4>快速导航</h4>
+      <p>
+        <a href="/">绿野仙踪</a><br>
+        <a href="/nature">漫步田园</a><br>
+        <a href="/attractions">故城寻踪</a><br>
+        <a href="/taste">烟火知味</a><br>
+        <a href="/events">四时盛事</a>
+      </p>
+    </div>
+    <div>
+      <h4>查询工具</h4>
+      <p>
+        <a href="https://prodaja.hzpp.hr/en" target="_blank" rel="noopener">火车时刻</a><br>
+        <a href="https://www.buscroatia.com/" target="_blank" rel="noopener">大巴查询</a><br>
+        <a href="https://www.zagreb-airport.hr/en" target="_blank" rel="noopener">萨格勒布机场</a><br>
+        <a href="https://www.hak.hr/info/stanje-na-cestama" target="_blank" rel="noopener">实时路况</a>
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">梅吉穆列 · 旅行贴士 · 交通信息供旅客参考</div>
+</footer>
+
+<button class="back-to-top" id="backTop" aria-label="返回顶部">↑</button>
+
+<script>
+(function(){
+  var btn = document.getElementById('backTop');
+  function onScroll(){
+    if (!btn) return;
+    if (window.scrollY > 400) btn.classList.add('show');
+    else btn.classList.remove('show');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+  if (btn) btn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+})();
+</script>
 
 </body>
 </html>

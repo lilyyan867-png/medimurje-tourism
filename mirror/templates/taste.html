@@ -1,99 +1,785 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>烟火知味 · 梅吉穆列</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f4f7f4;color:#333;line-height:1.6}
-
-.navbar{position:fixed;top:0;left:0;right:0;height:90px;background:rgba(26,61,36,0.92);backdrop-filter:blur(10px);display:flex;align-items:center;padding:0 60px;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
-.navbar .brand{color:#fff;font-size:28px;letter-spacing:6px;margin-right:90px;font-weight:700;font-family:'STKaiti','KaiTi',serif;white-space:nowrap}
-.navbar ul{display:flex;gap:48px;list-style:none}
-.navbar a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:20px;letter-spacing:2px;font-weight:600;transition:color .2s;white-space:nowrap}
-.navbar a:hover,.navbar a.active{color:#a5d6a7}
-
-.page{padding:150px 20px 80px;max-width:1200px;margin:0 auto}
-
-/* ===== Hero 视频 ===== */
-.hero-mini{position:relative;text-align:center;padding:140px 20px;overflow:hidden;background:#1a3d24;border-radius:14px;margin-bottom:60px}
-.hero-mini .hero-bg{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;transform:translate(-50%,-50%);object-fit:cover;z-index:0}
-.hero-mini h1,.hero-mini p{position:relative;z-index:2}
-.hero-mini h1{font-size:48px;font-weight:600;color:#fff !important;letter-spacing:4px;margin-bottom:16px;text-shadow:0 4px 24px rgba(0,0,0,0.85),0 2px 8px rgba(0,0,0,0.9)}
-.hero-mini p{font-size:16px;color:#fff !important;letter-spacing:1px;text-shadow:0 3px 16px rgba(0,0,0,0.85),0 1px 6px rgba(0,0,0,0.9)}
-
-/* ===== 章节 ===== */
-.section{margin-bottom:56px}
-.section-title{font-size:28px;font-weight:600;color:#1a3d24;border-left:5px solid #2e7d32;padding-left:16px;margin-bottom:10px}
-.section-subtitle{color:#666;font-size:15px;margin-bottom:32px;padding-left:21px}
-
-/* ===== 卡片网格：单列 ===== */
-.card-grid{display:grid;grid-template-columns:1fr;gap:28px}
-
-/* ===== 卡片：固定高度 320px，左图右文 ===== */
-.card{
-  background:#fff;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 6px 24px rgba(0,0,0,0.06);
-  transition:transform .25s,box-shadow .25s;
-  border-top:3px solid #2e7d32;
-  display:flex;
-  flex-direction:row;
-  height:320px;
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+   background:#f5f2ed;color:#3d3429;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
 }
-.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.12)}
 
-/* 图片：固定宽 380px，高度 100% */
-.card-img{width:380px;flex-shrink:0;height:100%;overflow:hidden;background:#e8f5e9}
-.card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
-.card:hover .card-img img{transform:scale(1.06)}
+/* ===== 导航栏 ===== */
+.navbar{
+  position:fixed;top:0;left:0;right:0;height:80px;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  display:flex;align-items:center;padding:0 60px;z-index:1000;
+  box-shadow:0 1px 20px rgba(0,0,0,0.06)
+}
+.navbar .brand{
+  color:#1a1a1a;font-size:24px;letter-spacing:8px;margin-right:80px;
+  font-weight:500;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+  white-space:nowrap
+}
+.navbar ul{display:flex;gap:44px;list-style:none;flex:1;justify-content:center}
+.navbar a{
+  color:#2c2c2c;text-decoration:none;font-size:16px;letter-spacing:3px;
+  font-weight:400;
+  font-family:'Noto Serif SC','STSong','SimSun',serif;
+  transition:color .3s;white-space:nowrap
+}
+.navbar a:hover{color:#8a7250}
+.navbar a.active{color:#2e7d32}
 
-/* 文字：占剩余宽度，垂直居中 */
-.card-body{
+/* ===== Hero 图片（静态） ===== */
+.hero{
+  position:relative;height:100vh;min-height:640px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:#2a2118
+}
+.hero::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to bottom,rgba(42,33,24,0.35),transparent 35%,rgba(42,33,24,0.55))
+}
+.hero .hero-photo{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:brightness(0.72) saturate(0.95)
+}
+.hero-inner{
+  position:relative;z-index:2;text-align:center;
+  padding:0 32px;max-width:920px
+}
+.hero .brand-mark{
+  font-size:14px;letter-spacing:14px;color:rgba(245,236,217,0.75);
+  margin-bottom:48px;font-weight:300
+}
+.hero h1{
+  font-size:clamp(42px,6vw,76px);
+  font-weight:400;color:#fdf9f0;
+  letter-spacing:16px;
+  margin-bottom:36px;line-height:1.2;
+  text-shadow:0 4px 30px rgba(0,0,0,0.35)
+}
+.hero .lead{
+  font-size:17px;color:rgba(245,236,217,0.9);
+  letter-spacing:4px;line-height:2.2;font-weight:300
+}
+
+/* ===== 引言带 ===== */
+.intro-band{
+  max-width:1180px;margin:0 auto;
+  padding:120px 60px 100px;text-align:center
+}
+.intro-band .eyebrow{
+  font-size:12px;letter-spacing:10px;
+  color:#8a7250;margin-bottom:28px;font-weight:400
+}
+.intro-band h2{
+  font-size:clamp(24px,3vw,34px);
+  font-weight:400;color:#3a2f24;
+  letter-spacing:8px;margin-bottom:30px;line-height:1.6
+}
+.intro-band p{
+  color:#6b5c48;font-size:15px;
+  line-height:2.2;max-width:720px;margin:0 auto;letter-spacing:1px
+}
+
+/* ===== 大图引言卡 ===== */
+.feature-hero{
+  max-width:1180px;margin:0 auto 100px;padding:0 60px;
+  position:relative
+}
+.feature-hero .frame{
+  position:relative;
+  box-shadow:0 30px 80px rgba(58,47,36,0.18);
+  overflow:hidden;
+}
+.feature-hero .frame img{
+  width:100%;display:block;
+  aspect-ratio:16/9;object-fit:cover;
+  transition:transform 1s ease
+}
+.feature-hero .frame:hover img{transform:scale(1.02)}
+.feature-hero .frame::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(42,33,24,0.7) 0%,transparent 55%)
+}
+.feature-hero .caption{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:52px 60px 48px;z-index:2;text-align:center
+}
+.feature-hero .caption .mark{
+  font-size:12px;letter-spacing:8px;
+  color:rgba(245,236,217,0.7);margin-bottom:20px
+}
+.feature-hero .caption h3{
+  font-size:clamp(26px,3vw,40px);
+  color:#fdf9f0;font-weight:400;letter-spacing:10px;
+  margin-bottom:20px;line-height:1.4;
+  text-shadow:0 2px 20px rgba(0,0,0,0.4)
+}
+.feature-hero .caption p{
+  color:rgba(245,236,217,0.88);
+  font-size:16px;letter-spacing:3px;font-weight:300
+}
+
+/* ===== 图文卡（浅米色卡片浮在深色背景上） ===== */
+.story-card-wrap{
+  max-width:1280px;margin:0 auto 100px;padding:0 60px;
+  position:relative
+}
+.story-card-wrap .backdrop{
+  position:relative;
+  background:#2a2118;
+  padding:80px 60px 80px 60px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
+}
+.story-card-wrap .backdrop-img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  opacity:0.28;z-index:0
+}
+.story-card-wrap .backdrop::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(42,33,24,0.7),rgba(42,33,24,0.5));z-index:1
+}
+.story-card-wrap .backdrop-inner{
+  position:relative;z-index:2;
+  grid-column:1 / -1;
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:stretch
+}
+
+/* 卡片：浅米色 */
+.card-beige{
+  background:#f5ede0;
+  padding:36px 34px 40px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  display:flex;flex-direction:column
+}
+.card-beige .card-top{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:24px
+}
+.card-beige .card-mark{
+  font-size:11px;letter-spacing:4px;
+  color:#8a7250;font-weight:400
+}
+.card-beige .card-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#b8854a
+}
+.card-beige .img-box{
+  width:100%;aspect-ratio:4/5;
+  overflow:hidden;margin-bottom:28px;
+  background:#e0d5c2
+}
+.card-beige .img-box img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .8s ease
+}
+.card-beige:hover .img-box img{transform:scale(1.04)}
+.card-beige .card-label{
+  font-size:14px;letter-spacing:6px;
+  color:#3a2f24;text-align:center;
+  margin-bottom:20px;font-weight:400
+}
+.card-beige .card-body{
+  font-size:13.5px;color:#5c4c39;
+  line-height:2;text-align:center;letter-spacing:0.5px
+}
+.card-beige .card-body strong{
+  display:block;color:#3a2f24;
+  font-size:15px;letter-spacing:2px;
+  font-weight:500;margin-bottom:10px
+}
+
+/* 右侧文字卡 */
+.card-text-beige{
+  background:#f5ede0;
+  padding:52px 48px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  display:flex;flex-direction:column;justify-content:center
+}
+.card-text-beige .card-top{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:40px
+}
+.card-text-beige .card-mark{
+  font-size:11px;letter-spacing:4px;color:#8a7250
+}
+.card-text-beige .card-dot{
+  width:10px;height:10px;border-radius:50%;background:#b8854a
+}
+.card-text-beige h4{
+  font-size:22px;font-weight:400;color:#3a2f24;
+  letter-spacing:6px;text-align:center;margin-bottom:36px;line-height:1.6
+}
+.card-text-beige .txt{
+  font-size:14px;color:#5c4c39;
+  line-height:2.2;text-align:center;letter-spacing:1px;
+  margin-bottom:28px
+}
+.card-text-beige .txt-label{
+  font-size:13px;color:#8a7250;
+  letter-spacing:3px;text-align:center;margin-bottom:8px
+}
+.card-text-beige .card-foot{
+  margin-top:auto;padding-top:32px;text-align:center;
+  font-size:11px;letter-spacing:4px;color:#8a7250
+}
+
+/* ===== 大图 + 侧栏（中欧乡村） ===== */
+.split-collage{
+  max-width:1280px;margin:0 auto 100px;padding:0 60px;
+  display:grid;grid-template-columns:1.3fr 1fr;gap:44px;align-items:center
+}
+.collage{
+  display:grid;grid-template-columns:1.6fr 1fr;
+  grid-template-rows:1fr 1fr;gap:10px;height:520px
+}
+.collage > div{overflow:hidden;position:relative;box-shadow:0 20px 40px rgba(58,47,36,0.15)}
+.collage img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s ease}
+.collage > div:hover img{transform:scale(1.05)}
+.collage .big{grid-column:1;grid-row:1 / span 2}
+.collage .small-1{grid-column:2;grid-row:1}
+.collage .small-2{grid-column:2;grid-row:2}
+
+.collage-text .eyebrow{
+  font-size:11px;letter-spacing:10px;color:#8a7250;margin-bottom:24px
+}
+.collage-text h3{
+  font-size:clamp(24px,2.6vw,34px);
+  font-weight:400;color:#3a2f24;letter-spacing:6px;
+  margin-bottom:24px;line-height:1.5
+}
+.collage-text .tag{
+  display:inline-block;font-size:11px;letter-spacing:4px;
+  color:#8a7250;border:1px solid #c9b390;
+  padding:6px 18px;margin-bottom:28px
+}
+.collage-text .desc{
+  color:#5c4c39;font-size:14px;line-height:2.2;
+  letter-spacing:1px;margin-bottom:24px
+}
+.collage-text .exp{
+  padding-top:24px;border-top:1px solid #c9b390;
+  font-size:13px;color:#6b5c48;line-height:2;letter-spacing:0.5px
+}
+.collage-text .exp strong{color:#3a2f24;font-weight:500}
+
+/* ===== 影院视频 ===== */
+.cinema-block{
+  position:relative;background:#1f1810;overflow:hidden;margin-top:40px
+}
+.cinema-block video{
+  display:block;width:100%;height:auto;
+  min-height:min(56vh,520px);max-height:85vh;
+  object-fit:cover;aspect-ratio:21/9
+}
+.cinema-caption{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:48px 40px 52px;
+  background:linear-gradient(transparent,rgba(31,24,16,0.7));
+  text-align:center;pointer-events:none
+}
+.cinema-caption p{
+  color:rgba(245,236,217,0.85);
+  font-size:14px;letter-spacing:6px;font-weight:300
+}
+
+/* ===== 页脚 ===== */
+.footer-mini{
+  text-align:center;padding:72px 20px 80px;
+  font-size:11px;color:#8a7250;letter-spacing:6px;
+  background:#e8e0d4
+}
+
+/* ===== 葡萄酒之路：Ichinobo 风格错落排版 ===== */
+.wine-journey{
+  max-width:1280px;margin:0 auto 100px;padding:0 60px;
+}
+.wine-block{
+  display:grid;
+  grid-template-columns:1.4fr 1.8fr 0.85fr;
+  gap:60px;
+  align-items:center;
+  padding:80px 0;
+  border-bottom:1px solid #d8cfc3;
+}
+.wine-block:last-child{border-bottom:none}
+
+.wine-block-reverse{
+  grid-template-columns:0.85fr 1.8fr 1.4fr;
+}
+
+/* 大图 */
+.wine-img-lg{
+  overflow:hidden;
+  box-shadow:0 20px 50px rgba(58,47,36,0.15);
+}
+.wine-img-lg img{
+  width:100%;
+  display:block;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  transition:transform .8s ease;
+}
+.wine-img-lg:hover img{transform:scale(1.03)}
+
+/* 小图 */
+.wine-img-sm{
+  overflow:hidden;
+  box-shadow:0 16px 40px rgba(58,47,36,0.15);
+  align-self:center;
+}
+.wine-img-sm img{
+  width:100%;
+  display:block;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  transition:transform .8s ease;
+}
+.wine-img-sm:hover img{transform:scale(1.05)}
+
+/* 文字区 */
+.wine-text{
+  padding:0 20px;
+}
+.wine-eyebrow{
+  font-size:13px;
+  letter-spacing:6px;
+  color:#8a7250;
+  margin-bottom:40px;
+  font-weight:400;
+}
+.wine-text h3{
+  font-size:clamp(28px,3vw,38px);
+  font-weight:400;
+  color:#3a2f24;
+  letter-spacing:6px;
+  margin-bottom:36px;
+  line-height:1.5;
+}
+.wine-desc{
+  font-size:14.5px;
+  color:#5c4c39;
+  line-height:2.2;
+  letter-spacing:1px;
+  margin-bottom:44px;
+}
+
+/* 底部信息行 */
+.wine-meta{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding-top:24px;
+  font-size:13.5px;
+  color:#5c4c39;
+  letter-spacing:1px;
+  flex-wrap:wrap;
+}
+.wine-meta .meta-label{
+  color:#8a7250;
+  letter-spacing:4px;
+  flex-shrink:0;
+}
+.wine-meta .meta-line{
+  flex:0 0 80px;
+  height:1px;
+  background:#c9b390;
+  margin:0 4px;
+}
+.wine-meta .meta-value{
+  color:#3a2f24;
+  letter-spacing:2px;
+}
+
+/* 移动端 */
+@media (max-width:960px){
+  .wine-journey{padding:0 20px;margin-bottom:60px}
+  .wine-block,
+  .wine-block-reverse{
+    grid-template-columns:1fr;
+    gap:28px;
+    padding:52px 0;
+  }
+  .wine-img-lg img{aspect-ratio:4/3}
+  .wine-img-sm img{aspect-ratio:16/9}
+  .wine-text{padding:0}
+  .wine-eyebrow{margin-bottom:24px}
+  .wine-text h3{margin-bottom:24px;font-size:24px}
+  .wine-desc{margin-bottom:28px;font-size:13.5px}
+  .wine-meta{font-size:12.5px;gap:12px}
+  .wine-meta .meta-line{flex-basis:40px}
+}
+
+/* ===== 美食志：竖排标题 + 横排文字 + 图片流水线 ===== */
+.food-journey{
+  max-width:1280px;
+  margin:0 auto 100px;
+  padding:0 60px;
+}
+
+/* 上半部分：竖排标题 + 横排文字 */
+.food-intro{
+  display:grid;
+  grid-template-columns:auto auto 1fr;
+  gap:48px;
+  align-items:flex-start;
+  padding:80px 0 60px;
+  border-bottom:1px solid #d8cfc3;
+}
+
+/* 左侧图片 */
+.food-intro-img{
+  overflow:hidden;
+  box-shadow:0 20px 50px rgba(58,47,36,0.15);
+  flex-shrink:0;
+  width:220px;
+}
+.food-intro-img img{
+  width:100%;
+  display:block;
+  aspect-ratio:3/4;
+  object-fit:cover;
+  transition:transform .8s ease;
+}
+.food-intro-img:hover img{transform:scale(1.04)}
+
+/* 左侧竖排大标题 */
+.food-title-vertical{
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  flex-shrink:0;
+  padding-right:24px;
+  border-right:1px solid #c9b390;
+}
+.food-title-vertical h3{
+  font-size:clamp(28px,3vw,40px);
+  font-weight:400;
+  color:#3a2f24;
+  letter-spacing:12px;
+  line-height:1.6;
+  margin:0;
+}
+
+/* 右侧横排文字 */
+.food-text-horizontal{
   flex:1;
-  min-width:0;
-  padding:32px 40px;
+  padding-top:12px;
+}
+.food-eyebrow{
+  font-size:13px;
+  letter-spacing:6px;
+  color:#8a7250;
+  margin-bottom:36px;
+  font-weight:400;
+}
+.food-desc{
+  font-size:15px;
+  color:#5c4c39;
+  line-height:2.3;
+  letter-spacing:1px;
+  margin-bottom:40px;
+  max-width:720px;
+}
+.food-meta{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding-top:24px;
+  font-size:13.5px;
+  color:#5c4c39;
+  letter-spacing:1px;
+  flex-wrap:wrap;
+}
+.food-meta .meta-label{
+  color:#8a7250;
+  letter-spacing:4px;
+  flex-shrink:0;
+}
+.food-meta .meta-line{
+  flex:0 0 80px;
+  height:1px;
+  background:#c9b390;
+  margin:0 4px;
+}
+.food-meta .meta-value{
+  color:#3a2f24;
+  letter-spacing:2px;
+}
+
+/* 下半部分：三张图片流水线 */
+.food-gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:32px;
+  padding-top:60px;
+}
+
+.gallery-item{
   display:flex;
   flex-direction:column;
-  justify-content:center;
-  overflow:hidden;
 }
 
-.card-tag{display:inline-block;background:#e8f5e9;color:#2e7d32;font-size:12px;padding:4px 12px;border-radius:14px;margin-bottom:12px;letter-spacing:.5px;font-weight:500;align-self:flex-start}
-.card-title{font-size:21px;font-weight:600;color:#1a3d24;margin-bottom:12px;letter-spacing:1px;line-height:1.3}
-.card-summary{color:#444;font-size:15px;line-height:1.8;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.gallery-img{
+  overflow:hidden;
+  box-shadow:0 20px 50px rgba(58,47,36,0.15);
+  margin-bottom:28px;
+}
+.gallery-img img{
+  width:100%;
+  display:block;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  transition:transform .8s ease;
+}
+.gallery-item:hover .gallery-img img{
+  transform:scale(1.04);
+}
 
-.card-details{margin-top:4px}
-.card-details summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;color:#2e7d32;font-size:13px;font-weight:600;letter-spacing:1px;padding:6px 16px;border:1px solid #c8e6c9;border-radius:18px;background:#f1f8f1;transition:all .2s;user-select:none}
-.card-details summary::-webkit-details-marker{display:none}
-.card-details summary::after{content:'▼';font-size:9px;transition:transform .25s}
-.card-details[open] summary::after{transform:rotate(180deg)}
-.card-details summary:hover{background:#2e7d32;color:#fff;border-color:#2e7d32}
-.card-detail-body{margin-top:12px;padding-top:12px;border-top:1px dashed #c8e6c9;color:#555;font-size:13.5px;line-height:1.8;animation:fadeIn .3s ease-out}
-.card-detail-body p{margin-bottom:8px}
-.card-detail-body p:last-child{margin-bottom:0}
-.card-detail-body strong{color:#2e7d32}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.gallery-caption{
+  padding:0 8px;
+}
+.caption-num{
+  display:block;
+  font-size:12px;
+  letter-spacing:6px;
+  color:#b8854a;
+  margin-bottom:12px;
+  font-weight:500;
+}
+.gallery-caption h4{
+  font-size:18px;
+  font-weight:400;
+  color:#3a2f24;
+  letter-spacing:3px;
+  margin-bottom:10px;
+  line-height:1.5;
+}
+.gallery-caption p{
+  font-size:13px;
+  color:#6b5c48;
+  line-height:2;
+  letter-spacing:0.5px;
+}
 
-/* ===== 移动端：上图下文 ===== */
-@media (max-width:900px){
-  .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:12px}
-  .navbar .brand{font-size:20px;letter-spacing:3px;margin-right:0;width:100%}
-  .navbar ul{gap:18px;width:100%;overflow-x:auto;padding-bottom:4px}
-  .navbar a{font-size:14px;letter-spacing:1px}
-  .page{padding:120px 16px 60px}
-  .hero-mini{padding:90px 20px;border-radius:0}
-  .hero-mini h1{font-size:32px;letter-spacing:2px}
-  .section-title{font-size:22px}
-  .card{flex-direction:column;height:auto}
-  .card-img{width:100%;height:200px}
-  .card-body{padding:22px}
-  .card-title{font-size:18px}
-  .card-summary{-webkit-line-clamp:5}
+/* 移动端 */
+@media (max-width:960px){
+  .food-journey{padding:0 20px;margin-bottom:60px}
+  .food-intro{
+    grid-template-columns:1fr;
+    gap:28px;
+    padding:52px 0 40px;
+  }
+  .food-intro-img{width:100%}
+  .food-intro-img img{aspect-ratio:16/9}
+  .food-title-vertical{
+    writing-mode:horizontal-tb;
+    border-right:none;
+    border-bottom:1px solid #c9b390;
+    padding-right:0;
+    padding-bottom:16px;
+    width:100%;
+  }
+  .food-title-vertical h3{
+    font-size:24px;
+    letter-spacing:6px;
+  }
+  .food-eyebrow{margin-bottom:20px}
+  .food-desc{font-size:13.5px;margin-bottom:28px}
+  .food-gallery{
+    grid-template-columns:1fr;
+    gap:40px;
+    padding-top:40px;
+  }
+  .gallery-img img{aspect-ratio:16/9}
+}
+
+/* ===== 葡园居行：Ichinobo 交错排版 ===== */
+.stay-journey{
+  max-width:1280px;
+  margin:0 auto 100px;
+  padding:0 60px;
+}
+
+/* 板块标题 */
+.stay-header{
+  text-align:center;
+  padding:40px 0 72px;
+}
+.stay-header .stay-eyebrow{
+  font-size:13px;
+  letter-spacing:6px;
+  color:#8a7250;
+  margin-bottom:28px;
+  font-weight:400;
+}
+.stay-header h2{
+  font-size:clamp(28px,3vw,38px);
+  font-weight:400;
+  color:#3a2f24;
+  letter-spacing:8px;
+  margin-bottom:20px;
+  line-height:1.5;
+}
+.stay-header .stay-sub{
+  font-size:14px;
+  color:#8a7250;
+  letter-spacing:3px;
+  font-weight:300;
+}
+
+/* 4 个景点容器：居中，1 行 2 个，控制宽度留白 */
+.stay-grid{
+  max-width:1080px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:72px;
+  row-gap:72px;
+}
+
+
+/* 单个景点：垂直堆叠（文字在上，图片在下） */
+.stay-item{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+
+/* 阶梯效果：右侧第 2、4 项向下偏移 */
+.stay-item:nth-child(even){
+  margin-top: 72px;
+}
+
+/* 文字块 */
+.stay-head{
+  display:flex;
+  flex-direction:column;
+}
+
+/* 编号、标题、罗马字——同时作用于 .stay-head 和 .stay-info */
+.stay-head .stay-num,
+.stay-info .stay-num{
+  font-size:13px;
+  letter-spacing:4px;
+  color:#8a7250;
+  margin-bottom:16px;
+  font-weight:400;
+}
+.stay-head h3,
+.stay-info h3{
+  font-size:clamp(20px,1.8vw,24px);
+  font-weight:400;
+  color:#3a2f24;
+  letter-spacing:4px;
+  margin-bottom:8px;
+  line-height:1.5;
+}
+.stay-head .stay-romaji,
+.stay-info .stay-romaji{
+  font-size:12px;
+  letter-spacing:2px;
+  color:#a89880;
+  font-weight:300;
+  margin-bottom:20px;
+}
+.stay-text p,
+.stay-info .stay-desc{
+  font-size:13.5px;
+  color:#5c4c39;
+  line-height:2.2;
+  letter-spacing:0.8px;
+}
+
+/* 图片 */
+.stay-img{
+  order: -1;
+  overflow:hidden;
+  box-shadow:0 20px 50px rgba(58,47,36,0.15);
+}
+.stay-img img{
+  width:100%;
+  display:block;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  transition:transform .8s ease;
+}
+.stay-img:hover img{transform:scale(1.03)}
+
+/* 移动端 */
+@media (max-width:960px){
+  .stay-grid{
+    max-width:100%;
+    grid-template-columns:1fr;
+    row-gap:56px;
+  }
+  .stay-img img{aspect-ratio:16/9}
+}
+
+@media (max-width:960px){
+  .stay-item:nth-child(even){
+    margin-top: 0;
+  }
+}
+
+/* ===== 移动端 ===== */
+@media (max-width:960px){
+  .stay-journey{padding:0 20px;margin-bottom:60px}
+  .stay-header{padding:20px 0 40px}
+  .stay-header h2{font-size:22px;letter-spacing:4px}
+  .stay-header .stay-sub{font-size:12px;letter-spacing:2px}
+  .stay-grid{
+    grid-template-columns:1fr;
+    row-gap:56px;
+  }
+  .stay-item{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+  /* 手机上视觉区永远在上 */
+  .stay-item-a .stay-visual,
+  .stay-item-b .stay-visual{order:1}
+  .stay-item-a .stay-text,
+  .stay-item-b .stay-text{order:2}
+  .stay-visual .stay-img img{aspect-ratio:16/9}
+  .stay-text{padding-top:0}
+}
+
+/* ===== 移动端 ===== */
+@media (max-width:960px){
+  .navbar{height:auto;padding:14px 20px;flex-wrap:wrap;gap:10px}
+  .navbar .brand{font-size:18px;letter-spacing:5px;margin-right:0;width:100%}
+  .navbar ul{gap:16px;width:100%;overflow-x:auto;padding-bottom:4px}
+  .navbar a{font-size:13px;letter-spacing:2px}
+  .hero h1{font-size:36px;letter-spacing:8px}
+  .hero .lead{font-size:14px;letter-spacing:2px}
+  .intro-band{padding:80px 24px 60px}
+  .intro-band h2{font-size:20px;letter-spacing:4px}
+  .intro-band p{font-size:13.5px}
+  .feature-hero,.story-card-wrap,.split-collage{padding:0 20px;margin-bottom:60px}
+  .feature-hero .caption{padding:32px 24px}
+  .feature-hero .caption h3{font-size:22px;letter-spacing:5px}
+  .story-card-wrap .backdrop{padding:40px 24px}
+  .story-card-wrap .backdrop-inner{grid-template-columns:1fr;gap:24px}
+  .card-beige,.card-text-beige{padding:28px 24px}
+  .card-text-beige h4{font-size:18px;letter-spacing:3px}
+  .split-collage{grid-template-columns:1fr;gap:36px}
+  .collage{height:340px}
+  .cinema-block video{min-height:40vh;aspect-ratio:16/9}
 }
 </style>
 </head>
@@ -110,187 +796,239 @@ body{font-family:'PingFang SC','Microsoft YaHei',sans-serif;background:#f4f7f4;c
     <li><a href="/plan">旅行贴士</a></li>
   </ul>
 </nav>
-<div class="page">
 
-  <div class="hero-mini">
-    <video class="hero-bg" autoplay muted loop playsinline>
-      <source src="/static/assets/taste.mp4" type="video/mp4">
-    </video>
+<!-- ===== Hero 图片（静态） ===== -->
+<header class="hero">
+  <img class="hero-photo" src="/static/assets/cake.png" alt="梅吉穆列千层蛋糕">
+  <div class="hero-inner">
+    <p class="brand-mark">MEDIMURJE</p>
     <h1>烟火知味</h1>
-    <p>小众产区的顶级佳酿与中欧融合的地道风味。</p>
-</div>
+    <p class="lead">小众产区的顶级佳酿与中欧融合的地道风味<br>全球单位面积获奖最多的葡萄酒产区之一</p>
+  </div>
+</header>
 
-<!-- 葡萄酒之路 -->
-  <div class="section">
-    <h2 class="section-title">葡萄酒之路 · 一方风土，一脉葡香</h2>
-    <p class="section-subtitle">全球单位面积获奖最多的葡萄酒产区之一</p>
-    <div class="card-grid">
+<!-- ===== 引言 ===== -->
+<section class="intro-band">
+  <p class="eyebrow">TASTE · MEDIMURJE</p>
+  <h2>葡萄酒之路 · 一方风土，一脉葡香</h2>
+  <p>梅吉穆列是克罗地亚最北端的迷你葡萄酒产区，也是全球单位面积获奖最多的产区之一。<br>从普希佩尔白葡萄酒到兹林斯基城堡的宫廷食谱，每一口都是中欧与地中海的交融。</p>
+</section>
 
-      <div class="card">
-        <div class="card-img"><img src="/static/assets/pusipel.png" alt="普希佩尔"></div>
-        <div class="card-body">
-          <span class="card-tag">产区专属名片</span>
-          <h3 class="card-title">普希佩尔</h3>
-          <p class="card-summary">梅吉穆列特有的白葡萄品种，分为两款核心产品：经典款口感轻盈，带有清新柑橘果香，易饮百搭；尊享款陈酿时间更长，酒体醇厚，风味层次丰富。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body">
-              <p><strong>主要葡萄品种：</strong>长相思、绿维特纳、灰皮诺、莱茵雷司令、黄麝香、普希佩尔</p>
-            </div>
-          </details>
-        </div>
+<!-- ===== 大图 Feature：普希佩尔 ===== -->
+<section class="feature-hero">
+  <div class="frame">
+    <img src="/static/assets/wine_road.png" alt="普希佩尔">
+    <div class="caption">
+      <p class="mark">WINE ROAD</p>
+      <h3>葡萄酒之路</h3>
+      <p>沿丘陵，寻访百年家族酒窖</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 01 葡萄酒之路（Ichinobo 排版） ===== -->
+<section class="wine-journey">
+
+  <!-- 普希佩尔：大图左 + 文字中 + 小图右 -->
+  <div class="wine-block">
+    <div class="wine-img-lg">
+      <img src="/static/assets/pusipel_1.png" alt="普希佩尔">
+    </div>
+
+    <div class="wine-text">
+      <p class="wine-eyebrow">( Signature )</p>
+      <h3>普希佩尔</h3>
+      <p class="wine-desc">梅吉穆列特有的白葡萄品种，被誉为产区的专属名片。经典款口感轻盈，带有清新柑橘果香，易饮百搭；尊享款陈酿时间更长，酒体醇厚，风味层次丰富——从入门到进阶，都能找到属于你的那一杯。</p>
+      <div class="wine-meta">
+        <span class="meta-label">品种</span>
+        <span class="meta-line"></span>
+        <span class="meta-value">长相思 · 绿维特纳 · 灰皮诺 · 莱茵雷司令 · 黄麝香</span>
       </div>
+    </div>
 
-      <div class="card">
-        <div class="card-img"><img src="/static/assets/Urbanovo_festival.png" alt="Urbanovo 葡萄酒节"></div>
-        <div class="card-body">
-          <span class="card-tag">5月中旬 · 年度国际盛会</span>
-          <h3 class="card-title">Urbanovo 葡萄酒节</h3>
-          <p class="card-summary">每年 5 月中旬在什特里戈瓦举办，是普希佩尔葡萄酒的年度国际盛会。活动包含国际专家品鉴会、酒窖开放日、葡萄酒知识竞赛、主题晚宴与现场音乐会，是深度体验产区文化的最佳时机。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body">
-              <p><strong>酒乡甄选：</strong>查科韦茨葡萄酒商店、Medimurski Štacun 商店，精选十几家酒庄代表作品</p>
-            </div>
-          </details>
-        </div>
-      </div>
-
+    <div class="wine-img-sm">
+      <img src="/static/assets/pusipel_2.png" alt="葡萄酒庄">
     </div>
   </div>
 
-  <!-- 酒乡栖居 -->
-  <div class="section">
-    <h2 class="section-title">酒乡栖居 · 住进葡萄园里</h2>
-    <p class="section-subtitle">温泉度假村与酒庄营地</p>
-    <div class="card-grid">
+  <!-- Urbanovo：小图左 + 文字中 + 大图右 -->
+  <div class="wine-block wine-block-reverse">
+    <div class="wine-img-sm">
+      <img src="/static/assets/Urbanovo_festival_2.png" alt="观景台">
+    </div>
 
-      <div class="card">
-        <div class="card-img"><img src="/static/assets/spring_5.png" alt="圣马丁温泉度假村"></div>
-        <div class="card-body">
-          <span class="card-tag">欧洲首家葡萄酒主题康养度假村</span>
-          <h3 class="card-title">圣马丁温泉度假村</h3>
-          <p class="card-summary">坐落于葡萄酒之路核心地带，周边配套百栋高标准乡村别墅。泡葡萄酒精油温泉，眺望连绵葡萄园，是葡萄酒产区才有的专属享受。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body"><p><strong>地点：</strong>Terme Sveti Martin</p></div>
-          </details>
-        </div>
+    <div class="wine-text">
+      <p class="wine-eyebrow">( Festival )</p>
+      <h3>葡萄酒节</h3>
+      <p class="wine-eyebrow">Urbanovo</p>
+      <p class="wine-desc">每年 5 月中旬在什特里戈瓦举办，是普希佩尔葡萄酒的年度国际盛会。一年仅一次的酒窖全开，沿线百年家族酒庄同步开放地下酒窖；国际专家品鉴会、酒窖开放日、主题晚宴与现场音乐会接连上演，是深度体验产区文化的最佳时机。</p>
+      <div class="wine-meta">
+        <span class="meta-label">时间</span>
+        <span class="meta-line"></span>
+        <span class="meta-value">5 月中下旬 · 为期 3 天 · 什特里戈瓦镇</span>
       </div>
+    </div>
 
-      <div class="card">
-        <div class="card-img"><img src="/static/assets/wine.jpg" alt="Hazić 葡萄酒营地"></div>
-        <div class="card-body">
-          <span class="card-tag">沉浸式体验酒庄生活</span>
-          <h3 class="card-title">Hazić 葡萄酒营地</h3>
-          <p class="card-summary">小众特色住宿选择，住在酒庄里，清晨醒来就是葡萄园，傍晚在露台小酌本地酒款。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body"><p><strong>地点：</strong>Jurovčak</p></div>
-          </details>
-        </div>
-      </div>
-
+    <div class="wine-img-lg">
+      <img src="/static/assets/Urbanovo_festival.png" alt="Urbanovo 葡萄酒节">
     </div>
   </div>
 
-  <!-- 酒路揽胜 -->
-  <div class="section">
-    <h2 class="section-title">酒路揽胜 · 沿途风光</h2>
-    <p class="section-subtitle">观景台、水车与百年教堂</p>
-    <div class="card-grid">
+</section>
 
-      <div class="card">
-        <div class="card-img"><img src="/static/assets/lookup.png" alt="马德尔金布雷格观景台"></div>
-        <div class="card-body">
-          <span class="card-tag">俯瞰全景</span>
-          <h3 class="card-title">马德尔金布雷格观景台</h3>
-          <p class="card-summary">站在这里，可以俯瞰什特里戈瓦全景，一片连着一片的葡萄园在丘陵上铺展，是拍摄日落的最佳机位。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body"><p><strong>地点：</strong>Mađerkin Breg</p></div>
-          </details>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-img"><img src="/static/assets/water.jpg" alt="穆拉河传统水车"></div>
-        <div class="card-body">
-          <span class="card-tag">聆听百年水声</span>
-          <h3 class="card-title">穆拉河传统水车</h3>
-          <p class="card-summary">穆拉河沿岸还保留着古老的漂浮水车，水声潺潺，是当地人几百年来的记忆。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body"><p>沿穆拉河岸分布，可顺路探访</p></div>
-          </details>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-img"><img src="/static/assets/church.png" alt="圣杰罗姆、圣乔治等历史教堂"></div>
-        <div class="card-body">
-          <span class="card-tag">中欧乡村建筑</span>
-          <h3 class="card-title">圣杰罗姆、圣乔治等历史教堂</h3>
-          <p class="card-summary">沿葡萄酒之路散落着多座中世纪教堂，钟楼、壁画与老石墙，感受最纯粹的中欧乡村建筑风貌。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body"><p>葡萄酒之路沿线</p></div>
-          </details>
-        </div>
-      </div>
-
+<!-- ===== 大图 Feature：葡圆居行 ===== -->
+<section class="feature-hero">
+  <div class="frame">
+    <img src="/static/assets/spring_5.png" alt="酒居">
+    <div class="caption">
+      <p class="mark">Travelling</p>
+      <h3>葡园居行</h3>
+      <p>漫宿酒乡深处，慢览沿路盛景</p>
     </div>
   </div>
+</section>
 
-  <!-- 美食志 -->
-  <div class="section">
-    <h2 class="section-title">梅吉穆列美食志 · 地道本土风味</h2>
-    <p class="section-subtitle">融合中欧多国烹饪特色</p>
-    <div class="card-grid">
+<!-- ===== 02 葡园居行（Ichinobo 交错排版） ===== -->
+<div class="stay-grid">
 
-      <div class="card">
-        <div class="card-img"><img src="/static/assets/cake.png" alt="梅吉穆列千层蛋糕"></div>
-        <div class="card-body">
-          <span class="card-tag">必尝经典</span>
-          <h3 class="card-title">梅吉穆列千层蛋糕</h3>
-          <p class="card-summary">入选联合国世界旅游组织全球美食旅游精选网络，斩获欧洲卓越目的地（EDEN）大奖。层层酥皮、奶酪与奶油，是当地最具代表性的甜点。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body"><p><strong>推荐：</strong>选择带有『梅吉穆列美食家』认证的餐厅</p></div>
-          </details>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-img"><img src="/static/assets/bacon.png" alt="培根油脂腌肉 · 奶油干酪"></div>
-        <div class="card-body">
-          <span class="card-tag">必尝经典</span>
-          <h3 class="card-title">培根油脂腌肉 · 奶油干酪</h3>
-          <p class="card-summary">本地传统腌肉与奶制品，配上一杯普希佩尔，是中欧乡村最朴实的享受。另有荞麦粥炖鸭肉、烤梭鲈、原生南瓜籽油等。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body"><p><strong>搭配建议：</strong>荞麦粥炖鸭肉、烤梭鲈、原生南瓜籽油</p></div>
-          </details>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-img"><img src="/static/assets/food.png" alt="中欧融合风味"></div>
-        <div class="card-body">
-          <span class="card-tag">文化溯源</span>
-          <h3 class="card-title">中欧融合风味</h3>
-          <p class="card-summary">梅吉穆列的饮食文化融合了维也纳、布达佩斯、威尼斯三地风味，17 世纪兹林斯基城堡的宫廷食谱流传至今。</p>
-          <details class="card-details">
-            <summary>了解更多</summary>
-            <div class="card-detail-body"><p><strong>生物动力农业：</strong>鲁道夫·斯坦纳出生地，斯坦纳博士中心长期推广环境友好种植</p></div>
-          </details>
-        </div>
-      </div>
-
+  <!-- 01 圣马丁温泉度假村：图在左，文在右 -->
+  <article class="stay-item">
+    <div class="stay-img">
+      <img src="/static/assets/spring_3.png" alt="圣马丁温泉度假村">
     </div>
+    <div class="stay-info">
+      <div class="stay-num">( 01 )</div>
+      <h3>圣马丁温泉度假村</h3>
+      <p class="stay-romaji">Terme Sveti Martin</p>
+      <p class="stay-desc">坐落于葡萄酒之路核心地带，是欧洲首家葡萄酒主题康养度假村。周边配套百栋高标准乡村别墅，泡葡萄酒精油温泉，眺望连绵葡萄园——这是葡萄酒产区才有的专属享受。</p>
+      <div class="stay-meta">
+        <span class="meta-label">地点</span>
+        <span class="meta-line"></span>
+        <span class="meta-value">葡萄酒之路核心地带</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 Hazić 葡萄酒营地：文在左，图在右 -->
+  <article class="stay-item">
+    <div class="stay-img">
+      <img src="/static/assets/wine.jpg" alt="Hazić 葡萄酒营地">
+    </div>
+    <div class="stay-info">
+      <div class="stay-num">( 02 )</div>
+      <h3>Hazić 葡萄酒营地</h3>
+      <p class="stay-romaji">Jurovčak</p>
+      <p class="stay-desc">住在酒庄里，清晨醒来就是葡萄园，傍晚在露台小酌本地酒款。小众特色住宿选择，远离城市喧嚣，体验最原汁原味的酒乡慢生活。</p>
+      <div class="stay-meta">
+        <span class="meta-label">地点</span>
+        <span class="meta-line"></span>
+        <span class="meta-value">Jurovčak</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 马德尔金布雷格观景台 -->
+<article class="stay-item">
+  <div class="stay-head">
+    <div class="stay-num">( 03 )</div>
+    <h3>马德尔金布雷格观景台</h3>
+    <p class="stay-romaji">Mađerkin Breg</p>
+    <p class="stay-desc">站在这里，可以俯瞰什特里戈瓦全景，一片连着一片的葡萄园在丘陵上铺展，是拍摄日落的最佳机位。晴天时，视线可以越过葡萄园直达远处的平原与河流。</p>
   </div>
+  <div class="stay-img">
+    <img src="/static/assets/lookup_3.png" alt="马德尔金布雷格观景台">
+  </div>
+</article>
+
+<!-- 04 圣杰罗姆 · 圣乔治教堂 -->
+<article class="stay-item">
+  <div class="stay-head">
+    <div class="stay-num">( 04 )</div>
+    <h3>圣杰罗姆 · 圣乔治教堂</h3>
+    <p class="stay-romaji">Churches of Medimurje</p>
+    <p class="stay-desc">沿葡萄酒之路散落着多座中世纪教堂，钟楼、壁画与老石墙，感受最纯粹的中欧乡村建筑风貌。圣杰罗姆、圣乔治等教堂至今仍在本地社区中扮演重要角色。</p>
+  </div>
+  <div class="stay-img">
+    <img src="/static/assets/church_1.png" alt="历史教堂">
+  </div>
+</article>
 
 </div>
+</section>
+
+<!-- ===== 04 美食志（竖排标题 + 横排文字 + 图片流水线） ===== -->
+<section class="food-journey">
+
+  <!-- 竖排标题 + 横排文字 -->
+<div class="food-intro">
+  <div class="food-intro-img">
+    <img src="/static/assets/food_1.jpg" alt="梅吉穆列美食">
+  </div>
+  <div class="food-title-vertical">
+    <h3>梅吉穆列美食志</h3>
+  </div>
+  <div class="food-text-horizontal">
+    <p class="food-eyebrow">( Cuisine )</p>
+    <p class="food-desc">梅吉穆列的饮食文化融合了维也纳、布达佩斯、威尼斯三地风味，17 世纪兹林斯基城堡的宫廷食谱流传至今。当地美食曾入选联合国世界旅游组织全球美食旅游精选网络，斩获欧洲卓越目的地（EDEN）大奖。</p>
+    <div class="food-meta">
+      <span class="meta-label">认证</span>
+      <span class="meta-line"></span>
+      <span class="meta-value">梅吉穆列美食家认证餐厅</span>
+    </div>
+  </div>
+</div>
+
+  <!-- 图片流水线 -->
+  <div class="food-gallery">
+
+    <div class="gallery-item">
+      <div class="gallery-img">
+        <img src="/static/assets/cake.png" alt="梅吉穆列千层蛋糕">
+      </div>
+      <div class="gallery-caption">
+        <span class="caption-num">01</span>
+        <h4>梅吉穆列千层蛋糕</h4>
+        <p>Gibanica · 层层酥皮、奶酪与奶油，当地最具代表性的甜点</p>
+      </div>
+    </div>
+
+    <div class="gallery-item">
+      <div class="gallery-img">
+        <img src="/static/assets/bacon.png" alt="培根油脂腌肉 · 奶油干酪">
+      </div>
+      <div class="gallery-caption">
+        <span class="caption-num">02</span>
+        <h4>培根油脂腌肉 · 奶油干酪</h4>
+        <p>本地传统腌肉与奶制品，配上一杯普希佩尔</p>
+      </div>
+    </div>
+
+    <div class="gallery-item">
+      <div class="gallery-img">
+        <img src="/static/assets/food.png" alt="中欧融合风味">
+      </div>
+      <div class="gallery-caption">
+        <span class="caption-num">03</span>
+        <h4>中欧融合风味</h4>
+        <p>维也纳 · 布达佩斯 · 威尼斯三地风味的交汇</p>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ===== 影院视频 ===== -->
+<section class="cinema-block" aria-label="烟火知味影像">
+  <video autoplay muted loop playsinline poster="/static/assets/wine.jpg">
+    <source src="/static/assets/taste.mp4" type="video/mp4">
+  </video>
+  <div class="cinema-caption">
+    <p>一 杯 酒 · 一 道 菜 · 一 段 中 欧 旧 梦</p>
+  </div>
+</section>
+
+<p class="footer-mini">梅吉穆列 · 烟火知味</p>
 
 </body>
 </html>
